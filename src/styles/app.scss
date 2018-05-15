@@ -170,6 +170,9 @@ mat-form-field {
 .primary-color {
     color: mat-color($mat-app-primary) !important;
 }
+.warn-color{
+    color: mat-color($mat-app-warn) !important;
+}
 
 .flex-container {
     display: flex;

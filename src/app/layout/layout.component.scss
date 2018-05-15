@@ -52,6 +52,11 @@ mat-sidenav {
     width: 200px;
 }
 
+.logout-link{
+    position: absolute;
+    bottom: 0;
+}
+
 .layout-header{
     // background-color: mat-color($mat-app-primary) !important;
 }
