@@ -20,8 +20,8 @@ const routes: Routes = [
                 loadChildren: './pages/events/events.module#EventsModule'
             },
             {
-                path: 'connections',
-                loadChildren: './pages/connections/connections.module#ConnectionsModule'
+                path: 'members',
+                loadChildren: './pages/members/members.module#MembersModule'
             }
         ]
     },

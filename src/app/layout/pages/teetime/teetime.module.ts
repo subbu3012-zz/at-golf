@@ -4,7 +4,7 @@ import { TeeTimeRoutingModule } from './teetime-routing.module';
 import { TeeTimeComponent } from './teetime.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule } from '@angular/material'
+import { MatInputModule, MatButtonModule, MatDatepickerModule, MAT_DATE_LOCALE, MatNativeDateModule, MatCardModule } from '@angular/material'
 
 @NgModule({
     imports: [
@@ -13,11 +13,11 @@ import { MatInputModule, MatButtonModule } from '@angular/material'
         CommonModule,
         TeeTimeRoutingModule,
         HttpClientModule,
-        MatInputModule, MatButtonModule
+        MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule,MatCardModule
     ],
     declarations: [
         TeeTimeComponent,
     ],
-    providers: []
+    providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-In' }]
 })
 export class TeeTimeModule { }

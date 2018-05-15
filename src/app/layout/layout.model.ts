@@ -18,8 +18,8 @@ export const MENULIST: Menu[] = [
     },
     {
         "menuId": "3",
-        "menuDesc": "Connections",
-        "menuRoute": "connections"
+        "menuDesc": "Members",
+        "menuRoute": "members"
     },
     {
         "menuId": "4",

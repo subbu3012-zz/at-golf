@@ -1,1 +1,36 @@
-<h2>Tee Time</h2>
+<div class="flex-container ">
+    <div>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="teeTimeDate" placeholder="Book a Tee Time On">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-raised-button color="primary">Refresh</button>
+    </div>
+</div>
+<div class="teeslot-container">
+    <h4 style="text-align:center">
+        <span style="color:#333333">Tee Time Slots on </span>
+        <span>{{teeTimeDate | date:'medium'}}</span>
+    </h4>
+    <div class="flex-container">
+        <div *ngFor="let teeSlot of teeSlotList">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <!-- <div mat-card-avatar></div> -->
+                    <mat-card-title style="font-size:18px;text-align:center">From {{teeSlot.slotStartTime}}</mat-card-title>
+                    <mat-card-subtitle style="text-align:center">To {{teeSlot.slotEndTime}}</mat-card-subtitle>
+                </mat-card-header>
+                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                <mat-card-content align="center">
+                    <button mat-raised-button color="primary">Book Now</button>
+                </mat-card-content>
+                <mat-card-actions>
+                    <!-- <button mat-raised-button color="primary">Follow</button> -->
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

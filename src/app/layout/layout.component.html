@@ -4,9 +4,8 @@
     </div>
 </div>
 <mat-sidenav-container class="sidebar-container">
-    <mat-sidenav #sidenav mode="overlay" [opened]="true" class="toolbar-container">
+    <mat-sidenav #sidenav mode="overlay" [opened]="false" class="toolbar-container">
         <mat-toolbar class="toolbar-container">
-
             <mat-toolbar-row *ngFor="let menu of menuList" class="primary-color">
                 <a tabindex="-1" (click)="sidenav.close();" [routerLink]="menu.menuRoute">{{menu.menuDesc}}</a>
                 <!-- <img src="../../assets/111 tee time booking.png" class="ml-auto" style="height:36px;width:36px" alt=""> -->
@@ -15,7 +14,9 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <router-outlet></router-outlet>
+        <div class="container-fluid mt-2">
+            <router-outlet></router-outlet>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
 

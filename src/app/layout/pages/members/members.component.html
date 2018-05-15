@@ -1,0 +1,76 @@
+<mat-tab-group>
+    <mat-tab label="My Groups">
+        <div class="mt-2">
+            <ng-container *ngTemplateOutlet="groupsTemplate;context:{groupList:myGroupList}"></ng-container>
+        </div>
+    </mat-tab>
+    <mat-tab label="My Connections">
+        <div class="mt-2">
+            <ng-container *ngTemplateOutlet="myMemberTemplate;context:{memberList:myMemberList}"></ng-container>
+        </div>
+    </mat-tab>
+    <mat-tab label="Members I May know">
+        <div class="mt-2">
+            <ng-container *ngTemplateOutlet="nonMembersTemplate;context:{memberList:memberList}"></ng-container>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+
+<ng-template #groupsTemplate let-groupList="groupList">
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let group of groupList">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{group.groupName}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{group.members.length}} Members
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-container *ngTemplateOutlet="myMemberTemplate;context:{memberList:group.members}"></ng-container>
+        </mat-expansion-panel>
+    </mat-accordion>
+</ng-template>
+
+<ng-template #nonMembersTemplate let-memberList="memberList">
+    <div class="flex-container">
+        <div *ngFor="let member of memberList">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <!-- <div mat-card-avatar></div> -->
+                    <mat-card-title>{{member.memberName}}</mat-card-title>
+                    <mat-card-subtitle>Rank : {{member.memberRank}}</mat-card-subtitle>
+                </mat-card-header>
+                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                <mat-card-content align="center">
+                    <button mat-raised-button color="primary">Follow</button>
+                </mat-card-content>
+                <mat-card-actions>
+                    <!-- <button mat-raised-button color="primary">Follow</button> -->
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #myMemberTemplate let-memberList="memberList">
+    <div class="flex-container">
+        <div *ngFor="let member of memberList">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <!-- <div mat-card-avatar></div> -->
+                    <mat-card-title>{{member.memberName}}</mat-card-title>
+                    <mat-card-subtitle>Rank : {{member.memberRank}}</mat-card-subtitle>
+                </mat-card-header>
+                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                <mat-card-actions>
+                    <!-- <button mat-raised-button color="primary">Follow</button> -->
+                    <p class="primary-color">Call me at {{member.memberPhoneNo}}</p>
+                </mat-card-actions>
+                <mat-card-footer>
+
+                </mat-card-footer>
+            </mat-card>
+        </div>
+    </div>
+</ng-template>
