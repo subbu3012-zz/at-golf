@@ -33,7 +33,12 @@ export const MYGROUPS: MemberGroup[] = [
                 "memberName": "Sankar A",
                 "memberRank": "11",
                 "memberPhoneNo": "87513215477"
-            }
+            }, {
+                "memberId": "4",
+                "memberName": "Tamizh",
+                "memberRank": "07",
+                "memberPhoneNo": "88145742514"
+            },
         ]
     },
     {
@@ -86,12 +91,6 @@ export const MEMBERLIST: Member[] = [
         "memberName": "Sriram J",
         "memberRank": "04",
         "memberPhoneNo": "7787883457"
-    },
-    {
-        "memberId": "4",
-        "memberName": "Tamizh",
-        "memberRank": "07",
-        "memberPhoneNo": "88145742514"
     },
     {
         "memberId": "5",
@@ -176,8 +175,13 @@ export const MYMEMBERLIST: Member[] = [
     },
     {
         "memberId": "15",
-        "memberName": "Sairam P",
-        "memberRank": "01",
+        "memberName": "Sairam S",
+        "memberRank": "12",
+        "memberPhoneNo": "9874547541"
+    }, {
+        "memberId": "16",
+        "memberName": "Satish B",
+        "memberRank": "04",
         "memberPhoneNo": "9874547541"
     }
 ]

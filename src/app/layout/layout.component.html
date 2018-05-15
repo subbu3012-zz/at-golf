@@ -2,13 +2,20 @@
     <div style="float:left">
         <mat-icon class="toggle-icon" (click)="sidenav.toggle()">menu</mat-icon>
     </div>
+    <div style="text-align:end;position:fixed;top:6px;right:12px;color:snow;font-size:24px;">{{this.activeMenu}}</div>
 </div>
 <mat-sidenav-container class="sidebar-container">
     <mat-sidenav #sidenav mode="overlay" [opened]="false" class="toolbar-container">
+        <img src="../../assets/golf-cart 1.png" style="height:160px;width:170px;margin:15px" alt="">
+        <!-- <h6 style="text-align:center;"> Hyderabad Golf Club</h6> -->
         <mat-toolbar class="toolbar-container">
             <mat-toolbar-row *ngFor="let menu of menuList" class="primary-color">
-                <a tabindex="-1" (click)="sidenav.close();" [routerLink]="menu.menuRoute">{{menu.menuDesc}}</a>
-                <!-- <img src="../../assets/111 tee time booking.png" class="ml-auto" style="height:36px;width:36px" alt=""> -->
+                <a *ngIf="menu.isMenuActive" tabindex="-1" (click)="this.activeMenu  = menu.menuDesc;sidenav.close();" [routerLink]="menu.menuRoute">
+                    <img style="margin-right:8px" [src]="this.domSanitizer.bypassSecurityTrustUrl(menu.menuIcon)" /> {{menu.menuDesc}}
+                </a>
+                <a *ngIf="!menu.isMenuActive" tabindex="-1">
+                    <img style="margin-right:8px" [src]="this.domSanitizer.bypassSecurityTrustUrl(menu.menuIcon)" /> {{menu.menuDesc}}
+                </a>
             </mat-toolbar-row>
         </mat-toolbar>
     </mat-sidenav>

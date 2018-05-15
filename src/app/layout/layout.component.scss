@@ -42,9 +42,16 @@ mat-form-field {
 mat-toolbar-row {
     cursor: pointer;
     height: 56px !important;
-    border-bottom: mat-color($mat-app-primary) 1px dashed;
+}
+
+.dashed-border{
+    border-bottom: mat-color($mat-app-primary) 1px solid;
 }
 
 mat-sidenav {
     width: 200px;
+}
+
+.layout-header{
+    // background-color: mat-color($mat-app-primary) !important;
 }
