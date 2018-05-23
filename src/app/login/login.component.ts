@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
     mobileQuery: MediaQueryList;
     private _mobileQueryListener: () => void;
-
+    public loginId: FormControl = new FormControl('', Validators.minLength(2));
 
     public loginFormGroup: FormGroup = new FormGroup({
         loginId: new FormControl('', Validators.minLength(2)),

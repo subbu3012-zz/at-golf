@@ -4,7 +4,10 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule, MatTabsModule, MatCardModule } from '@angular/material'
+import {
+    MatInputModule, MatButtonModule, MatTabsModule, MatCardModule, MatMenuModule, MatIconModule,
+    MatDividerModule
+} from '@angular/material'
 
 @NgModule({
     imports: [
@@ -13,7 +16,8 @@ import { MatInputModule, MatButtonModule, MatTabsModule, MatCardModule } from '@
         CommonModule,
         LoginRoutingModule,
         HttpClientModule,
-        MatInputModule, MatButtonModule, MatTabsModule, MatCardModule
+        MatInputModule, MatButtonModule, MatTabsModule, MatCardModule, MatMenuModule, MatIconModule,
+        MatDividerModule
     ],
     declarations: [
         LoginComponent,
