@@ -1,4 +1,4 @@
-<div class="layout-header sticky-top bg-dark">
+<!-- <div class="layout-header sticky-top bg-dark">
     <div style="float:left">
         <mat-icon class="toggle-icon" (click)="sidenav.toggle()">menu</mat-icon>
     </div>
@@ -7,7 +7,6 @@
 <mat-sidenav-container class="sidebar-container">
     <mat-sidenav #sidenav mode="overlay" [opened]="false" class="toolbar-container">
         <img src="../../assets/golf-cart 1.png" style="height:160px;width:170px;margin:15px" alt="">
-        <!-- <h6 style="text-align:center;"> Hyderabad Golf Club</h6> -->
         <mat-toolbar class="toolbar-container">
             <mat-toolbar-row *ngFor="let menu of menuList" class="primary-color">
                 <a *ngIf="menu.isMenuActive" tabindex="-1" (click)="this.activeMenu  = menu.menuDesc;sidenav.close();" [routerLink]="menu.menuRoute">
@@ -30,27 +29,134 @@
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
 
-<!-- <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+
+<nav class="navbar navbar-expand-lg sticky-top navbar-class">
     <a class="navbar-brand" href="#">
-        <img src="../../assets/brand-white.png" width="100%" height="100%" alt="">
+        <img src="../../assets/hgc-logo.png" width="57" height="60" alt="">
+        <span>Hyderabad</span>
+        <span> Golf Club</span>
     </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav nav-menu ml-auto">
+            <li class="nav-item">
+                <button mat-menu-item (click)="routeTo('login')">Home</button>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">teetime</a>
+                <button mat-menu-item [matMenuTriggerFor]="aboutUsMenus">About Us
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+                <mat-menu [overlapTrigger]="false" backdropClass="temp-class" yPosition="below" #aboutUsMenus="matMenu">
+                    <button mat-menu-item>Management Committee</button>
+                    <button mat-menu-item>Sub-Committees</button>
+                    <button mat-menu-item>HGA Affiliations / Reciprocal Clubs</button>
+                </mat-menu>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Friends</a>
+                <button mat-menu-item [matMenuTriggerFor]="golfMenus">Golf
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+                <mat-menu [overlapTrigger]="false" #golfMenus="matMenu">
+                    <button mat-menu-item [matMenuTriggerFor]="courseMenus">Course Layout</button>
+                    <button mat-menu-item [matMenuTriggerFor]="golfCoachingMenus">Golf Coaching</button>
+                    <button mat-menu-item [matMenuTriggerFor]="juniorProgramMenus">Junior Program</button>
+                    <button mat-menu-item [matMenuTriggerFor]="drivingRangeMenus">Driving Range</button>
+                </mat-menu>
+                <mat-menu [overlapTrigger]="false" #courseMenus="matMenu">
+                    <button mat-menu-item>Score Card</button>
+                    <button mat-menu-item>Pictures</button>
+                </mat-menu>
+                <mat-menu [overlapTrigger]="false" #golfCoachingMenus="matMenu">
+                    <button mat-menu-item>Programs</button>
+                    <button mat-menu-item>Coaches & Facilities</button>
+                </mat-menu>
+                <mat-menu [overlapTrigger]="false" #juniorProgramMenus="matMenu">
+                    <button mat-menu-item>HGA-K&A Jr Programme</button>
+                    <button mat-menu-item>Student Player</button>
+                    <button mat-menu-item>Coaching Camps</button>
+                    <button mat-menu-item>Gallery</button>
+                </mat-menu>
+                <mat-menu [overlapTrigger]="false" #drivingRangeMenus="matMenu">
+                    <button mat-menu-item>Fees & Costs</button>
+                    <button mat-menu-item>Rules & Etiquette</button>
+                </mat-menu>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+                <button mat-menu-item [matMenuTriggerFor]="clubHouseMenus">Club House
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+                <mat-menu [overlapTrigger]="false" #clubHouseMenus="matMenu">
+                    <button mat-menu-item>Food & Beverages</button>
+                    <button mat-menu-item>Food Menu</button>
+                </mat-menu>
+            </li>
+            <li class="nav-item">
+                <button mat-menu-item>Contact Us</button>
+            </li>
+            <li class="nav-item">
+                <button mat-menu-item [matMenuTriggerFor]="galleryMenus">Gallery
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+                <mat-menu [overlapTrigger]="false" #galleryMenus="matMenu">
+                    <button mat-menu-item>The Course</button>
+                    <button mat-menu-item>Events</button>
+                    <button mat-menu-item>Jamalikunta</button>
+                    <button mat-menu-item>Nayaqila</button>
+                </mat-menu>
+            </li>
+            <li class="nav-item">
+                <button mat-menu-item (click)="routeTo('login')">Login</button>
             </li>
         </ul>
     </div>
-</nav> -->
+</nav>
+<div class="router-outlet-container">
+    <router-outlet></router-outlet>
+</div>
+<div class="division-container">
+    <div style="background-color:#333335">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-2">
+                    <h4 class="primary-color uppercase-text bold-text">About</h4>
+                    <p class="light-color">
+                        Since the opening of Golfield on August 15, 1995, the Club has become a popular tourist destination attracting golfers. Carved
+                        through a forest of eucalyptus and pine trees with the backdrop of the snow-capped Taurus Mountains
+                        and an abundance of natural lakes, our club tests all abilities of players.</p>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-2">
+                    <h4 class="primary-color uppercase-text bold-text">Quick Links</h4>
+                    <div class="pl-5">
+                        <p class="primary-color">
+                            <span class="bold-text">></span> About</p>
+                        <p class="primary-color">
+                            <span class="bold-text">></span> Tee</p>
+                        <p class="primary-color">
+                            <span class="bold-text">></span> Training</p>
+                        <p class="primary-color">
+                            <span class="bold-text">></span> Events</p>
+                        <p class="primary-color">
+                            <span class="bold-text">></span> Blog</p>
+                        <p class="primary-color">
+                            <span class="bold-text">></span> Contacts</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-2">
+                    <h4 class="primary-color uppercase-text bold-text">Contact Us</h4>
+                    <p class="light-color">2130 Fulton Street San Diego, CA 94117-1080 USA</p>
+                    <p class="light-color">1-800-1234-567</p>
+                    <p class="light-color">info@demolink.org</p>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:20px" class="col-12">
+            <img style="height:500px;width:inherit" src="../../assets/map.png" alt="Card image cap">
+        </div>
+    </div>
+</div>

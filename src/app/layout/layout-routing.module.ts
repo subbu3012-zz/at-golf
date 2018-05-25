@@ -8,6 +8,10 @@ const routes: Routes = [
         component: LayoutComponent,
         children: [
             {
+                path: 'login',
+                loadChildren: './pages/login/login.module#LoginModule'
+            },
+            {
                 path: 'teetime',
                 loadChildren: './pages/teetime/teetime.module#TeeTimeModule'
             },
@@ -23,10 +27,10 @@ const routes: Routes = [
                 path: 'members',
                 loadChildren: './pages/members/members.module#MembersModule'
             },
-            {
-                path: '',
-                redirectTo: 'teetime'
-            }
+            // {
+            //     path: '',
+            //     redirectTo: 'teetime'
+            // }
         ]
     }
 ];

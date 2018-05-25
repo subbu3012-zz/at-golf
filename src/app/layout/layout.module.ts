@@ -4,7 +4,10 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatDividerModule, MatListModule } from '@angular/material'
+import {
+    MatInputModule, MatButtonModule, MatSidenavModule, MatIconModule, MatToolbarModule,
+    MatDividerModule, MatListModule, MatMenuModule
+} from '@angular/material'
 
 @NgModule({
     imports: [
@@ -13,7 +16,7 @@ import { MatInputModule, MatButtonModule, MatSidenavModule, MatIconModule, MatTo
         CommonModule,
         LayoutRoutingModule,
         HttpClientModule,
-        MatInputModule, MatButtonModule, MatSidenavModule, MatIconModule, 
+        MatInputModule, MatButtonModule, MatSidenavModule, MatIconModule, MatMenuModule, MatIconModule,
         MatToolbarModule, MatDividerModule, MatListModule
     ],
     declarations: [

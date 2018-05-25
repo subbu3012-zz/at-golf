@@ -1,0 +1,54 @@
+.nav-menu>li>a:before :hover {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #2dc997;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.image-body {
+    position: absolute;
+    color: white;
+    top: 60%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.blurred-image {
+    -webkit-filter: blur(1px);
+    /* Safari 6.0 - 9.0 */
+    filter: blur(1px);
+}
+
+.divider.divider-offset {
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.division-container {
+    margin-top: 50px;
+}
+
+.divider-60 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 60px;
+}
+
+.divider-primary {
+    background-color: #96cb41;
+}
+
+.divider {
+    height: 2px;
+    border: none;
+}
