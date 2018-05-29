@@ -1,3 +1,13 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4 offset-1" style="cursor:pointer" (click)="teeBoxName = 'TBox 1'">
+            <img title="Book Slots for TBox 1" width="395" height="538" src="../../assets/field_reservation1.jpg" alt="Card image cap">
+        </div>
+        <div class="col-7" style="margin-top:50px;cursor:pointer" (click)="teeBoxName = 'TBox 10'">
+            <img title="Book Slots for TBox 10" src="../../assets/field_reservation10.jpg" alt="Card image cap">
+        </div>
+    </div>
+</div>
 <div class="flex-container ">
     <div>
         <mat-form-field>
@@ -10,25 +20,23 @@
         <button mat-raised-button color="primary">Refresh</button>
     </div>
 </div>
+<h4 style="text-align:center">
+    <h2 class="bold-text camelcase-text">Tee Time Slots for {{teeBoxName}} on {{teeTimeDate | date:'mediumDate'}}</h2>
+    <hr class="divider divider-primary divider-60 divider-offset">
+</h4>
 <div class="teeslot-container">
-    <h4 style="text-align:center">
-        <span style="color:#333333">Tee Time Slots on </span>
-        <span>{{teeTimeDate | date:'mediumDate'}}</span>
-    </h4>
     <div class="flex-container">
         <div *ngFor="let teeSlot of teeSlotList">
-            <mat-card class="example-card">
+            <mat-card style="padding:8px 24px" class="example-card">
                 <mat-card-header>
-                    <!-- <div mat-card-avatar></div> -->
-                    <mat-card-title style="font-size:18px;text-align:center">From {{teeSlot.slotStartTime}}</mat-card-title>
-                    <mat-card-subtitle style="text-align:center">To {{teeSlot.slotEndTime}}</mat-card-subtitle>
+                    <mat-card-title style="font-size:22px;text-align:center">{{teeSlot.slotStartTime}}</mat-card-title>
+                    <mat-card-subtitle style="text-align:center">9 Holes</mat-card-subtitle>
+                    <mat-card-subtitle style="text-align:center">18 Holes</mat-card-subtitle>
                 </mat-card-header>
-                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
                 <mat-card-content align="center">
                     <button mat-raised-button color="primary">Book Now</button>
                 </mat-card-content>
                 <mat-card-actions>
-                    <!-- <button mat-raised-button color="primary">Follow</button> -->
                 </mat-card-actions>
             </mat-card>
         </div>

@@ -1,7 +1,7 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { Menu, MENULIST } from './layout.model'
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatMenuTrigger } from '@angular/material'
 
@@ -16,10 +16,18 @@ export class LayoutComponent implements OnInit {
 
     public menuList: Menu[] = MENULIST;
     public activeMenu: string = "Tee Time";
+    public isRouteLoading: boolean = false;
 
     constructor(public rtr: Router, public domSanitizer: DomSanitizer,
         private activatedRoute: ActivatedRoute) {
-
+        this.rtr.events.subscribe((event: any) => {
+            if (event instanceof NavigationStart) {
+                this.isRouteLoading = true;
+            }
+            else if (event instanceof NavigationEnd) {
+                this.isRouteLoading = false;
+            }
+        });
     }
 
     ngOnInit() {

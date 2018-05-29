@@ -228,3 +228,17 @@ mat-form-field {
 .center-text{
     text-align: center;
 }
+
+.divider.divider-offset {
+    margin-top: 10px;
+}
+
+.divider-primary {
+    background-color: mat-color($mat-app-primary) !important;
+    width: 60px;
+}
+
+.divider {
+    height: 2px;
+    border: none;
+}

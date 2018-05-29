@@ -27,10 +27,10 @@ const routes: Routes = [
                 path: 'members',
                 loadChildren: './pages/members/members.module#MembersModule'
             },
-            // {
-            //     path: '',
-            //     redirectTo: 'teetime'
-            // }
+            {
+                path: '',
+                redirectTo: 'home/landing-page'
+            }
         ]
     }
 ];

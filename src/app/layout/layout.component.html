@@ -192,7 +192,7 @@
                 </mat-menu>
             </li>
             <li class="nav-item">
-                <button disableRipple="true" mat-menu-item [matMenuTriggerFor]="loginMenus">Login</button>
+                <button disableRipple="true" (click)="routeTo(['teetime'])" mat-menu-item>Login</button>
                 <!-- <ng-container style="width:300px;" *ngTemplateOutlet="loginTemplate;context:{formGroup:loginFormGroup}"></ng-container> -->
 
             </li>
@@ -201,7 +201,12 @@
 </nav>
 
 <div class="router-outlet-container">
-    <router-outlet></router-outlet>
+    <div *ngIf="isRouteLoading" style="display:flex;justify-content: center;align-items: center;height:100vh">
+        <img src="../../assets/loading.png" style="height:250px;width:250px" alt="">
+    </div>
+    <div [style.visibility]="isRouteLoading ? 'hidden' : 'visible'">
+        <router-outlet></router-outlet>
+    </div>
 </div>
 <div class="mt-5 division-container">
     <div style="background-color:#333335">
@@ -217,17 +222,17 @@
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-2">
                     <h4 class="primary-color uppercase-text bold-text">Quick Links</h4>
                     <div class="pl-5">
-                        <p class="primary-color">
+                        <p class="light-color">
                             <span class="bold-text">></span> About</p>
-                        <p class="primary-color">
+                        <p class="light-color">
                             <span class="bold-text">></span> Tee</p>
-                        <p class="primary-color">
+                        <p class="light-color">
                             <span class="bold-text">></span> Training</p>
-                        <p class="primary-color">
+                        <p class="light-color">
                             <span class="bold-text">></span> Events</p>
-                        <p class="primary-color">
+                        <p class="light-color">
                             <span class="bold-text">></span> Blog</p>
-                        <p class="primary-color">
+                        <p class="light-color">
                             <span class="bold-text">></span> Contacts</p>
                     </div>
                 </div>
