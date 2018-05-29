@@ -6,7 +6,11 @@ const routes: Routes = [
         path: 'layout',
         loadChildren: './layout/layout.module#LayoutModule'
     },
-
+    {
+        path: '',
+        redirectTo: 'layout',
+        pathMatch: 'full'
+    }
 ];
 
 @NgModule({
