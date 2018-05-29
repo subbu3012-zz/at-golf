@@ -1,3 +1,4 @@
+@import '../../../../styles/app.scss';
 .nav-menu>li>a:before :hover {
     content: "";
     position: absolute;
@@ -31,24 +32,57 @@
 
 .divider.divider-offset {
     margin-top: 10px;
-    margin-bottom: 40px;
+}
+
+.divider-primary {
+    background-color: mat-color($mat-app-primary) !important;
+    width: 60px;
+}
+
+.divider {
+    height: 2px;
+    border: none;
+}
+
+.menu-header{
+    color:#333333;
+    margin-top:10px;
 }
 
 .division-container {
     margin-top: 50px;
 }
 
-.divider-60 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 60px;
+.mc-member-container{
+    width: 700px;
 }
 
-.divider-primary {
-    background-color: #96cb41;
+.img-avatar{
+    border-radius: 50%;
 }
 
-.divider {
-    height: 2px;
-    border: none;
+tbody{
+    font-size: 14px !important;
+}
+
+th{
+    background-color:mat-color($mat-app-primary) !important;
+    border:none !important;
+}
+
+.table-flex-container{
+    align-items: flex-start;
+}
+
+
+.table-flex-container > div{
+    width:500px;
+}
+
+.address-card-container{
+    width:350px;
+}
+
+.card-detail-text{
+    padding-left:25px;
 }

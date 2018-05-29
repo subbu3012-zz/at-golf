@@ -1,6 +1,6 @@
 export const MGMTCOMMITTEEDATA: any[] = [
     {
-        name: "Mr. J. VIKRAMDEV RAO",
+        name: "Mr. J. Vikramdev Rao",
         role: "President",
         phoneNo: "9246523569",
         emailId: "vikramdevrao@gmail.com",
@@ -14,7 +14,7 @@ export const MGMTCOMMITTEEDATA: any[] = [
         imagePath: "Dayakar-Reddy-thumb.jpg"
     },
     {
-        name: "Mr. SRIKANTH RAO KATIKANENI",
+        name: "Mr. Srikanth Rao K.",
         role: "Hon Secretary",
         phoneNo: "9949533334",
         emailId: "srikanth_1961@yahoo.com",
