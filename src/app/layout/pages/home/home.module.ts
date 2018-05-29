@@ -4,7 +4,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule } from '@angular/material'
+import { MatInputModule, MatButtonModule, MatCardModule, MatTabsModule } from '@angular/material'
 
 @NgModule({
     imports: [
@@ -13,7 +13,7 @@ import { MatInputModule, MatButtonModule } from '@angular/material'
         CommonModule,
         HomeRoutingModule,
         HttpClientModule,
-        MatInputModule, MatButtonModule
+        MatInputModule, MatButtonModule, MatCardModule, MatTabsModule
     ],
     declarations: [
         HomeComponent,

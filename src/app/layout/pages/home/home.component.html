@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div *ngIf="this.contentCategory == 'home'" class="container-fluid">
     <div class="row">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -138,4 +138,859 @@
             </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="this.contentCategory == 'management-committee'" class="container-fluid">
+    <div class="flex-container">
+        <div class="mc-member-container" *ngFor="let member of membercommitteeData">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{member.name}}</mat-card-title>
+                    <mat-card-subtitle>{{member.role}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image height="100px" width="100px" [src]="'../../assets/'+member.imagePath">
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.contentCategory == 'sub-committees'" class="container-fluid">
+    <div class="flex-container">
+        <div>
+            <table class="table table-hover table-bordered table-md">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="2">FINANCE SUB-COMMITTEE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mr. D. Vandith Reddy</td>
+                        <td>Hon. Treasurer</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. C.Dayakar Reddy </td>
+                        <td>Chairman IT Comm</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. K. Srikanth Rao </td>
+                        <td>Chairman Jr. Comm</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. B.V.K. Raju </td>
+                        <td>Chairman Legal Comm</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. T. Ajay Kumar Reddy</td>
+                        <td>Chairman Golf Course</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Uttam Singhal</td>
+                        <td>Chairman House Comm</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. V. Sreenath Rao </td>
+                        <td>Chairman TRH Comm</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. P. Janardhan Reddy</td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Murali Krishna P</td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Bharadwaj </td>
+                        <td>Spl. Invitee</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-hover table-bordered table-md">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="2">House Sub-Committee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mr. Uttam Singhal</td>
+                        <td>Chairman</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Jasvinder Birgi</td>
+                        <td>Vice Chairman</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Rajiv Verma</td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Chakradhar M</td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Kamal Goel</td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Ramchandra Raju M</td>
+                        <td>Spl. Invitees</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Ashok Reddy Nimma</td>
+                        <td>Invitee</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-hover table-bordered table-md">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="2">Golf Course Sub-Committee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mr. T. Ajay Kumar Reddy </td>
+                        <td>Chairman</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Omprakash Modi Vice </td>
+                        <td>Chairman</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. R Siva Kumar </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Srinath Reddy Kottam </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. A. Bhaskar Reddy </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Saam Chinoy </td>
+                        <td>Invitee</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Bheema Raju K </td>
+                        <td>Invitee</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-hover table-bordered table-md">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="2">Events Sub-Committee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mr. D. Vandith Reddy </td>
+                        <td> Chairman</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. C. Dayakar Reddy </td>
+                        <td>Captain</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. K. Srikanth Rao </td>
+                        <td>Hon. Secretary</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. B.V.K. Raju </td>
+                        <td>Hon. Jt. Secretary</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. C. Venkateshwara Prasad </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. K. Narsing Rao</td>
+                        <td> Member</td>
+                    </tr>
+                    <tr>
+                        <td>Capt. S.V. Ramana</td>
+                        <td> Member</td>
+                    </tr>
+                    <tr>
+                        <td>GV Ramana</td>
+                        <td> Invitee</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-hover table-bordered table-md">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="2">Tournament & Handicap Sub-Committee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mr. V. Sreenath Rao </td>
+                        <td>Chairman</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. P.S. Raju </td>
+                        <td>Vice Chairman</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Ritesh Kumar Daga </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Sanath Malreddy </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Krishna Guduru </td>
+                        <td>Invitee</td>
+                    </tr>
+                    <tr>
+                        <td>Bhanu C </td>
+                        <td>Invitee</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-hover table-bordered table-md">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="2">Junior Golf & Coaching Sub-Committee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mr. K. Srikanth Rao </td>
+                        <td>Chairman</td>
+                    </tr>
+                    <tr>
+                        <td>Ram Mandava </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Ravi Chander Reddy Batti </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Abhishek Reddy K </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Capt. K.L. Sameer Kumar </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Rajender Reddy Gaddam </td>
+                        <td>Member</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-hover table-bordered table-md">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="2">IT Sub-Committee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mr. C. Dayakar Reddy </td>
+                        <td>Chairman</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Rakesh Vadlamudi </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. G. Jagadishwar Raju </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Dhiraj Jaiswal </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Sunil Godavarthi </td>
+                        <td>Member</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.contentCategory == 'affiliations'" class="container-fluid">
+    <div class="flex-container">
+        <div class="address-card-container">
+            <p class="card-text">Eagleton – The Golf Resort</p>
+            <p class="card-text">30th Km, Bangalore-Mysore Highway,</p>
+            <p class="card-text">Shanyamangala Cross,</p>
+            <p class="card-text">Bidadi(Bangalore Rural)-562 109</p>
+            <p class="card-text">Ph: +91-80-2263-2222</p>
+            <p class="card-text">Cell: +91-98458-11114</p>
+            <p class="card-text">Fax: +91-80-2263-2233</p>
+            <p class="card-text">E-mail: teeoff@eagletonindia.com</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">Ootacamund Gymkhana Golf Club</p>
+            <p class="card-text">Ootacamund Gymkhana Club, Finger Post P.O,</p>
+            <p class="card-text">Ootacamund, The Nilgiris, South India.</p>
+            <p class="card-text">Ph: 0423-2442254 / 2448497</p>
+            <p class="card-text">Cell: +91-9488773351</p>
+            <p class="card-text">Fax: +0423-2445967</p>
+            <p class="card-text">E-mail: ootygym@yahoo.in</p>
+            <p class="card-text">Website: www.ootygolfclub.org</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">The Kodaikanal Golf Club</p>
+            <p class="card-text">Pambapuram Village, Observatory,</p>
+            <p class="card-text">Kodaikanal – 624103, Dindigul District,</p>
+            <p class="card-text">Tamilnadu</p>
+            <p class="card-text">Ph No: 04542-240323 / 293323</p>
+            <p class="card-text">Fax: 04542 -241255</p>
+            <p class="card-text">E-mail: kodaigolf@gmail.com</p>
+            <p class="card-text">Website: www.kodaigolf.com</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">Chikmagalur Golf Club</p>
+            <p class="card-text">PB No. 154, Chikmagalur.</p>
+            <p class="card-text">Tel:08262-656500</p>
+            <p class="card-text">Mob: 9980390371</p>
+            <p class="card-text">E-mail: cgc2005@rediffmail.com</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">Coorg Golf Links</p>
+            <p class="card-text">Spring Valley Annexe,</p>
+            <p class="card-text">Bittangala, -571218, Virajpet.</p>
+            <p class="card-text">Tel: 08274-256252</p>
+            <p class="card-text">E-mail:coorggolf@rediffmail.com</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">Rambagh Golf Club</p>
+            <p class="card-text">Bhawani Singh Road, Jaipur, INDIA.</p>
+            <p class="card-text">Phone No: +91-141-2385239/482</p>
+            <p class="card-text">E-mail: info@rambaghgolfclub.com</p>
+            <p class="card-text">Website: www.rambaghgolfclub.com</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">Naldehra Golf Club</p>
+            <p class="card-text">P.O. Durgapur,</p>
+            <p class="card-text">Shimla – 171007</p>
+            <p class="card-text">Tel: 0177 – 6534303</p>
+            <p class="card-text">E-mail: naldehra@rediffmail.com</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">East Point Golf Club</p>
+            <p class="card-text">Mudasalova, Visakhapatnam – 5330040, Andhra Pradesh.</p>
+            <p class="card-text">Tel: 891-2530698 / 2794301</p>
+            <p class="card-text">E-mail: epgc@epgc.in</p>
+            <p class="card-text">Website: www.epgc.in</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">The Coimbatore Golf Club</p>
+            <p class="card-text">Postal Address: Chetipalyam, Coimbatore,</p>
+            <p class="card-text">Coimbatore District, Tamilnadu – 641201</p>
+            <p class="card-text">Fax: 04222-2655258</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">Karnataka Golf Association</p>
+            <p class="card-text">Postal Address: # 1, Golf Avenue, off Airport Road Kodihalli,</p>
+            <p class="card-text">Bengaluru, Karnataka 560008</p>
+            <p class="card-text">Tel: 080 -4009 0000</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">Mercara Downs Golf Club</p>
+            <p class="card-text">Postal Address: P.B. # 79, Galibeedu Village,</p>
+            <p class="card-text">Madikeri - 571201, Kodagu District, Karnataka</p>
+            <p class="card-text">Tel: 08272-200020</p>
+            <p class="card-text">Mob: 9945862709</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">Jayachamaraja Wadiyar Golf Club</p>
+            <p class="card-text">Postal Address: Maharana Pratap Singhji Road,</p>
+            <p class="card-text">Nazarbad, Mysore - 570010.</p>
+            <p class="card-text">Tel: 0821-2538457, 2433185</p>
+            <p class="card-text">E-mail: jwdc@rediffmail.com</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">Pilikula Golf Club</p>
+            <p class="card-text">Postal Address: Mangalore, Moodushedde,</p>
+            <p class="card-text">Mangalore - 575 028</p>
+            <p class="card-text">Tel: 824 2263957</p>
+            <p class="card-text">Mob: 720 480 1217</p>
+            <p class="card-text">E-mail: info@pilikulagolfclub.com</p>
+        </div>
+        <div class="address-card-container">
+            <p class="card-text">Tollygunge Club Ltd.</p>
+            <p class="card-text">Postal Address: 120, Deshapran Sasmal Road,</p>
+            <p class="card-text">Kolkata - 700 033, West Bengal, India\</p>
+            <p class="card-text">Tel: 033-24734539/5954/4741/2316</p>
+            <p class="card-text">E-mail: armukerji@tollygungeclub.org, managingmember@gmail.com</p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.contentCategory == 'score-card'" class="container-fluid">
+    <img src="../../assets/GolfScoreCard.jpg" style="width:96vw" alt="Golf Score Card">
+</div>
+
+<div *ngIf="this.contentCategory == 'coaches-and-facilities'" class="container-fluid">
+    <div>
+        <table class="table table-hover table-bordered table-md">
+            <thead class="thead-dark">
+                <tr>
+                    <th colspan="2">Amenities</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Caddy </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>Cart /Buggy No / </td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>Driving Range / Floodlit Yes / </td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>Practice putting range </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>Golf set rental </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>Shoes rental </td>
+                    <td> No</td>
+                </tr>
+                <tr>
+                    <td>Pro shop </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>F&B faciliities </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>Food </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>Water </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>Aerated drinks </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>On course F&B </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>Parking </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>Valet </td>
+                    <td> No</td>
+                </tr>
+                <tr>
+                    <td>Lodging/boarding </td>
+                    <td> No</td>
+                </tr>
+                <tr>
+                    <td>Night golf </td>
+                    <td> No</td>
+                </tr>
+                <tr>
+                    <td>Change rooms and shower </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>Locker facility </td>
+                    <td> Yes</td>
+                </tr>
+                <tr>
+                    <td>On course wash room areas </td>
+                    <td> No</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="flex-container">
+        <div>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Prakash M Pakki, 10 Jun 1981</mat-card-title>
+                    <mat-card-subtitle>7799572996, prakashm97@ymail.com</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image height="100px" width="100px" src="../../assets/PrakashMPakki.jpg">
+                <mat-card-content>
+                    <p>Profile : Has played the tour in India for 5 years & is a qualified teaching pro</p>
+                    <p>Qualifications : B Category certification from NGAI</p>
+                    <p>Experience : Has been teaching golf for 8 years .Was earlier at the JWGC course at Mysore.</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>H Sunil Kumar, 15/10/1976</mat-card-title>
+                    <mat-card-subtitle>9989828348, sunilhga@gmail.com</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image height="100px" width="100px" src="../../assets/SanjaySingh.jpg">
+                <mat-card-content>
+                    <p>Profile : Has been teaching golf now for over 10 years at HGA & other golf courses in Hyderabad</p>
+                    <p>Qualifications : Class D, NGAI certified and TPI certified Level 1 (CGFI)</p>
+                    <p>Experience : Has been teaching golf now for over 12 years at HGA & other golf courses in Hyderabad</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Sanjay Singh, 29 Apr 1974</mat-card-title>
+                    <mat-card-subtitle>9490116046, hgasanjay@gmail.com</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image height="100px" width="100px" src="../../assets/SanjaySingh.jpg">
+                <mat-card-content>
+                    <p>
+                        Profile : Member of PGTI and IGU certified trainer.A Commerce graduate from Calcutta University he was taught golf by the
+                        professional FEROZ ALI
+                    </p>
+                    <p>
+                        Qualifications : Professional Golfer- Member of PGTI; CLASS-A Teaching Professional (NGAI &amp; IGU); LEVEL-1 TPI (Certified
+                        Golf Fitness Instructor); LEVEL-2 TPI (Certified Junior Coach)); LEVEL-1 K-VEST (Certified in Bio-Mechanics);
+                        LEVEL-C R&amp;A- IGU (Certified Referee)
+                    </p>
+                    <p>
+                        Experience : Started playing in 1986 and has been teaching for over 15 years
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.contentCategory == 'junior-program'" class="container-fluid">
+    <p>Eligibility
+    </p>
+    <p>
+        Open to all juniors (Members & Guest) below the age of 17 yrs.
+    </p>
+    <p>
+        Duration & timings
+    </p>
+    <p>
+
+        The coaching will be for charged per month and conducted on Weekends of 2 hours sessions in the Morning and 2 hours session
+        in the afternoon. The students have to opt for the batches as per their convenience.
+    </p>
+    <p>
+
+        Timings: Saturdays, Sundays & Holidays from 7.00 am to 10.00 am and 2.00 pm to 4.00 pm.
+    </p>
+    <p>
+
+        Note: All Juniors have to report half an hour before the coaching class and stay half an hour after the coaching class for
+        warm up exercises and loosening exercise. Training Skills During The Junior Development Programme :
+    </p>
+    <p>
+        <ul>
+            <li>Short Game</li>
+            <li>Long Game</li>
+            <li>Speciality Shots</li>
+            <li>Recovery Shots</li>
+            <li>Skill Challenges</li>
+            <li>Mental aspect of the game on the golf course</li>
+            <li>Fitness programme with assistance from GYM Instructors of KGA</li>
+        </ul>
+        <p>
+            Basic Rules, Upkeep of golf equipments, Strategy for tournament, Play Etiquette on the golf course and club house.
+        </p>
+        <p>
+            Interact with parents to update on the progress of their children
+        </p>
+        <p>
+            One Class per month on Nutritional requirements for children with an expert on Nutrition.
+        </p>
+        <p>
+            All juniors who are interested may register.
+        </p>
+        <p>
+            All the slots will be allotted by the coach.
+        </p>
+</div>
+
+<div *ngIf="this.contentCategory == 'hga-kga'" class="container-fluid">
+    <p>
+        Dear Member/Parent
+    </p>
+    <p>
+        Hyderabad Golf Association is proud to extend its partnership with K&A Golf continuing into the second year for further development
+        of our junior players. We at HGA are fully committed to promote and develop our junior’s so that they can truly achieve
+        their full potential in the game of Golf and compete at the National and International stage. K&A Golf comprises
+        of Karan Bindra, Anitya Chand, Indrajeet Bhalotia, Akhil Nayar and Deepinder Kullar, who have been managing the DLF
+        Golf Academy since 1999; India’s best golf school. They have been guiding many promising Junior Golfers at the Academy,
+        who have won several National & International Championships.
+    </p>
+    <p>
+        The focus areas, structure, costs and registration details are listed below for your perusal.
+    </p>
+    <p>
+        FOCUS AREAS
+    </p>
+    <ul>
+        <li>Evaluations on Long Game / Short Game / Technique / Fitness / Equipment / Course Management.</li>
+        <li>Development plan and report for every junior made by K&A Golf.</li>
+        <li>Personal Diary for every junior, to be carried for all lessons.</li>
+        <li>Use of latest technology - V1 Professional Software / K VEST 3D Motion Capture Analysis / SAM Putt Lab Analysis for
+            Putting / Launch Monitor.</li>
+        <li>Evaluation of performance in Skills Challenge and Tournaments.</li>
+        <li>Quarterly Junior Golf Tournaments & Prizes.</li>
+        <li>Club head speed assessment and how to increase speed & distance.</li>
+    </ul>
+
+    <p>The program start date is scheduled for the 17th & 18th of January, 2015, and will take place once in a month for two
+        days (Four Sessions of Four hours each).</p>
+    <p>"2015" HGA - K&A JUNIOR PROGRAMME STRUCTURE</p>
+    <p>Elite Squad (Open for all Elite players at HGA)</p>
+    <ul>
+        <li>One group session of four hours with K&A representatives. </li>
+        <li>Four individual sessions of half hour each. One two and a half hour on course lesson in a four ball with HGA coaches.
+        </li>
+        <li>Four fitness sessions a month by HGA fitness trainers.</li>
+        <li>Travel allowance support for IGU tournaments. </li>
+        <li>T-shirts and Caps for tournament play. </li>
+        <li>One fully paid two day trip to train at the DLF Golf Academy, Gurgaon.</li>
+    </ul>
+    <p>
+        HGA Advanced Squad
+    </p>
+    <ul>
+        <li>One group session of four hours with K&A representatives.</li>
+        <li>Four sessions in a group of two hours each.</li>
+        <li>One two and a half hour on course lesson in a four ball with HGA coaches.</li>
+        <li>Four fitness sessions a month by HGA fitness trainers.</li>
+    </ul>
+    <p>
+        HGA Intermediate 1 & 2 Squads
+    </p>
+    <ul>
+        <li>One group session of four hours with K&A representatives.</li>
+        <li>Two sessions in a group of two hours each.</li>
+        <li>One two and a half hour on course lesson in a four ball with HGA coaches.</li>
+        <li>General fitness routines by HGA coaching team.</li>
+    </ul>
+</div>
+
+<div *ngIf="this.contentCategory == 'driving-range'" class="container-fluid">
+    <ul>
+        <li>The driving range shall remain open from 5.30 AM to 11.30 Am & 1 PM to 7.30 PM on all days.</li>
+        <li>No unauthorized persons shall be allowed to use the range.</li>
+        <li>Ball Charges : Prior to issue of Range Balls users shall pay prescribed charges.</li>
+        <li>Members, Dependents and Associates may avail credit facilities. All others shall pay by day card. Anyone using the
+            range balls without payment, shall be in serious breach of the rules and liable for disciplinary action which
+            may include suspension from membership. </li>
+    </ul>
+</div>
+
+<div *ngIf="this.contentCategory == 'fees-and-costs'" class="container-fluid">
+    <mat-tab-group>
+        <mat-tab label="Ball Bucket Charges">
+            <table class="table table-hover table-bordered table-md">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="2">Ball Bucket Charges</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ball Bucket Charges Members </td>
+                        <td> Rs.20/- per 50 Balls</td>
+                    </tr>
+                    <tr>
+                        <td>Ball Bucket Charges for Non-Members </td>
+                        <td> Rs.50/- per 50 Balls</td>
+                    </tr>
+                    <tr>
+                        <td>Ball Bucket Charges for Student Players </td>
+                        <td> Rs.20/- per 50 Balls</td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-tab>
+        <mat-tab label="Coaching Charges">
+            <table class="table table-hover table-bordered table-md">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Members/ All Associates </th>
+                        <th>Cat-A Existing </th>
+                        <th>Cat-B Existing </th>
+                        <th>Cat-C+D Existing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Members/Mem Dependent/ Student Player 25 Minutes Coaching Charges </td>
+                        <td> 650 </td>
+                        <td> 550 </td>
+                        <td> 450</td>
+                    </tr>
+                    <tr>
+                        <td>Members/Mem Dependent/ Student Player 10 Lessons Coaching Charges </td>
+                        <td> 5500 </td>
+                        <td> 4500 </td>
+                        <td> 3500</td>
+                    </tr>
+                    <tr>
+                        <td>Members/Mem Dependent/ Student Player 9 Holes Coaching Charges </td>
+                        <td> 2500 </td>
+                        <td> 2100 </td>
+                        <td> 1900</td>
+                    </tr>
+                    <tr>
+                        <td>HGA Junior Programme 8 Classes for Beginners & intermediate (Mem/Mem-Dep/Student Player) </td>
+                        <td> 4000 </td>
+                        <td> 4000 </td>
+                        <td> 4000</td>
+                    </tr>
+                    <tr>
+                        <td>Members/Mem Dependent/ Student Player Individual Class in Junior Programme </td>
+                        <td> 550 </td>
+                        <td> 550 </td>
+                        <td> 550</td>
+                    </tr>
+                    <tr>
+                        <td>Others </td>
+                    </tr>
+                    <tr>
+                        <td>Non-Members 25 Minutes Coaching Charges</td>
+                        <td> 1000 </td>
+                        <td> 900 </td>
+                        <td> 800</td>
+                    </tr>
+                    <tr>
+                        <td>Non-Members 10 Lessons Coaching</td>
+                        <td> 8000 </td>
+                        <td> 7000 </td>
+                        <td> 6000</td>
+                    </tr>
+                    <tr>
+                        <td>Non-Members 9 Holes Coaching Charges</td>
+                        <td> 4000 </td>
+                        <td> 3500 </td>
+                        <td> 2000</td>
+                    </tr>
+                    <tr>
+                        <td>HGA Junior Programme 8 Classes Beginners & intermediate (Non-Mem)</td>
+                        <td> 4500 </td>
+                        <td> 4500 </td>
+                        <td> 4500</td>
+                    </tr>
+                    <tr>
+                        <td>Individual Class in Junior Programme</td>
+                        <td> 900 </td>
+                        <td> 900 </td>
+                        <td> 900</td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-tab>
+        <mat-tab label="Golf Course Charges">
+            <table class="table table-hover table-bordered table-md">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="2">No Green Fees for Members and Member-Dependants & Student Players</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Member Guest Charges for Week-Days </td>
+                        <td> Rs.600/-(Per Round)</td>
+                    </tr>
+                    <tr>
+                        <td>Member Guest Charges for Week-Ends & Holidays </td>
+                        <td> Rs.900/-(Per Round)</td>
+                    </tr>
+                    <tr>
+                        <td>Non-Members Charges Week-Days </td>
+                        <td> Rs.800/-(Per Round)</td>
+                    </tr>
+                    <tr>
+                        <td>Non-Members Charges Week-Ends & Holidays </td>
+                        <td> Rs.1200/-(Per Round)</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Tournament Fees </td>
+                        <td> Rs.300/-(Or as decided by the committee)</td>
+                    </tr>
+                    <tr>
+                        <td>IGU Weekdays </td>
+                        <td> Rs.650/-</td>
+                    </tr>
+                    <tr>
+                        <td>IGU Weekends and Holidays </td>
+                        <td> Rs.950/-</td>
+                    </tr>
+                    <tr>
+                        <td>Affillated club charges </td>
+                        <td> Depends upon golf clubs</td>
+                    </tr>
+                    <tr>
+                        <td>Golf Set Charges - Members/Non-Mem </td>
+                        <td> Rs.300/-(Per Round)</td>
+                    </tr>
+                    <tr>
+                        <td>Trolly Charges - Members/Non-Mem </td>
+                        <td> Rs.50/-(Mem & Non-Mem)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<div *ngIf="this.contentCategory == 'rules-and-etiquette'" class="container-fluid">
+    <img mat-card-image height="100px" width="100px" src="../../assets/Complete_Rules_of_Golf.jpg">
+    <img mat-card-image height="100px" width="100px" src="../../assets/Code_of_Conduct_for_Golfers.jpg">
+</div>
+
+<div *ngIf="this.contentCategory == 'food-menu'" class="container-fluid">
+    <mat-tab-group>
+        <mat-tab label="Break Fast">
+            <img mat-card-image width="100vw" src="../../assets/Healthy-Breakfast.jpg">
+        </mat-tab>
+        <mat-tab label="Lunch">
+            <img mat-card-image width="100vw" src="../../assets/lunch.jpg">
+        </mat-tab>
+        <mat-tab label="Dinner">
+            <img mat-card-image width="100vw" src="../../assets/dinner.jpg">
+        </mat-tab>
+        <mat-tab label="Ala Carte Snacks">
+            <img mat-card-image width="100vw" src="../../assets/hitea.jpg">
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<div *ngIf="this.contentCategory == 'contact-us'" class="container-fluid">
+
 </div>

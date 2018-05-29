@@ -3,6 +3,8 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '
 import { Menu, MENULIST } from './layout.model'
 import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatMenuTrigger } from '@angular/material'
+
 
 @Component({
     selector: 'layout',
@@ -21,13 +23,21 @@ export class LayoutComponent implements OnInit {
     }
 
     ngOnInit() {
+        setTimeout(() => {
+            // this.rtr.navigate(['/home', 'fees-and-cost'], { relativeTo: this.activatedRoute })
+        }, 1000);
     }
 
     ngOnDestroy(): void {
 
     }
 
-    public routeTo(routerLink: string) {
-        this.rtr.navigate([routerLink], { relativeTo: this.activatedRoute });
+    public routeTo(routerLinkArray: any[]) {
+        this.rtr.navigate(routerLinkArray, { relativeTo: this.activatedRoute });
     }
+
+    public loginFormGroup: FormGroup = new FormGroup({
+        loginId: new FormControl('', Validators.minLength(2)),
+        loginPassword: new FormControl('', Validators.minLength(2))
+    });
 }

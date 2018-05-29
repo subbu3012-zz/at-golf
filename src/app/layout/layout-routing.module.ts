@@ -16,7 +16,7 @@ const routes: Routes = [
                 loadChildren: './pages/teetime/teetime.module#TeeTimeModule'
             },
             {
-                path: 'home',
+                path: 'home/:category',
                 loadChildren: './pages/home/home.module#HomeModule'
             },
             {
