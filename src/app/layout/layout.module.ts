@@ -11,7 +11,7 @@ import {
 import { LoginComponent } from './pages/login/login.component'
 import { SharedService } from './shared.service';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { UserSessionDataResolver } from './shared.service'
+import { UserSessionDataResolver, AuthGuard } from './shared.service'
 
 
 @NgModule({
@@ -28,6 +28,6 @@ import { UserSessionDataResolver } from './shared.service'
         LayoutComponent, LoginComponent
     ],
     entryComponents: [LoginComponent],
-    providers: [SharedService, MediaMatcher, UserSessionDataResolver]
+    providers: [SharedService, MediaMatcher, UserSessionDataResolver, AuthGuard]
 })
 export class LayoutModule { }
