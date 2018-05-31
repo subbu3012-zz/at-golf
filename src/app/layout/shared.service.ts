@@ -48,7 +48,7 @@ export class AuthGuard implements CanActivate {
     constructor(private sharedServ: SharedService) { }
     canActivate(): boolean {
         if (Object.keys(this.sharedServ.userSessionData).length) {
-            if (+this.sharedServ.userSessionData['sessionCreatedTime'] + 60000 < new Date().getTime()) {
+            if (+this.sharedServ.userSessionData['sessionCreatedTime'] + 300000 < new Date().getTime()) {
                 this.sharedServ.clearSessionData();
                 return false;
             }
