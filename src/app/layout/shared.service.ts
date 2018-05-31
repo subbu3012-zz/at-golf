@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { Observable } from 'rxjs'
+import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material'
 
 @Injectable()
 export class SharedService {
@@ -8,8 +9,9 @@ export class SharedService {
     public isUserLoggedIn: boolean = false;
     public mobileQuery: MediaQueryList;
     public userSessionData: Object;
+    public showProgressBar: boolean = false;
 
-    constructor(media: MediaMatcher, private rtr: Router) {
+    constructor(media: MediaMatcher, private rtr: Router, public snackBar: MatSnackBar) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
     }
 
@@ -28,8 +30,13 @@ export class SharedService {
     public clearSessionData() {
         sessionStorage.clear();
         this.userSessionData = new Object();
+    }
+
+    public forceLogoutUser() {
+        this.clearSessionData();
         this.isUserLoggedIn = false;
         this.rtr.navigate(['']);
+        this.openSnackBar("Your login is expired. Kindy login again.", "Okay", 5000)
     }
 
     public getUserSessionDataFromSession() {
@@ -39,6 +46,10 @@ export class SharedService {
         }
         return _userSessionData;
     }
+
+    public openSnackBar(message: string, action: string, duration: number = 5000) {
+        this.snackBar.open(message, action, { duration: duration });
+    }
 }
 
 import { CanActivate } from '@angular/router';
@@ -46,14 +57,18 @@ import { CanActivate } from '@angular/router';
 @Injectable()
 export class AuthGuard implements CanActivate {
     constructor(private sharedServ: SharedService) { }
+
     canActivate(): boolean {
+        this.sharedServ.userSessionData = this.sharedServ.getUserSessionDataFromSession();
         if (Object.keys(this.sharedServ.userSessionData).length) {
-            if (+this.sharedServ.userSessionData['sessionCreatedTime'] + 300000 < new Date().getTime()) {
-                this.sharedServ.clearSessionData();
+            if (+this.sharedServ.userSessionData['sessionCreatedTime'] + 60000 < new Date().getTime()) {
+                this.sharedServ.forceLogoutUser()
                 return false;
+            } else {
+                this.sharedServ.isUserLoggedIn = true;
             }
         } else {
-            this.sharedServ.clearSessionData();
+            this.sharedServ.forceLogoutUser()
             return false;
         }
         return true;
@@ -71,7 +86,6 @@ export class UserSessionDataResolver implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            console.log(route, state)
             this.sharedServ.userSessionData = this.sharedServ.getUserSessionDataFromSession();
             resolve(true);
         });

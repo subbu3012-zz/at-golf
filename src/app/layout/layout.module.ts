@@ -6,7 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     MatInputModule, MatButtonModule, MatSidenavModule, MatIconModule, MatToolbarModule,
-    MatDividerModule, MatListModule, MatMenuModule, MatDialogModule, MatTabsModule
+    MatDividerModule, MatListModule, MatMenuModule, MatDialogModule, MatTabsModule,
+    MatSnackBarModule, MatProgressBarModule, MatProgressSpinnerModule
 } from '@angular/material'
 import { LoginComponent } from './pages/login/login.component'
 import { SharedService } from './shared.service';
@@ -22,7 +23,8 @@ import { UserSessionDataResolver, AuthGuard } from './shared.service'
         LayoutRoutingModule,
         HttpClientModule,
         MatInputModule, MatButtonModule, MatSidenavModule, MatIconModule, MatMenuModule, MatIconModule,
-        MatToolbarModule, MatDividerModule, MatListModule, MatDialogModule, MatTabsModule
+        MatToolbarModule, MatDividerModule, MatListModule, MatDialogModule, MatTabsModule,
+        MatSnackBarModule, MatProgressBarModule, MatProgressSpinnerModule
     ],
     declarations: [
         LayoutComponent, LoginComponent

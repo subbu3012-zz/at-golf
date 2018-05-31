@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
     }
 
     public registerUser() {
-        console.log(this.registrationFormGroup.getRawValue())
+        // console.log(this.registrationFormGroup.getRawValue())
     }
 
     public processUserLogin() {
@@ -64,15 +64,18 @@ export class LoginComponent implements OnInit {
             let _loginId = this.loginFormGroup.controls['loginId'].value;
             _loginPayload['password'] = this.loginFormGroup.controls['loginPassword'].value;
             _loginPayload[(_loginId.includes("@admin.com") ? 'email' : 'memberId')] = _loginId;
-
+            this.sharedServ.showProgressBar = true;
             this.loginUser(_loginPayload).subscribe(data => {
                 this.sharedServ.setSessionData(data);
                 this.dialogRef.close();
                 this.dialogRef.afterClosed().subscribe(data => {
                     this.logUserInToApp();
                 })
+                this.sharedServ.openSnackBar("Your login is expired. Kindy login again.", "Okay", 5000)
+                this.sharedServ.showProgressBar = false;
             }, err => {
                 this.loginExceptionDesc = "Invalid credentials. Try again."
+                this.sharedServ.showProgressBar = false;
             })
         }
     }
@@ -80,7 +83,6 @@ export class LoginComponent implements OnInit {
     private markFormGroupTouched(formGroup: FormGroup) {
         (<any>Object).values(formGroup.controls).forEach(control => {
             control.markAsTouched();
-            console.log(control.errors);
             if (control.controls) {
                 control.controls.forEach(c => this.markFormGroupTouched(c));
             }

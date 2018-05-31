@@ -25,9 +25,11 @@ export class LayoutComponent implements OnInit {
         this.rtr.events.subscribe((event: any) => {
             if (event instanceof NavigationStart) {
                 this.isRouteLoading = true;
+                this.sharedServ.showProgressBar = true;
             }
             else if (event instanceof NavigationEnd) {
                 this.isRouteLoading = false;
+                this.sharedServ.showProgressBar = false;
             }
         });
     }
