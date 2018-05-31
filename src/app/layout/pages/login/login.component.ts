@@ -1,25 +1,25 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MediaMatcher } from '@angular/cdk/layout';
 import { MatDialogRef } from '@angular/material'
-
+import { hostName } from './../../../../environments/environment'
+import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs'
+import { SharedService } from '../../../layout/shared.service'
 
 @Component({
     selector: 'login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    providers: [MediaMatcher]
 })
 export class LoginComponent implements OnInit {
 
-    mobileQuery: MediaQueryList;
     private _mobileQueryListener: () => void;
-    public loginId: FormControl = new FormControl('', Validators.minLength(2));
+    private loginExceptionDesc: string = "";
 
     public loginFormGroup: FormGroup = new FormGroup({
-        loginId: new FormControl('', Validators.minLength(2)),
-        loginPassword: new FormControl('', Validators.minLength(2))
+        loginId: new FormControl('', [Validators.minLength(2), Validators.required]),
+        loginPassword: new FormControl('', [Validators.minLength(2), Validators.required])
     });
 
     public registrationFormGroup: FormGroup = new FormGroup({
@@ -29,28 +29,66 @@ export class LoginComponent implements OnInit {
         confirmPassword: new FormControl('', Validators.minLength(2))
     });
 
-    constructor(public rtr: Router, changeDetectorRef: ChangeDetectorRef,
-        media: MediaMatcher, private activatedRoute: ActivatedRoute,
-        private dialogRef: MatDialogRef<LoginComponent>) {
-        this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    constructor(
+        public rtr: Router,
+        private changeDetectorRef: ChangeDetectorRef,
+        private activatedRoute: ActivatedRoute,
+        private dialogRef: MatDialogRef<LoginComponent>,
+        private httpClient: HttpClient,
+        private sharedServ: SharedService
+    ) {
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-        this.mobileQuery.addListener(this._mobileQueryListener);
+        this.sharedServ.mobileQuery.addListener(this._mobileQueryListener);
     }
 
     ngOnInit() {
     }
 
     ngOnDestroy(): void {
-        this.mobileQuery.removeListener(this._mobileQueryListener);
+        this.sharedServ.mobileQuery.removeListener(this._mobileQueryListener);
     }
 
-    public logInToApp() {
-        console.log(this.loginFormGroup.getRawValue());
-        this.dialogRef.close(this.loginFormGroup.getRawValue());
-        // this.rtr.navigate(['../teetime'], { relativeTo: this.activatedRoute });
+    public logUserInToApp() {
+        this.sharedServ.isUserLoggedIn = true;
+        this.rtr.navigateByUrl('/layout/teetime');
     }
 
     public registerUser() {
         console.log(this.registrationFormGroup.getRawValue())
+    }
+
+    public processUserLogin() {
+        this.markFormGroupTouched(this.loginFormGroup);
+        if (this.loginFormGroup.valid) {
+            let _loginPayload = {};
+            let _loginId = this.loginFormGroup.controls['loginId'].value;
+            _loginPayload['password'] = this.loginFormGroup.controls['loginPassword'].value;
+            _loginPayload[(_loginId.includes("@admin.com") ? 'email' : 'memberId')] = _loginId;
+
+            this.loginUser(_loginPayload).subscribe(data => {
+                this.sharedServ.setSessionData(data);
+                this.dialogRef.close();
+                this.dialogRef.afterClosed().subscribe(data => {
+                    this.logUserInToApp();
+                })
+            }, err => {
+                this.loginExceptionDesc = "Invalid credentials. Try again."
+            })
+        }
+    }
+
+    private markFormGroupTouched(formGroup: FormGroup) {
+        (<any>Object).values(formGroup.controls).forEach(control => {
+            control.markAsTouched();
+            console.log(control.errors);
+            if (control.controls) {
+                control.controls.forEach(c => this.markFormGroupTouched(c));
+            }
+        });
+    }
+
+    public loginUser(loginPayload: any): Observable<any> {
+        return this.httpClient.post<any>(hostName + "oauth2/token?cid=df926dce-dff3-4b64-a30c-e480934b22d3", loginPayload);
+
     }
 }

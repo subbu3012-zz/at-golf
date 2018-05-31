@@ -9,7 +9,10 @@ import {
     MatDividerModule, MatListModule, MatMenuModule, MatDialogModule, MatTabsModule
 } from '@angular/material'
 import { LoginComponent } from './pages/login/login.component'
-import { SharedService } from './shared.service'
+import { SharedService } from './shared.service';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { UserSessionDataResolver } from './shared.service'
+
 
 @NgModule({
     imports: [
@@ -25,6 +28,6 @@ import { SharedService } from './shared.service'
         LayoutComponent, LoginComponent
     ],
     entryComponents: [LoginComponent],
-    providers: [SharedService]
+    providers: [SharedService, MediaMatcher, UserSessionDataResolver]
 })
 export class LayoutModule { }

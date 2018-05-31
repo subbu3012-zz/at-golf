@@ -19,20 +19,27 @@
 </div>
 
 <ng-template #loginTemplate let-formGroup="formGroup">
+    <h6 class="warn-color center-text">{{loginExceptionDesc}}</h6>
     <div class="login-template-container container-fluid">
         <form [formGroup]="formGroup">
             <div>
                 <mat-form-field>
-                    <input matInput placeholder="Member Id" [formControlName]="'loginId'">
+                    <input matInput placeholder="Login Id" formControlName="loginId">
+                    <mat-error *ngIf="formGroup.controls['loginId'].errors?.required">
+                        *Mandatory Field
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div>
                 <mat-form-field>
-                    <input matInput placeholder="Passcode" type="password" [formControlName]="'loginPassword'">
+                    <input matInput placeholder="Passcode" type="password" formControlName="loginPassword">
+                    <mat-error *ngIf="formGroup.controls['loginPassword'].errors?.required">
+                        *Mandatory Field
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div>
-                <button mat-raised-button color="primary" (click)="logInToApp();">Login</button>
+                <button mat-raised-button color="primary" (click)="processUserLogin();">Login</button>
             </div>
         </form>
     </div>

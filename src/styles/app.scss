@@ -241,3 +241,7 @@ mat-form-field {
     height: 2px;
     border: none;
 }
+
+.cdk-overlay-container{
+    z-index: 1050 !important;
+}

@@ -199,7 +199,7 @@
                     <button mat-menu-item (click)="routeTo(['teetime'])">Tee Time</button>
                     <button mat-menu-item (click)="routeTo(['events'])">Events</button>
                     <button mat-menu-item (click)="routeTo(['members'])">Members</button>
-                    <button class="warn-color" (click)="this.sharedServ.isUserLoggedIn = false;routeTo(['home', 'landing-page'])" mat-menu-item>
+                    <button class="warn-color" (click)="processUserLogout();" mat-menu-item>
                         Logout
                         <mat-icon class="warn-color" style="font-size:22px">exit_to_app</mat-icon>
                     </button>
