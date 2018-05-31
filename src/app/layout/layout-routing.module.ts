@@ -8,10 +8,6 @@ const routes: Routes = [
         component: LayoutComponent,
         children: [
             {
-                path: 'login',
-                loadChildren: './pages/login/login.module#LoginModule'
-            },
-            {
                 path: 'teetime',
                 loadChildren: './pages/teetime/teetime.module#TeeTimeModule'
             },

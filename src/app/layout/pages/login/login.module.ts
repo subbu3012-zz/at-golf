@@ -20,7 +20,7 @@ import {
         MatDividerModule
     ],
     declarations: [
-        LoginComponent,
+        // LoginComponent,
     ],
     providers: []
 })

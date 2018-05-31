@@ -1,8 +1,8 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
-
+import { MatDialogRef } from '@angular/material'
 
 
 @Component({
@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
         confirmPassword: new FormControl('', Validators.minLength(2))
     });
 
-    constructor(public rtr: Router, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,private activatedRoute:ActivatedRoute) {
+    constructor(public rtr: Router, changeDetectorRef: ChangeDetectorRef,
+        media: MediaMatcher, private activatedRoute: ActivatedRoute,
+        private dialogRef: MatDialogRef<LoginComponent>) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
@@ -44,7 +46,8 @@ export class LoginComponent implements OnInit {
 
     public logInToApp() {
         console.log(this.loginFormGroup.getRawValue());
-        this.rtr.navigate(['home'], { relativeTo: this.activatedRoute });
+        this.dialogRef.close(this.loginFormGroup.getRawValue());
+        // this.rtr.navigate(['../teetime'], { relativeTo: this.activatedRoute });
     }
 
     public registerUser() {

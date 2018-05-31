@@ -1,20 +1,24 @@
-<mat-tab-group>
-    <mat-tab label="My Groups">
-        <div class="mt-2">
-            <ng-container *ngTemplateOutlet="groupsTemplate;context:{groupList:myGroupList}"></ng-container>
-        </div>
-    </mat-tab>
-    <mat-tab label="My Connections">
-        <div class="mt-2">
-            <ng-container *ngTemplateOutlet="myMemberTemplate;context:{memberList:myMemberList}"></ng-container>
-        </div>
-    </mat-tab>
-    <mat-tab label="Members I May know">
-        <div class="mt-2">
-            <ng-container *ngTemplateOutlet="nonMembersTemplate;context:{memberList:memberList}"></ng-container>
-        </div>
-    </mat-tab>
-</mat-tab-group>
+<div class="container-fluid mt-2">
+    <h2 class="bold-text center-text camelcase-text">Members and Connections</h2>
+    <hr class="divider divider-primary divider-60 divider-offset">
+    <mat-tab-group>
+        <mat-tab label="My Groups">
+            <div class="mt-2">
+                <ng-container *ngTemplateOutlet="groupsTemplate;context:{groupList:myGroupList}"></ng-container>
+            </div>
+        </mat-tab>
+        <mat-tab label="My Connections">
+            <div class="mt-2">
+                <ng-container *ngTemplateOutlet="myMemberTemplate;context:{memberList:myMemberList}"></ng-container>
+            </div>
+        </mat-tab>
+        <mat-tab label="Members I May know">
+            <div class="mt-2">
+                <ng-container *ngTemplateOutlet="nonMembersTemplate;context:{memberList:memberList}"></ng-container>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
 
 <ng-template #groupsTemplate let-groupList="groupList">
     <mat-accordion>

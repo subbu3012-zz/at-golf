@@ -6,8 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     MatInputModule, MatButtonModule, MatSidenavModule, MatIconModule, MatToolbarModule,
-    MatDividerModule, MatListModule, MatMenuModule
+    MatDividerModule, MatListModule, MatMenuModule, MatDialogModule, MatTabsModule
 } from '@angular/material'
+import { LoginComponent } from './pages/login/login.component'
+import { SharedService } from './shared.service'
 
 @NgModule({
     imports: [
@@ -17,11 +19,12 @@ import {
         LayoutRoutingModule,
         HttpClientModule,
         MatInputModule, MatButtonModule, MatSidenavModule, MatIconModule, MatMenuModule, MatIconModule,
-        MatToolbarModule, MatDividerModule, MatListModule
+        MatToolbarModule, MatDividerModule, MatListModule, MatDialogModule, MatTabsModule
     ],
     declarations: [
-        LayoutComponent,
+        LayoutComponent, LoginComponent
     ],
-    providers: []
+    entryComponents: [LoginComponent],
+    providers: [SharedService]
 })
 export class LayoutModule { }

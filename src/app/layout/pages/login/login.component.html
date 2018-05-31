@@ -1,5 +1,7 @@
+<!-- <div class="container-fluid">
+    <ng-container *ngTemplateOutlet="loginTemplate;context:{formGroup:loginFormGroup}"></ng-container>
+</div> -->
 <div class="login-container">
-    <!-- <img src="../../assets/main-slide-2.jpg" style="position: absolute; z-index: 2;" /> -->
     <div class="login-form-container">
         <mat-tab-group>
             <mat-tab label="Login">
@@ -7,7 +9,7 @@
                     <ng-container *ngTemplateOutlet="loginTemplate;context:{formGroup:loginFormGroup}"></ng-container>
                 </div>
             </mat-tab>
-            <mat-tab label="Register With Us">
+            <mat-tab [disabled]="true" label="Register With Us">
                 <div class="mt-2">
                     <ng-container *ngTemplateOutlet="registrationTemplate;context:{formGroup:registrationFormGroup}"></ng-container>
                 </div>

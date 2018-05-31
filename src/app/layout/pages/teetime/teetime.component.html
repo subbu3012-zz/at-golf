@@ -2,9 +2,13 @@
     <div class="row">
         <div class="col-4 offset-1" style="cursor:pointer" (click)="teeBoxName = 'TBox 1'">
             <img title="Book Slots for TBox 1" width="395" height="538" src="../../assets/field_reservation1.jpg" alt="Card image cap">
+            <!-- <h6 class="center-text primary-color">TBox 1</h6> -->
+            <!-- <button mat-raised-button color="primary">Refresh</button> -->
         </div>
         <div class="col-7" style="margin-top:50px;cursor:pointer" (click)="teeBoxName = 'TBox 10'">
             <img title="Book Slots for TBox 10" src="../../assets/field_reservation10.jpg" alt="Card image cap">
+            <!-- <h6 class="center-text primary-color">TBox 10</h6> -->
+            <!-- <button mat-raised-button color="primary">Refresh</button> -->
         </div>
     </div>
 </div>
@@ -20,10 +24,9 @@
         <button mat-raised-button color="primary">Refresh</button>
     </div>
 </div>
-<h4 style="text-align:center">
-    <h2 class="bold-text camelcase-text">Tee Time Slots for {{teeBoxName}} on {{teeTimeDate | date:'mediumDate'}}</h2>
-    <hr class="divider divider-primary divider-60 divider-offset">
-</h4>
+
+<h2 class="bold-text center-text camelcase-text">Tee Time Slots for {{teeBoxName}} on {{teeTimeDate | date:'mediumDate'}}</h2>
+<hr class="divider divider-primary divider-60 divider-offset">
 <div class="teeslot-container">
     <div class="flex-container">
         <div *ngFor="let teeSlot of teeSlotList">

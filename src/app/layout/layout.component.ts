@@ -4,7 +4,9 @@ import { Menu, MENULIST } from './layout.model'
 import { Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatMenuTrigger } from '@angular/material'
-
+import { LoginComponent } from './pages/login/login.component'
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { SharedService } from './shared.service'
 
 @Component({
     selector: 'layout',
@@ -19,7 +21,7 @@ export class LayoutComponent implements OnInit {
     public isRouteLoading: boolean = false;
 
     constructor(public rtr: Router, public domSanitizer: DomSanitizer,
-        private activatedRoute: ActivatedRoute) {
+        private activatedRoute: ActivatedRoute, private dialog: MatDialog, public sharedServ: SharedService) {
         this.rtr.events.subscribe((event: any) => {
             if (event instanceof NavigationStart) {
                 this.isRouteLoading = true;
@@ -48,4 +50,13 @@ export class LayoutComponent implements OnInit {
         loginId: new FormControl('', Validators.minLength(2)),
         loginPassword: new FormControl('', Validators.minLength(2))
     });
+
+    public openLoginDialog() {
+        let dialogRef: MatDialogRef<LoginComponent> = this.dialog.open(LoginComponent, {
+        })
+        dialogRef.beforeClose().subscribe((data: any) => {
+            this.sharedServ.isUserLoggedIn = true;
+            this.routeTo(['teetime'])
+        });
+    }
 }

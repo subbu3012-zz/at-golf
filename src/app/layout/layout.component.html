@@ -192,9 +192,16 @@
                 </mat-menu>
             </li>
             <li class="nav-item">
-                <button disableRipple="true" (click)="routeTo(['teetime'])" mat-menu-item>Login</button>
-                <!-- <ng-container style="width:300px;" *ngTemplateOutlet="loginTemplate;context:{formGroup:loginFormGroup}"></ng-container> -->
-
+                <button *ngIf="!this.sharedServ.isUserLoggedIn" disableRipple="true" (click)="openLoginDialog()" mat-menu-item>Login</button>
+                <button *ngIf="this.sharedServ.isUserLoggedIn" disableRipple="true" mat-menu-item [matMenuTriggerFor]="userMenus">Member's Arena
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+                <mat-menu [overlapTrigger]="false" #userMenus="matMenu">
+                    <button mat-menu-item (click)="routeTo(['teetime'])">Tee Time</button>
+                    <button mat-menu-item (click)="routeTo(['events'])">Events</button>
+                    <button mat-menu-item (click)="routeTo(['members'])">Members</button>
+                    <button (click)="this.sharedServ.isUserLoggedIn = false;routeTo(['home', 'landing-page'])" mat-menu-item>Logout</button>
+                </mat-menu>
             </li>
         </ul>
     </div>
