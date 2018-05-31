@@ -54,7 +54,7 @@ export class LayoutComponent implements OnInit {
     public openLoginDialog() {
         let dialogRef: MatDialogRef<LoginComponent> = this.dialog.open(LoginComponent, {
         })
-        dialogRef.beforeClose().subscribe((data: any) => {
+        dialogRef.afterClosed().subscribe((data: any) => {
             this.sharedServ.isUserLoggedIn = true;
             this.routeTo(['teetime'])
         });

@@ -1,7 +1,7 @@
 @import '../../styles/app.scss';
-* {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-}
+// * {
+//     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+// }
 
 mat-form-field {
     width: 100%;
@@ -97,4 +97,30 @@ mat-sidenav {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+}
+
+.nav-item{
+    margin: 0px 5px;
+}
+.mat-menu-list-button :hover{
+}
+
+.mat-menu-item:hover{
+    background-color: white !important;
+    color: mat-color($mat-app-primary);
+}
+
+.mat-menu-list-button::after {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 5px 5px;
+    border-color: currentColor transparent transparent transparent;
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 27px;
+    right: 0px;
+    color:rgba(0, 0, 0, 0.54);
+    transform: translateY(-50%);
 }

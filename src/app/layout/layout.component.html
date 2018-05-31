@@ -45,7 +45,7 @@
             </div>
             <div class="nav-item">
                 <button mat-menu-item [matMenuTriggerFor]="aboutUsMenus">About us
-                    <mat-icon>keyboard_arrow_down</mat-icon>
+                    <mat-icon style = "margin-bottom:3px" >arrow_drop_down</mat-icon>
                 </button>
                 <mat-menu [overlapTrigger]="false" backdropClass="temp-class" #aboutUsMenus="matMenu">
                     <button mat-menu-item>Management Committee</button>
@@ -55,7 +55,7 @@
             </div>
             <div class="nav-item">
                 <button mat-menu-item [matMenuTriggerFor]="golfMenus">Golf
-                    <mat-icon>keyboard_arrow_down</mat-icon>
+                    <mat-icon style = "margin-bottom:3px" >arrow_drop_down</mat-icon>
                 </button>
                 <mat-menu [overlapTrigger]="false" #golfMenus="matMenu">
                     <button mat-menu-item [matMenuTriggerFor]="courseMenus">Course Layout</button>
@@ -84,7 +84,7 @@
             </div>
             <div class="nav-item">
                 <button mat-menu-item [matMenuTriggerFor]="clubHouseMenus">Club house
-                    <mat-icon>keyboard_arrow_down</mat-icon>
+                    <mat-icon style = "margin-bottom:3px" >arrow_drop_down</mat-icon>
                 </button>
                 <mat-menu [overlapTrigger]="false" #clubHouseMenus="matMenu">
                     <button mat-menu-item>Food & Beverages</button>
@@ -96,7 +96,7 @@
             </div>
             <div class="nav-item">
                 <button mat-menu-item [matMenuTriggerFor]="galleryMenus">Gallery
-                    <mat-icon>keyboard_arrow_down</mat-icon>
+                    <mat-icon style = "margin-bottom:3px" >arrow_drop_down</mat-icon>
                 </button>
                 <mat-menu [overlapTrigger]="false" #galleryMenus="matMenu">
                     <button mat-menu-item>The Course</button>
@@ -132,8 +132,8 @@
                 <button disableRipple="true" mat-menu-item (click)="routeTo(['home', 'landing-page'])">Home</button>
             </li>
             <li class="nav-item">
-                <button disableRipple="true" mat-menu-item [matMenuTriggerFor]="aboutUsMenus">About us
-                    <mat-icon>keyboard_arrow_down</mat-icon>
+                <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="aboutUsMenus">About us
+                    <!-- <mat-icon >arrow_drop_down</mat-icon> -->
                 </button>
                 <mat-menu [overlapTrigger]="false" backdropClass="temp-class" #aboutUsMenus="matMenu">
                     <button mat-menu-item (click)="routeTo(['home', 'management-committee'])">Management Committee</button>
@@ -142,8 +142,8 @@
                 </mat-menu>
             </li>
             <li class="nav-item">
-                <button disableRipple="true" mat-menu-item [matMenuTriggerFor]="golfMenus">Golf
-                    <mat-icon>keyboard_arrow_down</mat-icon>
+                <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="golfMenus">Golf
+                    <!-- <mat-icon >arrow_drop_down</mat-icon> -->
                 </button>
                 <mat-menu [overlapTrigger]="false" #golfMenus="matMenu">
                     <button mat-menu-item [matMenuTriggerFor]="courseMenus">Course Layout</button>
@@ -169,8 +169,8 @@
                 </mat-menu>
             </li>
             <li class="nav-item">
-                <button disableRipple="true" mat-menu-item [matMenuTriggerFor]="clubHouseMenus">Club house
-                    <mat-icon>keyboard_arrow_down</mat-icon>
+                <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="clubHouseMenus">Club house
+                    <!-- <mat-icon >arrow_drop_down</mat-icon> -->
                 </button>
                 <mat-menu [overlapTrigger]="false" #clubHouseMenus="matMenu">
                     <button mat-menu-item>Food & Beverages</button>
@@ -181,8 +181,8 @@
                 <button disableRipple="true" mat-menu-item (click)="routeTo(['home', 'contact-us'])">Contact us</button>
             </li>
             <li class="nav-item">
-                <button disableRipple="true" mat-menu-item [matMenuTriggerFor]="galleryMenus">Gallery
-                    <mat-icon>keyboard_arrow_down</mat-icon>
+                <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="galleryMenus">Gallery
+                    <!-- <mat-icon >arrow_drop_down</mat-icon> -->
                 </button>
                 <mat-menu [overlapTrigger]="false" #galleryMenus="matMenu">
                     <button mat-menu-item>The Course</button>
@@ -191,23 +191,31 @@
                     <button mat-menu-item>Nayaqila</button>
                 </mat-menu>
             </li>
-            <li class="nav-item">
-                <button *ngIf="!this.sharedServ.isUserLoggedIn" disableRipple="true" (click)="openLoginDialog()" mat-menu-item>Login</button>
-                <button *ngIf="this.sharedServ.isUserLoggedIn" disableRipple="true" mat-menu-item [matMenuTriggerFor]="userMenus">Member's Arena
-                    <mat-icon>keyboard_arrow_down</mat-icon>
+            <li *ngIf="this.sharedServ.isUserLoggedIn" class="nav-item">
+                <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="userMenus">
+                    Member's Area
                 </button>
                 <mat-menu [overlapTrigger]="false" #userMenus="matMenu">
                     <button mat-menu-item (click)="routeTo(['teetime'])">Tee Time</button>
                     <button mat-menu-item (click)="routeTo(['events'])">Events</button>
                     <button mat-menu-item (click)="routeTo(['members'])">Members</button>
-                    <button (click)="this.sharedServ.isUserLoggedIn = false;routeTo(['home', 'landing-page'])" mat-menu-item>Logout</button>
+                    <button class="warn-color" (click)="this.sharedServ.isUserLoggedIn = false;routeTo(['home', 'landing-page'])" mat-menu-item>
+                        Logout
+                        <mat-icon class="warn-color" style="font-size:22px">exit_to_app</mat-icon>
+                    </button>
                 </mat-menu>
+            </li>
+            <li class="nav-item">
+                <button class="primary-color" *ngIf="!this.sharedServ.isUserLoggedIn" disableRipple="true" (click)="openLoginDialog()" mat-menu-item>
+                    Login
+                    <mat-icon class="primary-color" style="font-size:22px">account_circle</mat-icon>
+                </button>
             </li>
         </ul>
     </div>
 </nav>
 
-<div class="router-outlet-container">
+<div class="router-outlet-container mt-3">
     <div *ngIf="isRouteLoading" style="display:flex;justify-content: center;align-items: center;height:100vh">
         <img src="../../assets/loading.png" style="height:250px;width:250px" alt="">
     </div>
@@ -256,23 +264,3 @@
         </div>
     </div>
 </div>
-
-<ng-template #loginTemplate let-formGroup="formGroup">
-    <div class="login-template-container container-fluid">
-        <form [formGroup]="formGroup">
-            <div>
-                <mat-form-field>
-                    <input matInput placeholder="Member Id" [formControlName]="'loginId'">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field>
-                    <input matInput placeholder="Passcode" type="password" [formControlName]="'loginPassword'">
-                </mat-form-field>
-            </div>
-            <div>
-                <button mat-raised-button color="primary" (click)="logInToApp();">Login</button>
-            </div>
-        </form>
-    </div>
-</ng-template>
