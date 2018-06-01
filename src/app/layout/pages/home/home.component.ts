@@ -1,6 +1,6 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ParamMap } from '@angular/router';
 import { MGMTCOMMITTEEDATA } from './home.model';
 
@@ -15,14 +15,14 @@ export class HomeComponent implements OnInit {
     public contentCategory: string = "home";
     public membercommitteeData: any[] = MGMTCOMMITTEEDATA;
 
-    constructor(public activatedRoute: ActivatedRoute) {
+    constructor(public activatedRoute: ActivatedRoute, public rtr: Router) {
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.contentCategory = params.get('category');
         })
     }
 
     ngOnInit() {
-        
+
     }
 
     ngOnDestroy(): void {

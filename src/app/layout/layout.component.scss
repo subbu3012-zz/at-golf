@@ -64,7 +64,8 @@ mat-sidenav {
     // background-color: rgba(0, 0, 0, 0.7) !important;
     background-color: white;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
-    height: 55px;
+    // height: 70px;
+    padding:0px;
 }
 
 .nav-button{
@@ -102,10 +103,6 @@ mat-sidenav {
     align-items: center;
 }
 
-.nav-item{
-    margin: 0px 5px;
-    letter-spacing: 5px;
-}
 .mat-menu-item{
     letter-spacing: 0.5px;
 }
@@ -124,8 +121,20 @@ mat-sidenav {
     content: '';
     display: inline-block;
     position: absolute;
-    top: 27px;
-    right: 0px;
+    top: 20px;
+    right: 10px;
     color:rgba(0, 0, 0, 0.54);
     transform: translateY(-50%);
+}
+
+.nav-item > button {
+    border-right: mat-color($mat-app-primary)  2px solid;
+    margin-right: 5px;
+    height: 35px;
+    padding:0px 20px;
+}
+
+.nav-item:last-child > button{
+    border-right: none !important;
+    padding:0px 0px 0px 20px;
 }

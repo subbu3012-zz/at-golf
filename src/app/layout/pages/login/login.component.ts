@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
 
     public logUserInToApp() {
         this.sharedServ.isUserLoggedIn = true;
-        this.rtr.navigateByUrl('/layout/teetime');
+        this.rtr.navigateByUrl('/layout/home/post-login');
     }
 
     public registerUser() {
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
                 this.dialogRef.afterClosed().subscribe(data => {
                     this.logUserInToApp();
                 })
-                this.sharedServ.openSnackBar("Logged in succesfully.", "DISMISS", 5000)
+                // this.sharedServ.openSnackBar("Logged in succesfully.", "DISMISS", 5000)
                 this.sharedServ.showProgressBar = false;
             }, err => {
                 this.loginExceptionDesc = "Invalid credentials. Try again."

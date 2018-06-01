@@ -37,7 +37,7 @@
 }
 
 .division-container {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .mc-member-container{
@@ -72,4 +72,18 @@ th{
 
 .card-detail-text{
     padding-left:25px;
+}
+
+.post-login-container {
+    // position: relative;
+    z-index: 1;
+    background-image: url("../../../../assets/teetime-parallax.jpg");
+    background-repeat: no-repeat;
+    width:98vw;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    flex-direction: column;
 }

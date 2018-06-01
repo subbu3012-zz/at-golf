@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { MatSnackBar } from '@angular/material'
+import { MatSnackBar } from '@angular/material';
+import { forceLogoutTimeInterval } from './../../environments/environment'
 
 @Injectable()
 export class SharedService {
@@ -61,7 +62,7 @@ export class AuthGuard implements CanActivate {
     canActivate(): boolean {
         this.sharedServ.userSessionData = this.sharedServ.getUserSessionDataFromSession();
         if (Object.keys(this.sharedServ.userSessionData).length) {
-            if (+this.sharedServ.userSessionData['sessionCreatedTime'] + 300000 < new Date().getTime()) {
+            if (+this.sharedServ.userSessionData['sessionCreatedTime'] + forceLogoutTimeInterval < new Date().getTime()) {
                 this.sharedServ.forceLogoutUser()
                 return false;
             } else {

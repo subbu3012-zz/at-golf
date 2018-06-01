@@ -64,9 +64,39 @@
     </div>
 
     <div align="center" class="division-container">
+        <h2 class="bold-text uppercase-text">Coaches and Instructors</h2>
+        <hr class="divider divider-primary divider-60 divider-offset">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div align="center" class="card mt-2" style="border:none">
+                    <img class="card-img-top" style="height:170px;width:170px" src="../../assets/PrakashMPakki.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title primary-color bold-text">Prakash M Pakki</h5>
+                        <p class="card-text">
+                            Has been teaching golf for 8 years .Was earlier at the JWGC course at Mysore.
+                        </p>
+                    </div>
+                </div>
+                <div align="center" class="card mt-2" style="border:none">
+                    <img class="card-img-top" style="height:170px;width:170px" src="../../assets/SanjaySingh.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title primary-color bold-text">Sanjay Singh</h5>
+                        <p class="card-text">
+                            Started playing in 1986 and has been teaching for over 15 years.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <img style="width:inherit;height:inherit" src="../../assets/index-10.jpg" alt="Card image cap">
+            </div>
+        </div>
+    </div>
+
+    <div align="center" class="division-container">
         <h2 class="bold-text camelcase-text">Upcoming Tournaments</h2>
         <hr class="divider divider-primary divider-60 divider-offset">
-        <div class="row mt-4">
+        <div class="row">
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2">
                 <img class="blurred-image" style="width:inherit;height:inherit" src="../../assets/events-01.jpg" alt="Card image cap">
                 <div class="image-body">
@@ -1027,4 +1057,15 @@
 
 <div *ngIf="this.contentCategory == 'contact-us'" class="container-fluid">
 
+</div>
+
+<div *ngIf="this.contentCategory == 'post-login'" class="container-fluid">
+    <div class="post-login-container">
+        <div>
+            <h1>Golf your stress away ..... in the fresh air</h1>
+        </div>
+        <div style="margin-top:20px">
+            <button disableRipple="true" style="padding: 15px 30px;border-radius: 40px;font-size: 20px" mat-raised-button color="primary" (click)="this.rtr.navigateByUrl('/layout/teetime')">Book A Tee Time</button>
+        </div>
+    </div>
 </div>

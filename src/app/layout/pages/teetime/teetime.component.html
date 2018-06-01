@@ -3,19 +3,19 @@
         <div class="col-4 offset-1" style="cursor:pointer" (click)="teeBoxName = 'TBox 1'">
             <img title="Book Slots for TBox 1" width="395" height="538" src="../../assets/field_reservation1.jpg" alt="Card image cap">
             <!-- <h6 class="center-text primary-color">TBox 1</h6> -->
-            <!-- <button mat-raised-button color="primary">Refresh</button> -->
+            <button style="position: absolute;bottom: 30%;left: 10%;" mat-mini-fab color="warn">T1</button>
         </div>
         <div class="col-7" style="margin-top:50px;cursor:pointer" (click)="teeBoxName = 'TBox 10'">
             <img title="Book Slots for TBox 10" src="../../assets/field_reservation10.jpg" alt="Card image cap">
             <!-- <h6 class="center-text primary-color">TBox 10</h6> -->
-            <!-- <button mat-raised-button color="primary">Refresh</button> -->
+            <button style="position: absolute;bottom: 30%;left: 40%;" mat-mini-fab color="warn">T10</button>
         </div>
     </div>
 </div>
 <div class="flex-container ">
     <div>
         <mat-form-field>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="teeTimeDate" placeholder="Book a Tee Time On">
+            <input matInput [min]="currentDate" [matDatepicker]="picker" [(ngModel)]="teeTimeDate" placeholder="Book a Tee Time On">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
