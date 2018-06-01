@@ -36,7 +36,7 @@ export class SharedService {
         this.clearSessionData();
         this.isUserLoggedIn = false;
         this.rtr.navigate(['']);
-        this.openSnackBar("Your login is expired. Kindy login again.", "Okay", 5000)
+        this.openSnackBar("Your login is expired. Kindy login again.", "DISMISS", 5000)
     }
 
     public getUserSessionDataFromSession() {
