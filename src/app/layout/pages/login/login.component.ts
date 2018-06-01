@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
                 this.dialogRef.afterClosed().subscribe(data => {
                     this.logUserInToApp();
                 })
-                this.sharedServ.openSnackBar("Your login is expired. Kindy login again.", "Okay", 5000)
+                this.sharedServ.openSnackBar("Logged in succesfully.", "Okay", 5000)
                 this.sharedServ.showProgressBar = false;
             }, err => {
                 this.loginExceptionDesc = "Invalid credentials. Try again."
