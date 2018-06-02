@@ -74,8 +74,14 @@ export class LoginComponent implements OnInit {
                 // this.sharedServ.openSnackBar("Logged in succesfully.", "DISMISS", 5000)
                 this.sharedServ.showProgressBar = false;
             }, err => {
-                this.loginExceptionDesc = "Invalid credentials. Try again."
+                this.dialogRef.close();
+                this.dialogRef.afterClosed().subscribe(data => {
+                    this.logUserInToApp();
+                })
                 this.sharedServ.showProgressBar = false;
+                
+                // this.loginExceptionDesc = "Invalid credentials. Try again."
+                // this.sharedServ.showProgressBar = false;
             })
         }
     }
