@@ -10,7 +10,11 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start": "node index.js",
-    "postinstall": "rm -rf dist && npm run build"
+    "postinstall": "rm -rf dist && npm run build",
+    "ngsw-config": "node_modules/.bin/ngsw-config dist src/ngsw-config.json",
+    "ngsw-copy": "cp node_modules/@angular/service-worker/ngsw-worker.js dist/",
+    "build-prod-ngsw": "ng build --prod && npm run ngsw-config && npm run ngsw-copy",
+    "serve-prod-ngsw": "npm run build-prod-ngsw && http-server dist -p 8080"
   },
   "private": true,
   "dependencies": {
@@ -30,7 +34,7 @@
     "@angular/platform-browser-dynamic": "^6.0.1",
     "@angular/pwa": "^0.7.0-beta.1",
     "@angular/router": "^6.0.1",
-    "@angular/service-worker": "^6.0.3",
+    "@angular/service-worker": "^6.0.1",
     "@types/jquery": "^3.3.0",
     "bootstrap": "^4.0.0-beta.3",
     "core-js": "^2.4.1",
@@ -40,6 +44,7 @@
     "popper.js": "^1.12.9",
     "rxjs": "^6.1.0",
     "rxjs-compat": "^6.1.0",
+    "tslib": "1.9.0",
     "typescript": "~2.7.2",
     "zone.js": "^0.8.26"
   },
