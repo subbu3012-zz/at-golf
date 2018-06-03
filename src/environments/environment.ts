@@ -1,11 +1,8 @@
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
+import { version } from './version';
 
-export const environment = {
-  production: false
+export const environment = {  
+  production: false,
+  appVersion: version,
+  hostName: "//40.135.239.32:7999/",
+  forceLogoutTimeInterval: 3000000,
 };
-
-export const hostName = "//40.135.239.32:7999/";
-export const forceLogoutTimeInterval:number = 3000000;

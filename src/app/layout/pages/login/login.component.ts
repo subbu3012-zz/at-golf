@@ -2,7 +2,7 @@ import { Component, ElementRef, NgZone, OnInit, ViewChild, ChangeDetectorRef } f
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogRef } from '@angular/material'
-import { hostName } from './../../../../environments/environment'
+import { environment } from './../../../../environments/environment'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { SharedService } from '../../../layout/shared.service'
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
                     this.logUserInToApp();
                 })
                 this.sharedServ.showProgressBar = false;
-                
+
                 // this.loginExceptionDesc = "Invalid credentials. Try again."
                 // this.sharedServ.showProgressBar = false;
             })
@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
     }
 
     public loginUser(loginPayload: any): Observable<any> {
-        return this.httpClient.post<any>(hostName + "oauth2/token?cid=df926dce-dff3-4b64-a30c-e480934b22d3", loginPayload);
+        return this.httpClient.post<any>(environment.hostName + "oauth2/token?cid=df926dce-dff3-4b64-a30c-e480934b22d3", loginPayload);
 
     }
 }

@@ -1,6 +1,8 @@
-export const environment = {
-  production: true
-};
+import { version } from './version';
 
-export const hostName = "//40.135.239.32:7999/";
-export const forceLogoutTimeInterval:number = 300000;
+export const environment = {
+  production: true,
+  appVersion: version,
+  hostName: "//40.135.239.32:7999/",
+  forceLogoutTimeInterval: 300000,
+};

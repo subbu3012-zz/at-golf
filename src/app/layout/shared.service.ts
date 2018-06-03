@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
-import { forceLogoutTimeInterval } from './../../environments/environment'
+import { environment } from './../../environments/environment'
 
 @Injectable()
 export class SharedService {
@@ -11,6 +11,7 @@ export class SharedService {
     public mobileQuery: MediaQueryList;
     public userSessionData: Object;
     public showProgressBar: boolean = false;
+    public environment: any = environment;
 
     constructor(media: MediaMatcher, private rtr: Router, public snackBar: MatSnackBar) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -55,6 +56,19 @@ export class SharedService {
     public isUserTypeInsider() {
         return this.getSessionValue('userType').toLowerCase() == 'insider';
     }
+
+    public authorizeUser() {
+        this.userSessionData = this.getUserSessionDataFromSession();
+        if (Object.keys(this.userSessionData).length) {
+            if (+this.userSessionData['sessionCreatedTime'] + environment.forceLogoutTimeInterval < new Date().getTime()) {
+                this.isUserLoggedIn = false;
+            } else {
+                this.isUserLoggedIn = true;
+            }
+        } else {
+            this.isUserLoggedIn = false;
+        }
+    }
 }
 
 import { CanActivate } from '@angular/router';
@@ -63,6 +77,7 @@ import { CanActivate } from '@angular/router';
 export class AuthGuard implements CanActivate {
     constructor(private sharedServ: SharedService) { }
     canActivate(): boolean {
+        this.sharedServ.authorizeUser();
         if (this.sharedServ.isUserLoggedIn) {
             return true;
         } else {
@@ -83,16 +98,7 @@ export class UserSessionDataResolver implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            this.sharedServ.userSessionData = this.sharedServ.getUserSessionDataFromSession();
-            if (Object.keys(this.sharedServ.userSessionData).length) {
-                if (+this.sharedServ.userSessionData['sessionCreatedTime'] + forceLogoutTimeInterval < new Date().getTime()) {
-                    this.sharedServ.isUserLoggedIn = false;
-                } else {
-                    this.sharedServ.isUserLoggedIn = true;
-                }
-            } else {
-                this.sharedServ.isUserLoggedIn = false;
-            }
+            this.sharedServ.authorizeUser();
             resolve(true);
         });
     }
