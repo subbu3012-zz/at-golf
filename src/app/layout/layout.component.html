@@ -217,7 +217,7 @@
     <mat-progress-bar *ngIf="sharedServ.showProgressBar" mode="indeterminate"></mat-progress-bar>
 </div>
 
-<div class="router-outlet-container" [class.mt-3]="!this.rtr.url.includes('landing-page')">
+<div class="router-outlet-container" [class.mt-3]="!this.rtr.url.includes('landing-page') && !this.rtr.url.includes('post-login')">
     <div *ngIf="isRouteLoading" style="display:flex;justify-content: center;align-items: center;height:100vh">
         <img src="../../assets/loading.png" style="height:250px;width:250px" alt="">
     </div>
