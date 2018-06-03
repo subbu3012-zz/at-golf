@@ -62,21 +62,13 @@ import { CanActivate } from '@angular/router';
 @Injectable()
 export class AuthGuard implements CanActivate {
     constructor(private sharedServ: SharedService) { }
-
     canActivate(): boolean {
-        this.sharedServ.userSessionData = this.sharedServ.getUserSessionDataFromSession();
-        if (Object.keys(this.sharedServ.userSessionData).length) {
-            if (+this.sharedServ.userSessionData['sessionCreatedTime'] + forceLogoutTimeInterval < new Date().getTime()) {
-                this.sharedServ.forceLogoutUser()
-                return false;
-            } else {
-                this.sharedServ.isUserLoggedIn = true;
-            }
+        if (this.sharedServ.isUserLoggedIn) {
+            return true;
         } else {
-            this.sharedServ.forceLogoutUser()
+            this.sharedServ.forceLogoutUser();
             return false;
         }
-        return true;
     }
 }
 
@@ -92,6 +84,15 @@ export class UserSessionDataResolver implements Resolve<any> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         return new Promise((resolve, reject) => {
             this.sharedServ.userSessionData = this.sharedServ.getUserSessionDataFromSession();
+            if (Object.keys(this.sharedServ.userSessionData).length) {
+                if (+this.sharedServ.userSessionData['sessionCreatedTime'] + forceLogoutTimeInterval < new Date().getTime()) {
+                    this.sharedServ.isUserLoggedIn = false;
+                } else {
+                    this.sharedServ.isUserLoggedIn = true;
+                }
+            } else {
+                this.sharedServ.isUserLoggedIn = false;
+            }
             resolve(true);
         });
     }
