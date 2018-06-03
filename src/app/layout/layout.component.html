@@ -132,7 +132,7 @@
                 <li class="nav-item">
                     <button disableRipple="true" mat-menu-item (click)="routeTo(['home', 'landing-page'])">Home</button>
                 </li>
-                <li class="nav-item">
+                <li *ngIf="!sharedServ.isUserTypeInsider()" class="nav-item">
                     <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="aboutUsMenus">About us
                         <!-- <mat-icon >arrow_drop_down</mat-icon> -->
                     </button>
@@ -142,7 +142,7 @@
                         <button mat-menu-item (click)="routeTo(['home', 'affiliations'])">HGA Affiliations & Clubs</button>
                     </mat-menu>
                 </li>
-                <li class="nav-item">
+                <li *ngIf="!sharedServ.isUserTypeInsider()" class="nav-item">
                     <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="golfMenus">Golf
                         <!-- <mat-icon >arrow_drop_down</mat-icon> -->
                     </button>
@@ -169,7 +169,7 @@
                         <button mat-menu-item>Gallery</button>
                     </mat-menu>
                 </li>
-                <li class="nav-item">
+                <li *ngIf="!sharedServ.isUserTypeInsider()" class="nav-item">
                     <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="clubHouseMenus">Club house
                         <!-- <mat-icon >arrow_drop_down</mat-icon> -->
                     </button>
@@ -178,10 +178,10 @@
                         <button mat-menu-item (click)="routeTo(['home', 'food-menu'])">Food Menu</button>
                     </mat-menu>
                 </li>
-                <li class="nav-item">
+                <li *ngIf="!sharedServ.isUserTypeInsider()" class="nav-item">
                     <button disableRipple="true" mat-menu-item (click)="routeTo(['home', 'contact-us'])">Contact us</button>
                 </li>
-                <li class="nav-item">
+                <li *ngIf="!sharedServ.isUserTypeInsider()" class="nav-item">
                     <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="galleryMenus">Gallery
                         <!-- <mat-icon >arrow_drop_down</mat-icon> -->
                     </button>
@@ -194,8 +194,7 @@
                 </li>
                 <li *ngIf="this.sharedServ.isUserLoggedIn" class="nav-item">
                     <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="userMenus">
-                        Member's Area
-                    </button>
+                        {{sharedServ.isUserTypeInsider() ? "Admin's Area" : "Member's Area"}} </button>
                     <mat-menu [overlapTrigger]="false" #userMenus="matMenu">
                         <button mat-menu-item (click)="routeTo(['teetime'])">Tee Time</button>
                         <button mat-menu-item (click)="routeTo(['events'])">Events</button>

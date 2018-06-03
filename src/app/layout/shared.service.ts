@@ -25,7 +25,7 @@ export class SharedService {
     }
 
     public getSessionValue(key: string) {
-        return sessionStorage.getItem(key);
+        return sessionStorage.getItem(key) || '';
     }
 
     public clearSessionData() {
@@ -50,6 +50,10 @@ export class SharedService {
 
     public openSnackBar(message: string, action: string, duration: number = 5000) {
         this.snackBar.open(message, action, { duration: duration });
+    }
+
+    public isUserTypeInsider() {
+        return this.getSessionValue('userType').toLowerCase() == 'insider';
     }
 }
 

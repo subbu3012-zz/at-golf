@@ -22,13 +22,6 @@ export class LoginComponent implements OnInit {
         loginPassword: new FormControl('', [Validators.minLength(2), Validators.required])
     });
 
-    public registrationFormGroup: FormGroup = new FormGroup({
-        userName: new FormControl('', Validators.minLength(2)),
-        emailId: new FormControl('', Validators.minLength(2)),
-        password: new FormControl('', Validators.minLength(2)),
-        confirmPassword: new FormControl('', Validators.minLength(2))
-    });
-
     constructor(
         public rtr: Router,
         private changeDetectorRef: ChangeDetectorRef,

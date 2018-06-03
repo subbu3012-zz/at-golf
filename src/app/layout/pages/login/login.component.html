@@ -1,21 +1,6 @@
-<!-- <div class="container-fluid">
+<div class="container-fluid center-text" style="width:300px;">
+    <!-- <h5>Login into </h5> -->
     <ng-container *ngTemplateOutlet="loginTemplate;context:{formGroup:loginFormGroup}"></ng-container>
-</div> -->
-<div class="login-container">
-    <div class="login-form-container">
-        <mat-tab-group>
-            <mat-tab label="Login">
-                <div class="mt-2">
-                    <ng-container *ngTemplateOutlet="loginTemplate;context:{formGroup:loginFormGroup}"></ng-container>
-                </div>
-            </mat-tab>
-            <mat-tab [disabled]="true" label="Register With Us">
-                <div class="mt-2">
-                    <ng-container *ngTemplateOutlet="registrationTemplate;context:{formGroup:registrationFormGroup}"></ng-container>
-                </div>
-            </mat-tab>
-        </mat-tab-group>
-    </div>
 </div>
 
 <ng-template #loginTemplate let-formGroup="formGroup">
@@ -40,36 +25,6 @@
             </div>
             <div>
                 <button mat-raised-button color="primary" (click)="processUserLogin();">Login</button>
-            </div>
-        </form>
-    </div>
-</ng-template>
-
-<ng-template #registrationTemplate let-formGroup="formGroup">
-    <div class="registration-template-container container-fluid">
-        <form [formGroup]="formGroup">
-            <div>
-                <mat-form-field>
-                    <input matInput placeholder="User Name" [formControlName]="'userName'">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field>
-                    <input matInput placeholder="Email Id" [formControlName]="'emailId'">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field>
-                    <input matInput placeholder="Password" type="password" [formControlName]="'password'">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field>
-                    <input matInput placeholder="Confirm Password" type="password" [formControlName]="'confirmPassword'">
-                </mat-form-field>
-            </div>
-            <div>
-                <button mat-raised-button color="primary" (click)="registerUser();">Join Us</button>
             </div>
         </form>
     </div>

@@ -1,18 +1,23 @@
 <div class="container-fluid">
     <h2 class="bold-text center-text camelcase-text">Members and Connections</h2>
-    <hr class="divider divider-primary divider-60 divider-offset">
+    <hr class="divider">
     <mat-tab-group>
-        <mat-tab label="My Groups">
+        <mat-tab *ngIf="sharedServ.isUserTypeInsider()" label="Add Members">
+            <div class="mt-2">
+                <ng-container *ngTemplateOutlet="addMembersTemplate;context:{formGroup:newMemberGroup}"></ng-container>
+            </div>
+        </mat-tab>
+        <mat-tab *ngIf="!sharedServ.isUserTypeInsider()" label="My Groups">
             <div class="mt-2">
                 <ng-container *ngTemplateOutlet="groupsTemplate;context:{groupList:myGroupList}"></ng-container>
             </div>
         </mat-tab>
-        <mat-tab label="My Connections">
+        <mat-tab [label]="sharedServ.isUserTypeInsider() ? 'All Members' : 'My Connections'">
             <div class="mt-2">
                 <ng-container *ngTemplateOutlet="myMemberTemplate;context:{memberList:myMemberList}"></ng-container>
             </div>
         </mat-tab>
-        <mat-tab label="Members I May know">
+        <mat-tab *ngIf="!sharedServ.isUserTypeInsider()" label="Members I May know">
             <div class="mt-2">
                 <ng-container *ngTemplateOutlet="nonMembersTemplate;context:{memberList:memberList}"></ng-container>
             </div>
@@ -41,16 +46,13 @@
         <div *ngFor="let member of memberList">
             <mat-card class="example-card">
                 <mat-card-header>
-                    <!-- <div mat-card-avatar></div> -->
                     <mat-card-title>{{member.memberName}}</mat-card-title>
                     <mat-card-subtitle>Rank : {{member.memberRank}}</mat-card-subtitle>
                 </mat-card-header>
-                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
                 <mat-card-content align="center">
                     <button mat-raised-button color="primary">Follow</button>
                 </mat-card-content>
                 <mat-card-actions>
-                    <!-- <button mat-raised-button color="primary">Follow</button> -->
                 </mat-card-actions>
             </mat-card>
         </div>
@@ -62,19 +64,62 @@
         <div *ngFor="let member of memberList">
             <mat-card class="example-card">
                 <mat-card-header>
-                    <!-- <div mat-card-avatar></div> -->
                     <mat-card-title>{{member.memberName}}</mat-card-title>
                     <mat-card-subtitle>Rank : {{member.memberRank}}</mat-card-subtitle>
                 </mat-card-header>
-                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
                 <mat-card-actions>
-                    <!-- <button mat-raised-button color="primary">Follow</button> -->
                     <p class="primary-color">Contact No : {{member.memberPhoneNo}}</p>
                 </mat-card-actions>
                 <mat-card-footer>
 
                 </mat-card-footer>
             </mat-card>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #addMembersTemplate let-formGroup="formGroup">
+    <div class="flex-container container-fluid">
+        <div>
+            <img height="380px" title="Add New Member" src="../../../../assets/111 golf instructor.png" alt="Card image cap">
+        </div>
+        <div style="min-width: 400px" class="center-text">
+            <form [formGroup]="formGroup">
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Member Name" [formControlName]="'memberName'">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Phone No" [formControlName]="'phoneNo'">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Email Id" [formControlName]="'emailId'">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Member Id" [formControlName]="'loginId'">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Password" type="password" [formControlName]="'password'">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Confirm Password" type="password" [formControlName]="'confirmPassword'">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" (click)="registerUser();">Add Member</button>
+                </div>
+            </form>
         </div>
     </div>
 </ng-template>
