@@ -4,6 +4,7 @@ export class TeeSlot {
     slotEndTime: string;
     isBooked: boolean;
     slotType: string;
+    isFocused?: boolean = false;
 }
 
 export const TEESLOTLIST: TeeSlot[] = [

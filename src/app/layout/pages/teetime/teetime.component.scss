@@ -1,0 +1,11 @@
+.expanded-slot-card{
+    width: 300px;
+    // min-height: 450px;
+}
+
+.flex-container > div{
+    // width:150px;
+    // margin: 2vh 5px;
+    -webkit-transition: width 2s ease-in-out;
+    transition: width 2s ease-in-out;
+}

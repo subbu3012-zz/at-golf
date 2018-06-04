@@ -23,6 +23,6 @@ export class AppComponent {
             console.log('new version is', event.current);
         });
 
-        // interval(6 * 60 * 60).subscribe(() => updates.checkForUpdate())
+        interval(1 * 60 * 60).subscribe(() => updates.checkForUpdate())
     }
 }

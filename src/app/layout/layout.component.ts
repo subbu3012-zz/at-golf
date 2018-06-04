@@ -32,6 +32,7 @@ export class LayoutComponent implements OnInit {
                 this.sharedServ.showProgressBar = false;
             }
         });
+        window.document.title = 'Hyderabad Golf Club - Version ' + this.sharedServ.environment.appVersion;
     }
 
     ngOnInit() {
