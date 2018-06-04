@@ -39,22 +39,22 @@ export class TeeTimeComponent implements OnInit {
     }
 }
 
-@Component({
-    selector: 'book-teetime',
-    templateUrl: './teetime.component.html',
-    styleUrls: ['./teetime.component.scss'],
-    providers: []
-})
-export class BookTeeTimeComponent implements OnInit {
+// @Component({
+//     selector: 'book-teetime',
+//     templateUrl: './dialogs/book-teetime.component.html',
+//     styleUrls: ['./teetime.component.scss'],
+//     providers: []
+// })
+// export class BookTeeTimeComponent implements OnInit {
 
-    constructor() {
+//     constructor() {
 
-    }
+//     }
 
-    ngOnInit() {
-    }
+//     ngOnInit() {
+//     }
 
-    ngOnDestroy(): void {
+//     ngOnDestroy(): void {
 
-    }
-}
+//     }
+// }
