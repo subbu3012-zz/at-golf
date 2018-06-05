@@ -55,7 +55,11 @@ export class TeeTimeComponent implements OnInit {
 export class BookTeeTimeComponent implements OnInit {
 
     public slotInfo: TeeSlot;
-    constructor(@Inject(MAT_DIALOG_DATA) public dialogData: any) {
+    constructor(
+        @Inject(MAT_DIALOG_DATA) public dialogData: any,
+        public sharedServ: SharedService,
+        private dialogRef: MatDialogRef<BookTeeTimeComponent>,
+    ) {
         this.slotInfo = dialogData.slotInfo;
         console.log(this.slotInfo)
     }
@@ -65,5 +69,10 @@ export class BookTeeTimeComponent implements OnInit {
 
     ngOnDestroy(): void {
 
+    }
+
+    public bookTeetimeSlot(slotInfo: TeeSlot) {
+        this.sharedServ.openSnackBar("Slot booked succesfully. Have a nice day.", "DISMISS", 5000);
+        this.dialogRef.close();
     }
 }

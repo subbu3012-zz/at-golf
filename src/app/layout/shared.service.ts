@@ -50,7 +50,7 @@ export class SharedService {
     }
 
     public openSnackBar(message: string, action: string, duration: number = 5000) {
-        this.snackBar.open(message, action, { duration: duration });
+        return this.snackBar.open(message, action, { duration: duration });
     }
 
     public isUserTypeInsider() {
