@@ -11,11 +11,7 @@
             <div style="width:inherit">
                 <mat-form-field>
                     <mat-select placeholder="Choose Members*" multiple>
-                        <mat-option>Member 01</mat-option>
-                        <mat-option>Member 02</mat-option>
-                        <mat-option>Member 03</mat-option>
-                        <mat-option>Member 04</mat-option>
-                        <mat-option>Member 05</mat-option>
+                        <mat-option *ngFor="let member of memberList" [value]="member.memberId">{{member.memberName}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>

@@ -1,6 +1,6 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
-import { TeeSlot, TEESLOTLIST } from './teetime.model'
+import { TeeSlot, TEESLOTLIST, MEMBERLIST } from './teetime.model'
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { SharedService } from './../../shared.service'
 import { MAT_DIALOG_DATA } from '@angular/material';
@@ -40,7 +40,7 @@ export class TeeTimeComponent implements OnInit {
 
     openBookTeetimeModal(_index: number) {
         this.teeServ.getSlotData(new Date(), "1").subscribe();
-        
+
         let dialogRef: MatDialogRef<BookTeeTimeComponent> = this.dialog.open(
             BookTeeTimeComponent, {
                 "width": "700px",
@@ -58,6 +58,8 @@ export class TeeTimeComponent implements OnInit {
 export class BookTeeTimeComponent implements OnInit {
 
     public slotInfo: TeeSlot;
+    public memberList: any[] = MEMBERLIST;
+    
     constructor(
         @Inject(MAT_DIALOG_DATA) public dialogData: any,
         public sharedServ: SharedService,
@@ -68,6 +70,7 @@ export class BookTeeTimeComponent implements OnInit {
     }
 
     ngOnInit() {
+
     }
 
     ngOnDestroy(): void {

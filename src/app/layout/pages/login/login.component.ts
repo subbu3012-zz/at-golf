@@ -59,22 +59,20 @@ export class LoginComponent implements OnInit {
             _loginPayload[(_loginId.includes("@admin.com") ? 'email' : 'memberId')] = _loginId;
             this.sharedServ.showProgressBar = true;
             this.loginUser(_loginPayload).subscribe(data => {
-                this.sharedServ.setSessionData(data);
-                this.dialogRef.close();
-                this.dialogRef.afterClosed().subscribe(data => {
-                    this.logUserInToApp();
-                })
-                // this.sharedServ.openSnackBar("Logged in succesfully.", "DISMISS", 5000)
-                this.sharedServ.showProgressBar = false;
+                if (data) {
+                    this.sharedServ.setSessionData(data);
+                    this.dialogRef.close();
+                    this.dialogRef.afterClosed().subscribe(data => {
+                        this.logUserInToApp();
+                    })
+                    this.sharedServ.showProgressBar = false;
+                } else {
+                    this.loginExceptionDesc = "Invalid credentials. Try again or contact your admin."
+                    this.sharedServ.showProgressBar = false;
+                }
             }, err => {
-                this.dialogRef.close();
-                this.dialogRef.afterClosed().subscribe(data => {
-                    this.logUserInToApp();
-                })
+                this.loginExceptionDesc = "Invalid credentials. Try again or contact your admin."
                 this.sharedServ.showProgressBar = false;
-
-                // this.loginExceptionDesc = "Invalid credentials. Try again."
-                // this.sharedServ.showProgressBar = false;
             })
         }
     }
