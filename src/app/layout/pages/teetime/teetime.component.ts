@@ -3,6 +3,9 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '
 import { TeeSlot, TEESLOTLIST } from './teetime.model'
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { SharedService } from './../../shared.service'
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { Inject } from '@angular/core';
+
 
 @Component({
     selector: 'teetime',
@@ -35,26 +38,32 @@ export class TeeTimeComponent implements OnInit {
     }
 
     openBookTeetimeModal(_index: number) {
-        return;
+        let dialogRef: MatDialogRef<BookTeeTimeComponent> = this.dialog.open(
+            BookTeeTimeComponent, {
+                "width": "700px",
+                "data": { "slotInfo": this.teeSlotList[_index] }
+            })
     }
 }
 
-// @Component({
-//     selector: 'book-teetime',
-//     templateUrl: './dialogs/book-teetime.component.html',
-//     styleUrls: ['./teetime.component.scss'],
-//     providers: []
-// })
-// export class BookTeeTimeComponent implements OnInit {
+@Component({
+    selector: 'book-teetime',
+    templateUrl: './dialogs/book-teetime.component.html',
+    // styleUrls: ['./teetime.component.scss'],
+    providers: []
+})
+export class BookTeeTimeComponent implements OnInit {
 
-//     constructor() {
+    public slotInfo: TeeSlot;
+    constructor(@Inject(MAT_DIALOG_DATA) public dialogData: any) {
+        this.slotInfo = dialogData.slotInfo;
+        console.log(this.slotInfo)
+    }
 
-//     }
+    ngOnInit() {
+    }
 
-//     ngOnInit() {
-//     }
+    ngOnDestroy(): void {
 
-//     ngOnDestroy(): void {
-
-//     }
-// }
+    }
+}

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeeTimeRoutingModule } from './teetime-routing.module';
-import { TeeTimeComponent } from './teetime.component';
+import { TeeTimeComponent, BookTeeTimeComponent } from './teetime.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -20,8 +20,9 @@ import {
         MatNativeDateModule, MatCardModule, MatSelectModule
     ],
     declarations: [
-        TeeTimeComponent
+        TeeTimeComponent, BookTeeTimeComponent
     ],
+    entryComponents: [BookTeeTimeComponent],
     providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-In' }]
 })
 export class TeeTimeModule { }
