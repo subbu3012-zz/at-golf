@@ -19,6 +19,7 @@ export class LayoutComponent implements OnInit {
     public menuList: Menu[] = MENULIST;
     public activeMenu: string = "Tee Time";
     public isRouteLoading: boolean = false;
+    public isMenuToggled: boolean = !this.sharedServ.mobileQuery.matches;
 
     constructor(public rtr: Router, public domSanitizer: DomSanitizer,
         private activatedRoute: ActivatedRoute, private dialog: MatDialog, public sharedServ: SharedService) {
@@ -51,6 +52,7 @@ export class LayoutComponent implements OnInit {
 
     public routeTo(routerLinkArray: any[]) {
         this.rtr.navigate(routerLinkArray, { relativeTo: this.activatedRoute });
+        this.sharedServ.mobileQuery.matches && (this.isMenuToggled = false);
     }
 
     public openLoginDialog() {

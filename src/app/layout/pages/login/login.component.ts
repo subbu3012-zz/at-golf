@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
     public logUserInToApp() {
         this.sharedServ.isUserLoggedIn = true;
-        this.rtr.navigateByUrl('/layout/home/post-login');
+        this.rtr.navigateByUrl('/layout/home/landing-page');
     }
 
     public registerUser() {

@@ -3,6 +3,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '
 import { ActivatedRoute, Router } from '@angular/router'
 import { ParamMap } from '@angular/router';
 import { MGMTCOMMITTEEDATA } from './home.model';
+import { SharedService } from '../../../layout/shared.service'
 
 
 @Component({
@@ -15,7 +16,10 @@ export class HomeComponent implements OnInit {
     public contentCategory: string = "home";
     public membercommitteeData: any[] = MGMTCOMMITTEEDATA;
 
-    constructor(public activatedRoute: ActivatedRoute, public rtr: Router) {
+    constructor(
+        public activatedRoute: ActivatedRoute,
+        public rtr: Router,
+        public sharedServ: SharedService) {
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.contentCategory = params.get('category');
         })

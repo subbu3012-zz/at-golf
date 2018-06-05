@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { interval } from 'rxjs';
+import { environment } from './../environments/environment'
 
 @Component({
     selector: 'app-root',
@@ -11,7 +12,7 @@ import { interval } from 'rxjs';
 export class AppComponent {
     public loadingTimeout: any;
     constructor(public rtr: Router, public updates: SwUpdate) {
-        if ('serviceWorker' in navigator) {
+        if ('serviceWorker' in navigator && environment.production) {
             updates.available.subscribe(event => {
                 console.log('current version is', event.current);
                 console.log('available version is', event.available);
