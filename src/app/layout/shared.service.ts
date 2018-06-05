@@ -69,6 +69,13 @@ export class SharedService {
             this.isUserLoggedIn = false;
         }
     }
+
+    public getRequestHeaders() {
+        return new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': this.userSessionData['token']
+        });
+    }
 }
 
 import { CanActivate } from '@angular/router';
@@ -90,6 +97,7 @@ export class AuthGuard implements CanActivate {
 import {
     Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot
 } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Injectable()

@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { SharedService } from './../../shared.service'
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Inject } from '@angular/core';
+import { TeetimeService } from './teetime.service'
 
 
 @Component({
@@ -20,7 +21,7 @@ export class TeeTimeComponent implements OnInit {
     public teeBoxName: String = "TBox 1";
     public currentDate: Date = new Date();
 
-    constructor(private dialog: MatDialog, public sharedServ: SharedService) {
+    constructor(private dialog: MatDialog, public sharedServ: SharedService, public teeServ: TeetimeService) {
 
     }
 
@@ -38,6 +39,8 @@ export class TeeTimeComponent implements OnInit {
     }
 
     openBookTeetimeModal(_index: number) {
+        this.teeServ.getSlotData(new Date(), "1").subscribe();
+        
         let dialogRef: MatDialogRef<BookTeeTimeComponent> = this.dialog.open(
             BookTeeTimeComponent, {
                 "width": "700px",

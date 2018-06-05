@@ -90,6 +90,5 @@ export class LoginComponent implements OnInit {
 
     public loginUser(loginPayload: any): Observable<any> {
         return this.httpClient.post<any>(environment.hostName + "oauth2/token?cid=df926dce-dff3-4b64-a30c-e480934b22d3", loginPayload);
-
     }
 }

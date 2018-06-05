@@ -7,7 +7,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     MatInputModule, MatButtonModule, MatDatepickerModule,
     MAT_DATE_LOCALE, MatNativeDateModule, MatCardModule, MatSelectModule
-} from '@angular/material'
+}
+    from '@angular/material'
+import { TeetimeService } from './teetime.service'
 
 @NgModule({
     imports: [
@@ -23,6 +25,6 @@ import {
         TeeTimeComponent, BookTeeTimeComponent
     ],
     entryComponents: [BookTeeTimeComponent],
-    providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-In' }]
+    providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-In' }, TeetimeService]
 })
 export class TeeTimeModule { }
