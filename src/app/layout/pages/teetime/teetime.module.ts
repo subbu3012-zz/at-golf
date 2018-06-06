@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     MatInputModule, MatButtonModule, MatDatepickerModule,
-    MAT_DATE_LOCALE, MatNativeDateModule, MatCardModule, MatSelectModule
+    MAT_DATE_LOCALE, MatNativeDateModule, MatCardModule, MatSelectModule, MatRadioModule
 }
     from '@angular/material'
 import { TeetimeService } from './teetime.service'
@@ -19,7 +19,7 @@ import { TeetimeService } from './teetime.service'
         TeeTimeRoutingModule,
         HttpClientModule,
         MatInputModule, MatButtonModule, MatDatepickerModule,
-        MatNativeDateModule, MatCardModule, MatSelectModule
+        MatNativeDateModule, MatCardModule, MatSelectModule, MatRadioModule
     ],
     declarations: [
         TeeTimeComponent, BookTeeTimeComponent

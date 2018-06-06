@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
             this.sharedServ.showProgressBar = true;
             this.loginUser(_loginPayload).subscribe(data => {
                 if (data) {
+                    data['loginId'] = _loginId;
                     this.sharedServ.setSessionData(data);
                     this.dialogRef.close();
                     this.dialogRef.afterClosed().subscribe(data => {

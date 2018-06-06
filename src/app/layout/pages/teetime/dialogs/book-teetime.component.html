@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <h2 class="bold-text center-text camelcase-text">
-        {{this.slotInfo.slotStartTime}} - {{this.slotInfo.slotEndTime}} slot booking on 2018-11-06
+        {{this.slotInfo.slotStartTime}} slot on {{this.slotInfo.date}}
     </h2>
     <hr class="divider">
     <div class="row">
@@ -10,7 +10,7 @@
         <div class="col-6 mt-2">
             <div style="width:inherit">
                 <mat-form-field>
-                    <mat-select placeholder="Choose Members*" multiple>
+                    <mat-select placeholder="Choose Members*" [(ngModel)]="this.bookTeeSlotData.members" multiple>
                         <mat-option *ngFor="let member of memberList" [value]="member.memberId">{{member.memberName}}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -19,7 +19,7 @@
                 </mat-form-field>
             </div>
             <div class="center-text" style="margin-top:30px">
-                <button (click)="bookTeetimeSlot(this.slotInfo)" style="padding: 10px 50px;border-radius: 40px;font-size: 20px" mat-raised-button
+                <button (click)="bookTeetimeSlot()" style="padding: 10px 50px;border-radius: 40px;font-size: 20px" mat-raised-button
                     color="primary">Book Now</button>
             </div>
         </div>

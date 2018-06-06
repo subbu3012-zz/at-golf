@@ -73,7 +73,8 @@ export class SharedService {
     public getRequestHeaders() {
         return new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization': this.userSessionData['token']
+            'cid' : 'df926dce-dff3-4b64-a30c-e480934b22d3',
+            'Authorization': 'bearer ' + this.userSessionData['token']
         });
     }
 }
