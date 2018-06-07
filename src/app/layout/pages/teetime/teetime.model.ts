@@ -14,9 +14,20 @@ export class BookTeeSlot {
     slotId: string;
     bookedby: string;
     resourceId: string;
-    eventDate: string;
+    eventDate: Date;
     members: string[];
 }
+
+export const TBOXLIST: any[] = [
+    {
+        "resourceId": "f03e40a0-6889-11e8-881b-9d116b3528b1",
+        "resourceName": "TBox 1"
+    },
+    {
+        "resourceId": "f03e40a0-6889-11e8-881b-9d116b3528b2",
+        "resourceName": "TBox 10"
+    }
+]
 
 // export const TEESLOTLIST: TeeSlot[] = [
 //     {

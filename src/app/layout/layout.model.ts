@@ -36,3 +36,12 @@ export const MENULIST: Menu[] = [
         "isMenuActive": false
     }
 ]
+
+export class Member {
+    id: string;
+    firstName: string;
+    lastName: string;
+    memberId: string;
+    email: string;
+    phone: string;
+}

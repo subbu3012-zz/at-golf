@@ -11,7 +11,7 @@
             <div style="width:inherit">
                 <mat-form-field>
                     <mat-select placeholder="Choose Members*" [(ngModel)]="this.bookTeeSlotData.members" multiple>
-                        <mat-option *ngFor="let member of memberList" [value]="member.memberId">{{member.memberName}}</mat-option>
+                        <mat-option *ngFor="let member of sharedServ.memberList" [value]="member.memberId">{{member.memberId}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>
@@ -19,8 +19,7 @@
                 </mat-form-field>
             </div>
             <div class="center-text" style="margin-top:30px">
-                <button (click)="bookTeetimeSlot()" style="padding: 10px 50px;border-radius: 40px;font-size: 20px" mat-raised-button
-                    color="primary">Book Now</button>
+                <button (click)="bookTeetimeSlot()" style="padding: 10px 50px;border-radius: 40px;font-size: 20px" mat-raised-button color="primary">Book Now</button>
             </div>
         </div>
     </div>

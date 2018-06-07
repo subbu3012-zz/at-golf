@@ -14,9 +14,9 @@ export class TeetimeService {
 
     }
 
-    public getSlotData(selectedDate: string, tboxId: string): Observable<any> {
+    public getSlotData(tboxId: string, selectedDate: string): Observable<any> {
         return this.httpClient.get<any>(environment.hostName +
-            "resource-date-slots/f03e40a0-6889-11e8-881b-9d116b3528b1/date/2018-06-06",
+            "resource-date-slots/" + tboxId + "/date/" + selectedDate,
             { headers: this.sharedServ.getRequestHeaders() });
     }
 

@@ -1,12 +1,11 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
-import { TeeSlot, MEMBERLIST, BookTeeSlot } from './teetime.model'
+import { TeeSlot, MEMBERLIST, BookTeeSlot, TBOXLIST } from './teetime.model'
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { SharedService } from './../../shared.service'
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Inject } from '@angular/core';
 import { TeetimeService } from './teetime.service'
-
 
 @Component({
     selector: 'teetime',
@@ -18,8 +17,9 @@ export class TeeTimeComponent implements OnInit {
 
     public teeSlotList: TeeSlot[] = [];
     public teeTimeDate: Date = new Date();
-    public teeBoxName: String = "TBox 1";
     public currentDate: Date = new Date();
+    public teeBoxList: any[] = TBOXLIST;
+    public selectedTBox: any = this.teeBoxList[0];
 
     constructor(
         private dialog: MatDialog,
@@ -43,7 +43,7 @@ export class TeeTimeComponent implements OnInit {
         })
     }
 
-    openBookTeetimeModal(_index: number) {
+    public openBookTeetimeModal(_index: number) {
         let dialogRef: MatDialogRef<BookTeeTimeComponent> = this.dialog.open(
             BookTeeTimeComponent, {
                 "width": "700px",
@@ -52,11 +52,18 @@ export class TeeTimeComponent implements OnInit {
     }
 
     public getTeeSlotData() {
-        this.teeServ.getSlotData("", "1").subscribe(data => {
+        setTimeout(() => {
+            this.sharedServ.showProgressBar = true;
+        }, 100);
+        this.teeServ.getSlotData(this.selectedTBox.resourceId, this.sharedServ.getTransformedDate(this.teeTimeDate, "yyyy-MM-dd")).subscribe(data => {
+            !this.sharedServ.memberList.length && this.sharedServ.getCustomerData().subscribe(data1 => {
+                this.sharedServ.memberList = data1;
+            })
             this.teeSlotList = data;
             this.teeSlotList = this.teeSlotList.sort((a: any, b: any) => {
                 return +a.slotId.slice(4) - +b.slotId.slice(4);
             })
+            this.sharedServ.showProgressBar = false;
         });
     }
 }
@@ -80,12 +87,11 @@ export class BookTeeTimeComponent implements OnInit {
         public teeServ: TeetimeService
     ) {
         this.slotInfo = dialogData.slotInfo;
-        console.log(this.slotInfo)
     }
 
     ngOnInit() {
         this.bookTeeSlotData.bookedby = this.sharedServ.userSessionData['loginId'];
-        this.bookTeeSlotData.eventDate = this.slotInfo.date;
+        this.bookTeeSlotData.eventDate = new Date(this.slotInfo.date);
         this.bookTeeSlotData.resourceId = this.slotInfo.resourceId;
         this.bookTeeSlotData.slotId = this.slotInfo.slotId;
         this.bookTeeSlotData.members = [];
@@ -102,9 +108,7 @@ export class BookTeeTimeComponent implements OnInit {
             this.dialogRef.close();
             this.sharedServ.showProgressBar = false;
         }, err => {
-            this.sharedServ.openSnackBar("Slot booked succesfully. Have a nice day.", "DISMISS", 5000);
-            this.dialogRef.close();
-            this.sharedServ.showProgressBar = false;
+
         })
     }
 }

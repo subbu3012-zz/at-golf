@@ -1,11 +1,11 @@
 <div class="container-fluid">
     <div *ngIf="!this.sharedServ.mobileQuery.matches" class="row">
-        <div class="col-xl-4 offset-1 col-lg-4 offset-1 col-md-4 offset-1 col-sm-12 col-xs-12" style="cursor:pointer" (click)="teeBoxName = 'TBox 1'">
+        <div class="col-xl-4 offset-1 col-lg-4 offset-1 col-md-12 col-sm-12 col-xs-12" style="cursor:pointer" (click)="selectedTBox = this.teeBoxList[0];getTeeSlotData()">
             <img title="Book Slots for TBox 1" width="395" height="538" src="../../assets/field_reservation1.jpg" alt="Card image cap">
             <!-- <h6 class="center-text primary-color">TBox 1</h6> -->
             <button style="position: absolute;bottom: 30%;left: 10%;" mat-mini-fab color="warn">T1</button>
         </div>
-        <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 col-xs-12" style="margin-top:50px;cursor:pointer" (click)="teeBoxName = 'TBox 10'">
+        <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12" style="margin-top:50px;cursor:pointer" (click)="selectedTBox = this.teeBoxList[1];getTeeSlotData()">
             <img title="Book Slots for TBox 10" src="../../assets/field_reservation10.jpg" alt="Card image cap">
             <!-- <h6 class="center-text primary-color">TBox 10</h6> -->
             <button style="position: absolute;bottom: 30%;left: 40%;" mat-mini-fab color="warn">T10</button>
@@ -13,9 +13,8 @@
     </div>
     <div *ngIf="this.sharedServ.mobileQuery.matches">
         <mat-form-field>
-            <mat-select placeholder="Choose Tbox*" [(ngModel)]="teeBoxName">
-                <mat-option [value] = "'TBox 1'">TBox 1</mat-option>
-                <mat-option [value] = "'TBox 10'">TBox 10</mat-option>
+            <mat-select (change)="getTeeSlotData()" placeholder="Choose Tbox*" [(ngModel)]="selectedTBox">
+                <mat-option *ngFor="let tbox of teeBoxList" [value]="tbox">{{tbox.resourceName}}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
@@ -23,17 +22,17 @@
 <div class="flex-container ">
     <div>
         <mat-form-field>
-            <input matInput [min]="currentDate" [matDatepicker]="picker" [(ngModel)]="teeTimeDate" placeholder="Book a Tee Time On">
+            <input matInput (dateChange)="getTeeSlotData()" [min]="currentDate" [matDatepicker]="picker" [(ngModel)]="teeTimeDate" placeholder="Book a Tee Time On">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
     </div>
     <div>
-        <button mat-raised-button color="primary">Refresh</button>
+        <button mat-raised-button (click)="getTeeSlotData()" color="primary">Refresh</button>
     </div>
 </div>
 
-<h2 class="bold-text center-text camelcase-text">Tee Time Slots for {{teeBoxName}} on {{teeTimeDate | date:'mediumDate'}}</h2>
+<h2 class="bold-text center-text camelcase-text">Tee Time Slots for {{selectedTBox.resourceName}} on {{teeTimeDate | date:'mediumDate'}}</h2>
 <hr class="divider ">
 <div class="teeslot-container">
     <div class="flex-container">

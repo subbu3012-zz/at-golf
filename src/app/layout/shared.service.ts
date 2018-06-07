@@ -3,6 +3,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { environment } from './../../environments/environment'
+import { Member } from './layout.model'
+import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @Injectable()
 export class SharedService {
@@ -12,8 +15,15 @@ export class SharedService {
     public userSessionData: Object;
     public showProgressBar: boolean = false;
     public environment: any = environment;
+    public memberList: Member[] = [];
 
-    constructor(media: MediaMatcher, private rtr: Router, public snackBar: MatSnackBar) {
+    constructor(
+        media: MediaMatcher,
+        private rtr: Router,
+        public snackBar: MatSnackBar,
+        private httpClient: HttpClient,
+        public datePipe: DatePipe
+    ) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
     }
 
@@ -73,9 +83,18 @@ export class SharedService {
     public getRequestHeaders() {
         return new HttpHeaders({
             'Content-Type': 'application/json',
-            'cid' : 'df926dce-dff3-4b64-a30c-e480934b22d3',
+            'cid': 'df926dce-dff3-4b64-a30c-e480934b22d3',
             'Authorization': 'bearer ' + this.userSessionData['token']
         });
+    }
+
+    public getCustomerData(): Observable<Member[]> {
+        return this.httpClient.get<Member[]>(environment.hostName + "customers",
+            { headers: this.getRequestHeaders() });
+    }
+
+    public getTransformedDate(date: Date, dateFormat: string) {
+        return this.datePipe.transform(date, dateFormat);
     }
 }
 
