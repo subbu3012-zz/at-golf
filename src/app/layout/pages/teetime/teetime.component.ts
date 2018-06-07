@@ -18,6 +18,7 @@ export class TeeTimeComponent implements OnInit {
     public teeSlotList: TeeSlot[] = [];
     public teeTimeDate: Date = new Date();
     public currentDate: Date = new Date();
+    public maxDate: Date = new Date();
     public teeBoxList: TBox[] = [];
     public selectedTBox: TBox;
 
@@ -31,6 +32,7 @@ export class TeeTimeComponent implements OnInit {
 
     ngOnInit() {
         this.getMasterData();
+        this.maxDate.setDate(this.maxDate.getDate() + 2);
     }
 
     ngOnDestroy(): void {
