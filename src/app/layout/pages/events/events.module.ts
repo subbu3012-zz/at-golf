@@ -5,6 +5,7 @@ import { EventsComponent } from './events.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatButtonModule } from '@angular/material'
+import { EventsService } from './events.service'
 
 @NgModule({
     imports: [
@@ -18,6 +19,6 @@ import { MatInputModule, MatButtonModule } from '@angular/material'
     declarations: [
         EventsComponent,
     ],
-    providers: []
+    providers: [EventsService]
 })
 export class EventsModule { }
