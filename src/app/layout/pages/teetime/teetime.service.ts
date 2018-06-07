@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from './../../../../environments/environment'
 import { HttpClient, HttpHeaders, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { SharedService } from './../../shared.service'
-import { BookTeeSlot } from './teetime.model'
+import { BookTeeSlot, TBox } from './teetime.model'
 
 @Injectable()
 export class TeetimeService {
@@ -23,6 +23,11 @@ export class TeetimeService {
 
     public bookTeeSlot(bookTeeSlotData: BookTeeSlot): Observable<any> {
         return this.httpClient.post<any>(environment.hostName + "events", bookTeeSlotData,
+            { headers: this.sharedServ.getRequestHeaders() });
+    }
+
+    public getResources(): Observable<TBox[]> {
+        return this.httpClient.get<TBox[]>(environment.hostName + "resources",
             { headers: this.sharedServ.getRequestHeaders() });
     }
 }

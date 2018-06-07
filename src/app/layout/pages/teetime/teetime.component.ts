@@ -1,6 +1,6 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
-import { TeeSlot, MEMBERLIST, BookTeeSlot, TBOXLIST } from './teetime.model'
+import { TeeSlot, MEMBERLIST, BookTeeSlot, TBOXLIST, TBox } from './teetime.model'
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { SharedService } from './../../shared.service'
 import { MAT_DIALOG_DATA } from '@angular/material';
@@ -18,8 +18,8 @@ export class TeeTimeComponent implements OnInit {
     public teeSlotList: TeeSlot[] = [];
     public teeTimeDate: Date = new Date();
     public currentDate: Date = new Date();
-    public teeBoxList: any[] = TBOXLIST;
-    public selectedTBox: any = this.teeBoxList[0];
+    public teeBoxList: TBox[] = [];
+    public selectedTBox: TBox;
 
     constructor(
         private dialog: MatDialog,
@@ -30,11 +30,26 @@ export class TeeTimeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getTeeSlotData();
+        this.getMasterData();
     }
 
     ngOnDestroy(): void {
 
+    }
+
+    public getMasterData() {
+        setTimeout(() => {
+            this.sharedServ.showProgressBar = true;
+        }, 100);
+        if (this.teeBoxList.length) {
+            this.getTeeSlotData();
+        } else {
+            this.teeServ.getResources().subscribe(data => {
+                this.teeBoxList = data;
+                this.selectedTBox = this.teeBoxList[0];
+                this.getTeeSlotData();
+            })
+        }
     }
 
     public setSlotToFocus(slotIndex: number) {
@@ -44,11 +59,16 @@ export class TeeTimeComponent implements OnInit {
     }
 
     public openBookTeetimeModal(_index: number) {
+        //temp fix
+        this.teeSlotList[_index].resourceId = this.selectedTBox.id;
         let dialogRef: MatDialogRef<BookTeeTimeComponent> = this.dialog.open(
             BookTeeTimeComponent, {
                 "width": "700px",
                 "data": { "slotInfo": this.teeSlotList[_index] }
             })
+        dialogRef.afterClosed().subscribe(data => {
+            data && this.getTeeSlotData();
+        })
     }
 
     public getTeeSlotData() {
@@ -93,7 +113,7 @@ export class BookTeeTimeComponent implements OnInit {
         this.bookTeeSlotData.bookedby = this.sharedServ.userSessionData['loginId'];
         this.bookTeeSlotData.eventDate = new Date(this.slotInfo.date);
         this.bookTeeSlotData.resourceId = this.slotInfo.resourceId;
-        this.bookTeeSlotData.slotId = this.slotInfo.slotId;
+        this.bookTeeSlotData.slotId = this.slotInfo.id;
         this.bookTeeSlotData.members = [];
     }
 
@@ -105,7 +125,7 @@ export class BookTeeTimeComponent implements OnInit {
         this.sharedServ.showProgressBar = true;
         this.teeServ.bookTeeSlot(this.bookTeeSlotData).subscribe(data => {
             this.sharedServ.openSnackBar("Slot booked succesfully. Have a nice day.", "DISMISS", 5000);
-            this.dialogRef.close();
+            this.dialogRef.close(true);
             this.sharedServ.showProgressBar = false;
         }, err => {
 

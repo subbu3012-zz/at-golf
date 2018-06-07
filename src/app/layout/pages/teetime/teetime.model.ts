@@ -18,6 +18,12 @@ export class BookTeeSlot {
     members: string[];
 }
 
+export class TBox {
+    resourceId: string;
+    resourceName: string;
+    id: string;
+}
+
 export const TBOXLIST: any[] = [
     {
         "resourceId": "f03e40a0-6889-11e8-881b-9d116b3528b1",

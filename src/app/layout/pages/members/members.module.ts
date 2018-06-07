@@ -5,6 +5,7 @@ import { MembersComponent } from './members.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatButtonModule, MatTabsModule, MatCardModule, MatExpansionModule } from '@angular/material'
+import { MemberService } from './members.service'
 
 @NgModule({
     imports: [
@@ -18,6 +19,6 @@ import { MatInputModule, MatButtonModule, MatTabsModule, MatCardModule, MatExpan
     declarations: [
         MembersComponent,
     ],
-    providers: []
+    providers: [MemberService]
 })
 export class MembersModule { }

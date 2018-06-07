@@ -7,19 +7,19 @@
                 <ng-container *ngTemplateOutlet="addMembersTemplate;context:{formGroup:newMemberGroup}"></ng-container>
             </div>
         </mat-tab>
-        <mat-tab *ngIf="!sharedServ.isUserTypeInsider()" label="My Groups">
+        <!-- <mat-tab *ngIf="!sharedServ.isUserTypeInsider()" label="My Groups">
             <div class="mt-2">
                 <ng-container *ngTemplateOutlet="groupsTemplate;context:{groupList:myGroupList}"></ng-container>
             </div>
-        </mat-tab>
+        </mat-tab> -->
         <mat-tab [label]="sharedServ.isUserTypeInsider() ? 'All Members' : 'My Connections'">
             <div class="mt-2">
-                <ng-container *ngTemplateOutlet="myMemberTemplate;context:{memberList:myMemberList}"></ng-container>
+                <ng-container *ngTemplateOutlet="myMemberTemplate;context:{memberList:this.sharedServ.memberList}"></ng-container>
             </div>
         </mat-tab>
         <mat-tab *ngIf="!sharedServ.isUserTypeInsider()" label="Members I May know">
             <div class="mt-2">
-                <ng-container *ngTemplateOutlet="nonMembersTemplate;context:{memberList:memberList}"></ng-container>
+                <ng-container *ngTemplateOutlet="nonMembersTemplate;context:{memberList:this.sharedServ.memberList}"></ng-container>
             </div>
         </mat-tab>
     </mat-tab-group>
@@ -46,8 +46,8 @@
         <div *ngFor="let member of memberList">
             <mat-card class="example-card">
                 <mat-card-header>
-                    <mat-card-title>{{member.memberName}}</mat-card-title>
-                    <mat-card-subtitle>Rank : {{member.memberRank}}</mat-card-subtitle>
+                    <mat-card-title>{{member.firstName +' '+ member.lastName}}</mat-card-title>
+                    <mat-card-subtitle>Email : {{member.email}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content align="center">
                     <button mat-raised-button color="primary">Follow</button>
@@ -64,11 +64,11 @@
         <div *ngFor="let member of memberList">
             <mat-card class="example-card">
                 <mat-card-header>
-                    <mat-card-title>{{member.memberName}}</mat-card-title>
-                    <mat-card-subtitle>Rank : {{member.memberRank}}</mat-card-subtitle>
+                    <mat-card-title>{{member.firstName +' '+ member.lastName}}</mat-card-title>
+                    <mat-card-subtitle>Email : {{member.email}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-actions>
-                    <p class="primary-color">Contact No : {{member.memberPhoneNo}}</p>
+                    <p class="primary-color">Contact No : {{member.phone}}</p>
                 </mat-card-actions>
                 <mat-card-footer>
 
@@ -88,36 +88,41 @@
             <form [formGroup]="formGroup">
                 <div>
                     <mat-form-field>
-                        <input matInput placeholder="Member Name" [formControlName]="'memberName'">
+                        <input matInput placeholder="First Name" [formControlName]="'firstName'">
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field>
-                        <input matInput placeholder="Phone No" [formControlName]="'phoneNo'">
+                        <input matInput placeholder="Last Name" [formControlName]="'lastName'">
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field>
-                        <input matInput placeholder="Email Id" [formControlName]="'emailId'">
+                        <input matInput placeholder="Phone No" [formControlName]="'phone'">
                     </mat-form-field>
                 </div>
                 <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Email Id" [formControlName]="'email'">
+                    </mat-form-field>
+                </div>
+                <!-- <div>
                     <mat-form-field>
                         <input matInput placeholder="Member Id" [formControlName]="'loginId'">
                     </mat-form-field>
-                </div>
+                </div> -->
                 <div>
                     <mat-form-field>
                         <input matInput placeholder="Password" type="password" [formControlName]="'password'">
                     </mat-form-field>
                 </div>
                 <div>
-                    <mat-form-field appearance="outline">
+                    <mat-form-field>
                         <input matInput placeholder="Confirm Password" type="password" [formControlName]="'confirmPassword'">
                     </mat-form-field>
                 </div>
                 <div>
-                    <button mat-raised-button color="primary" (click)="registerUser();">Add Member</button>
+                    <button mat-raised-button color="primary" (click)="registerMember();">Add Member</button>
                 </div>
             </form>
         </div>

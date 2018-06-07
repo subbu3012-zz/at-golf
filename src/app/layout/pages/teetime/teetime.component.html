@@ -5,7 +5,7 @@
             <!-- <h6 class="center-text primary-color">TBox 1</h6> -->
             <button style="position: absolute;bottom: 30%;left: 10%;" mat-mini-fab color="warn">T1</button>
         </div>
-        <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12" style="margin-top:50px;cursor:pointer" (click)="selectedTBox = this.teeBoxList[1];getTeeSlotData()">
+        <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12" style="margin-top:50px;cursor:pointer" (click)="selectedTBox = this.teeBoxList[0];getTeeSlotData()">
             <img title="Book Slots for TBox 10" src="../../assets/field_reservation10.jpg" alt="Card image cap">
             <!-- <h6 class="center-text primary-color">TBox 10</h6> -->
             <button style="position: absolute;bottom: 30%;left: 40%;" mat-mini-fab color="warn">T10</button>
@@ -32,54 +32,21 @@
     </div>
 </div>
 
-<h2 class="bold-text center-text camelcase-text">Tee Time Slots for {{selectedTBox.resourceName}} on {{teeTimeDate | date:'mediumDate'}}</h2>
+<h2 class="bold-text center-text camelcase-text">Tee Time Slots for {{selectedTBox?.resourceName}} on {{teeTimeDate | date:'mediumDate'}}</h2>
 <hr class="divider ">
 <div class="teeslot-container">
     <div class="flex-container">
         <div *ngFor="let teeSlot of teeSlotList; let _index = index;">
-            <ng-container *ngIf="!teeSlot.isFocused">
-                <mat-card style="padding:8px 24px;height:160px">
-                    <mat-card-header>
-                        <mat-card-title style="font-size:22px;text-align:center">{{teeSlot.slotStartTime}}</mat-card-title>
-                        <mat-card-subtitle style="text-align:center">9 Holes</mat-card-subtitle>
-                        <mat-card-subtitle style="text-align:center">18 Holes</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <button mat-raised-button (click)="openBookTeetimeModal(_index)" color="primary">Book Now</button>
-                    </mat-card-content>
-                </mat-card>
-            </ng-container>
-            <ng-container *ngIf="teeSlot.isFocused">
-                <mat-card style="padding:8px 8px;width:510px;height:160px">
-                    <div class="flex-container" style="justify-content: space-around">
-                        <div style="font-size:22px;">
-                            {{teeSlot.slotStartTime}}
-                        </div>
-                        <div>
-                            9 Holes & 18 Holes
-                        </div>
-                        <div>
-                            <button mat-raised-button (click)="teeSlot.isFocused = false" color="warn">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="flex-container" style="justify-content: space-between">
-                        <div>
-                            <mat-form-field>
-                                <mat-select placeholder="Choose Members" multiple>
-                                    <mat-option>One</mat-option>
-                                    <mat-option>Two</mat-option>
-                                    <mat-option>Three</mat-option>
-                                    <mat-option>Four</mat-option>
-                                    <mat-option>Five</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <button mat-raised-button (click)="setSlotToFocus(_index)" color="primary">Book Now</button>
-                        </div>
-                    </div>
-                </mat-card>
-            </ng-container>
+            <mat-card style="padding:8px 24px;height:160px">
+                <mat-card-header>
+                    <mat-card-title style="font-size:22px;text-align:center">{{teeSlot.slotStartTime}}</mat-card-title>
+                    <mat-card-subtitle style="text-align:center">9 Holes</mat-card-subtitle>
+                    <mat-card-subtitle style="text-align:center">18 Holes</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <button [disabled]="teeSlot.isBooked" mat-raised-button (click)="openBookTeetimeModal(_index)" color="primary">Book Now</button>
+                </mat-card-content>
+            </mat-card>
         </div>
     </div>
 </div>

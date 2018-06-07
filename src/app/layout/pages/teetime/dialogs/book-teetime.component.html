@@ -4,14 +4,16 @@
     </h2>
     <hr class="divider">
     <div class="row">
-        <div class="col-6">
+        <div *ngIf="!this.sharedServ.mobileQuery.matches" class="col-6">
             <img style="width:inherit" title="Add New Member" src="../../../../assets/golf1.png" alt="Card image cap">
         </div>
-        <div class="col-6 mt-2">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2">
             <div style="width:inherit">
                 <mat-form-field>
                     <mat-select placeholder="Choose Members*" [(ngModel)]="this.bookTeeSlotData.members" multiple>
-                        <mat-option *ngFor="let member of sharedServ.memberList" [value]="member.memberId">{{member.memberId}}</mat-option>
+                        <ng-container *ngFor="let member of sharedServ.memberList">
+                            <mat-option *ngIf="member.firstName" [value]="member.memberId">{{member.firstName +' '+member.lastName }}</mat-option>
+                        </ng-container>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>
