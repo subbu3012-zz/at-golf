@@ -131,3 +131,22 @@ export class UserSessionDataResolver implements Resolve<any> {
         });
     }
 }
+
+import { Pipe, PipeTransform } from '@angular/core';
+@Pipe({ name: 'searchArray' })
+export class SearchArrayPipe implements PipeTransform {
+    transform(searchArray: any[], searchFields: string, searchKeyword: string): any[] {
+        if (!searchKeyword) return searchArray;
+        return searchArray.filter(element => { return this.isValidElement(element, searchFields.split(","), searchKeyword) });
+    }
+
+    isValidElement(searchElement: any, searchFields: string[], searchKeyword: string): boolean {
+        let _isValid = false;
+        searchFields.forEach(keyField => {
+            if (searchElement[keyField] && searchElement[keyField].toLowerCase().includes(searchKeyword.toLowerCase())) {
+                _isValid = true; return;
+            }
+        });
+        return _isValid;
+    }
+}

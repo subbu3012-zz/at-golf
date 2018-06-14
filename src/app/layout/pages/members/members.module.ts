@@ -4,8 +4,12 @@ import { MembersRoutingModule } from './members-routing.module';
 import { MembersComponent } from './members.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule, MatTabsModule, MatCardModule, MatExpansionModule } from '@angular/material'
+import {
+    MatInputModule, MatButtonModule, MatTabsModule, MatCardModule,
+    MatExpansionModule, MatIconModule
+} from '@angular/material'
 import { MemberService } from './members.service'
+import { SearchArrayPipe } from './../../shared.service'
 
 @NgModule({
     imports: [
@@ -14,10 +18,11 @@ import { MemberService } from './members.service'
         CommonModule,
         MembersRoutingModule,
         HttpClientModule,
-        MatInputModule, MatButtonModule, MatTabsModule, MatCardModule, MatExpansionModule
+        MatInputModule, MatButtonModule, MatTabsModule, MatCardModule,
+        MatExpansionModule, MatIconModule
     ],
     declarations: [
-        MembersComponent,
+        MembersComponent, SearchArrayPipe
     ],
     providers: [MemberService]
 })

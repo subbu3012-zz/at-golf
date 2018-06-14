@@ -60,8 +60,14 @@
 </ng-template>
 
 <ng-template #myMemberTemplate let-memberList="memberList">
+    <div style="max-width:300px">
+        <mat-form-field>
+            <input matInput placeholder="Search Members with mem-id or name" [(ngModel)]="searchKeyword">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </div>
     <div class="flex-container">
-        <div *ngFor="let member of memberList">
+        <div *ngFor="let member of memberList | searchArray:'memberId,firstName,lastName':searchKeyword">
             <mat-card class="example-card">
                 <mat-card-header>
                     <mat-card-title>{{member.firstName +' '+ member.lastName}}</mat-card-title>
@@ -89,36 +95,38 @@
                 <div>
                     <mat-form-field>
                         <input matInput placeholder="First Name" [formControlName]="'firstName'">
+                        <mat-icon matSuffix>account_circle</mat-icon>
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field>
                         <input matInput placeholder="Last Name" [formControlName]="'lastName'">
+                        <mat-icon matSuffix>account_circle</mat-icon>
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field>
                         <input matInput placeholder="Phone No" [formControlName]="'phone'">
+                        <mat-icon matSuffix>contact_phone</mat-icon>
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field>
                         <input matInput placeholder="Email Id" [formControlName]="'email'">
-                    </mat-form-field>
-                </div>
-                <!-- <div>
-                    <mat-form-field>
-                        <input matInput placeholder="Member Id" [formControlName]="'loginId'">
-                    </mat-form-field>
-                </div> -->
-                <div>
-                    <mat-form-field>
-                        <input matInput placeholder="Password" type="password" [formControlName]="'password'">
+                        <mat-icon matSuffix>contact_mail</mat-icon>
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field>
-                        <input matInput placeholder="Confirm Password" type="password" [formControlName]="'confirmPassword'">
+                        <input matInput placeholder="Password" type="password" [formControlName]="'password'" [type]="!show1 ? 'password' : 'text'">
+                        <mat-icon class="cursor-pointer" matSuffix (mouseenter)="show1 = true" (mouseleave)="show1 = false">{{show1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Confirm Password" type="password" [formControlName]="'confirmPassword'" [type]="!show2 ? 'password' : 'text'">
+                        <mat-icon class="cursor-pointer" matSuffix (mouseenter)="show2 = true" (mouseleave)="show2 = false">{{show2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+
                     </mat-form-field>
                 </div>
                 <div>

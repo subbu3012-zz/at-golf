@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChangePasswordComponent } from './change-password.component';
 import { ChangePasswordRoutingModule } from './change-password-routing.module';
-import { MatInputModule, MatButtonModule, MatTabsModule, MatCardModule, MatExpansionModule } from '@angular/material'
+import {
+    MatInputModule, MatButtonModule, MatTabsModule, MatCardModule,
+    MatExpansionModule, MatIconModule
+} from '@angular/material'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -10,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         CommonModule,
         ChangePasswordRoutingModule,
         FormsModule, ReactiveFormsModule,
-        MatInputModule, MatButtonModule, MatTabsModule, MatCardModule, MatExpansionModule
+        MatInputModule, MatButtonModule, MatTabsModule, MatCardModule,
+        MatExpansionModule, MatIconModule
     ],
     declarations: [ChangePasswordComponent]
 })

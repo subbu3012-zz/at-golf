@@ -53,7 +53,6 @@ export class MembersComponent implements OnInit {
     registerMember() {
         this.sharedServ.showProgressBar = true;
         this.memServ.createCustomer(this.newMemberGroup.getRawValue()).subscribe(data => {
-            console.log(data);
             this.getMemberList();
             this.sharedServ.openSnackBar("Member is added succesfully.", "DISMISS", 5000);
             this.sharedServ.showProgressBar = false;
