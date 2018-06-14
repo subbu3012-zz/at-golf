@@ -16,6 +16,9 @@ export class MembersComponent implements OnInit {
     // public myMemberList: Member[] = [];
     // public myGroupList: MemberGroup[] = [];
 
+    public showPassword: boolean = false;
+    public showConfirmPassword: boolean = false;
+
     public newMemberGroup: FormGroup = new FormGroup({
         firstName: new FormControl('', Validators.minLength(2)),
         lastName: new FormControl('', Validators.minLength(2)),

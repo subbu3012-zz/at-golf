@@ -118,14 +118,14 @@
                 </div>
                 <div>
                     <mat-form-field>
-                        <input matInput placeholder="Password" type="password" [formControlName]="'password'" [type]="!show1 ? 'password' : 'text'">
-                        <mat-icon class="cursor-pointer" matSuffix (mouseenter)="show1 = true" (mouseleave)="show1 = false">{{show1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <input matInput placeholder="Password" type="password" [formControlName]="'password'" [type]="!showPassword ? 'password' : 'text'">
+                        <mat-icon class="cursor-pointer" matSuffix (mouseenter)="showPassword = true" (mouseleave)="showPassword = false">{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field>
-                        <input matInput placeholder="Confirm Password" type="password" [formControlName]="'confirmPassword'" [type]="!show2 ? 'password' : 'text'">
-                        <mat-icon class="cursor-pointer" matSuffix (mouseenter)="show2 = true" (mouseleave)="show2 = false">{{show2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <input matInput placeholder="Confirm Password" type="password" [formControlName]="'confirmPassword'" [type]="!showConfirmPassword ? 'password' : 'text'">
+                        <mat-icon class="cursor-pointer" matSuffix (mouseenter)="showConfirmPassword = true" (mouseleave)="showConfirmPassword = false">{{showConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
 
                     </mat-form-field>
                 </div>

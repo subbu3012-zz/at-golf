@@ -18,6 +18,9 @@ export class ChangePasswordComponent implements OnInit {
         confirmPassword: new FormControl('', Validators.minLength(2))
     });
 
+    public showOldPassword: boolean = false;
+    public showPassword: boolean = false;
+    public showConfirmPassword: boolean = false;
 
     constructor(
         private httpClient: HttpClient,
