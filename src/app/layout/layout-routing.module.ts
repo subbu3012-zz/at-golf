@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
+import { LoginComponent } from './pages/login/login.component';
 import { UserSessionDataResolver, AuthGuard } from './shared.service'
 
 const routes: Routes = [
@@ -8,6 +9,16 @@ const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
+            {
+                path: 'login',
+                component: LoginComponent,
+            },
+            {
+                path: 'change-password',
+                loadChildren: './pages/change-password/change-password.module#ChangePasswordModule',
+                resolve: [UserSessionDataResolver],
+                canActivate: [AuthGuard]
+            },
             {
                 path: 'teetime',
                 loadChildren: './pages/teetime/teetime.module#TeeTimeModule',
