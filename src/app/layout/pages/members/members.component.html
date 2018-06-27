@@ -60,14 +60,27 @@
 </ng-template>
 
 <ng-template #myMemberTemplate let-memberList="memberList">
-    <div style="max-width:300px">
-        <mat-form-field>
-            <input matInput placeholder="Search Members with mem-id or name" [(ngModel)]="searchKeyword">
-            <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
+    <div class="flex-container">
+        <div style="max-width:300px">
+            <mat-form-field>
+                <input matInput placeholder="Search Members with mem-id or name" [(ngModel)]="searchKeyword">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-select placeholder="Member Type" (change)="this.filterMemberList()" [(ngModel)]="filterMemberType">
+                    <mat-option [value]="'All'">All Members</mat-option>
+                    <mat-option [value]="'Associate Member'">Associate Members</mat-option>
+                    <mat-option [value]="'Permanent Member'">Permanent Members</mat-option>
+                    <mat-option [value]="'Candidate Member'">Candidate Members</mat-option>
+                    <mat-option [value]="'Service Member'">Service Members</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
     </div>
     <div class="flex-container">
-        <div *ngFor="let member of memberList | searchArray:'memberId,firstName,lastName':searchKeyword">
+        <div *ngFor="let member of filteredMemberList | searchArray:'memberId,firstName,lastName':searchKeyword">
             <mat-card class="example-card">
                 <mat-card-header>
                     <mat-card-title>{{member.firstName +' '+ member.lastName}}</mat-card-title>
@@ -102,6 +115,22 @@
                     <mat-form-field>
                         <input matInput placeholder="Last Name" [formControlName]="'lastName'">
                         <mat-icon matSuffix>account_circle</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Member Id" [formControlName]="'memberId'">
+                        <mat-icon matSuffix>input</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-select matInput placeholder="Member Type" [formControlName]="'memberType'">
+                            <mat-option [value]="'Permanent Member'">Permanent Member</mat-option>
+                            <mat-option [value]="'Associate Member'">Associate Member</mat-option>
+                            <mat-option [value]="'Candidate Member'">Candidate Member</mat-option>
+                            <mat-option [value]="'Service Member'">Service Member</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
                 <div>

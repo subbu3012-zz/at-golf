@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     MatInputModule, MatButtonModule, MatTabsModule, MatCardModule,
-    MatExpansionModule, MatIconModule
+    MatExpansionModule, MatIconModule,MatSelectModule
 } from '@angular/material'
 import { MemberService } from './members.service'
 import { SearchArrayPipe } from './../../shared.service'
@@ -19,7 +19,7 @@ import { SearchArrayPipe } from './../../shared.service'
         MembersRoutingModule,
         HttpClientModule,
         MatInputModule, MatButtonModule, MatTabsModule, MatCardModule,
-        MatExpansionModule, MatIconModule
+        MatExpansionModule, MatIconModule,MatSelectModule
     ],
     declarations: [
         MembersComponent, SearchArrayPipe

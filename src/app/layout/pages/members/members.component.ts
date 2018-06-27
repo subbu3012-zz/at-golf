@@ -12,8 +12,8 @@ import { MemberService } from './members.service'
 })
 export class MembersComponent implements OnInit {
 
-    // public memberList: Member[] = [];
-    // public myMemberList: Member[] = [];
+    public filteredMemberList: Member[] = [];
+    public filterMemberType: string = 'All';
     // public myGroupList: MemberGroup[] = [];
 
     public showPassword: boolean = false;
@@ -22,6 +22,8 @@ export class MembersComponent implements OnInit {
     public newMemberGroup: FormGroup = new FormGroup({
         firstName: new FormControl('', Validators.minLength(2)),
         lastName: new FormControl('', Validators.minLength(2)),
+        memberId: new FormControl('', Validators.minLength(2)),
+        memberType: new FormControl('', Validators.minLength(2)),
         phone: new FormControl('', Validators.minLength(2)),
         email: new FormControl('', Validators.minLength(2)),
         password: new FormControl('', Validators.minLength(2)),
@@ -45,8 +47,16 @@ export class MembersComponent implements OnInit {
         }, 100);
         this.sharedServ.getCustomerData().subscribe(data => {
             this.sharedServ.memberList = data;
+            this.filterMemberList();
             this.sharedServ.showProgressBar = false;
         })
+    }
+
+    public filterMemberList() {
+        this.filteredMemberList = this.sharedServ.memberList.filter(data =>
+            (this.filterMemberType == "All" ? true : data.memberType == this.filterMemberType)
+        );
+        console.log(this.filterMemberType, this.filteredMemberList);
     }
 
     ngOnDestroy(): void {

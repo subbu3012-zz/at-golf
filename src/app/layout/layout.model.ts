@@ -44,4 +44,5 @@ export class Member {
     memberId: string;
     email: string;
     phone: string;
+    memberType: string;
 }
