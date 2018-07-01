@@ -20,6 +20,11 @@ const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'forgot-password/:emailId',
+                loadChildren: './pages/forgot-password/forgot-password.module#ForgotPasswordModule',
+                resolve: [UserSessionDataResolver]
+            },
+            {
                 path: 'teetime',
                 loadChildren: './pages/teetime/teetime.module#TeeTimeModule',
                 resolve: [UserSessionDataResolver],

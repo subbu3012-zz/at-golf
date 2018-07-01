@@ -171,7 +171,7 @@ mat-form-field {
 }
 
 .light-color {
-    color: snow !important;
+    color: #ffffff !important;
 }
 
 .warn-color {
@@ -242,4 +242,13 @@ mat-form-field {
 
 .cdk-overlay-container{
     z-index: 1050 !important;
+}
+
+.mat-menu-content{
+    // background: red;
+}
+
+th{
+    background-color:mat-color($mat-app-primary) !important;
+    border:none !important;
 }

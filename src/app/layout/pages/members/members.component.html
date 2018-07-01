@@ -80,20 +80,26 @@
         </div>
     </div>
     <div class="flex-container">
-        <div *ngFor="let member of filteredMemberList | searchArray:'memberId,firstName,lastName':searchKeyword">
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <mat-card-title>{{member.firstName +' '+ member.lastName}}</mat-card-title>
-                    <mat-card-subtitle>Email : {{member.email}}</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-actions>
-                    <p class="primary-color">Contact No : {{member.phone}}</p>
-                </mat-card-actions>
-                <mat-card-footer>
-
-                </mat-card-footer>
-            </mat-card>
-        </div>
+        <table class="table table-hover table-striped table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Member Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Member Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let member of filteredMemberList | searchArray:'memberId,firstName,lastName':searchKeyword">
+                    <td>{{member.memberId}}</td>
+                    <td>{{member.firstName +' '+ member.lastName}}</td>
+                    <td>{{member.email}}</td>
+                    <td>{{member.phone}}</td>
+                    <td>{{member.memberType}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </ng-template>
 

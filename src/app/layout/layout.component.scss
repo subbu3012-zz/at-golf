@@ -13,7 +13,7 @@ mat-form-field {
 }
 
 .toolbar-container {
-    background-color: snow;
+    background-color: #ffffff;
 }
 
 .sidebar-container {
@@ -37,7 +37,7 @@ mat-form-field {
 
 .toggle-icon {
     font-size: 44px;
-    color: snow;
+    color: #ffffff;
     cursor: pointer;
     margin-top: 3px;
 }
@@ -66,6 +66,10 @@ mat-sidenav {
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
     // height: 70px;
     padding:0px;
+}
+
+.transparent-navbar-class{
+    background-color: transparent;
 }
 
 .nav-button{
@@ -108,7 +112,7 @@ mat-sidenav {
 }
 
 .mat-menu-item:hover{
-    background-color: white !important;
+    background-color: transparent !important;
     color: mat-color($mat-app-primary);
 }
 
@@ -123,18 +127,34 @@ mat-sidenav {
     position: absolute;
     top: 20px;
     right: 10px;
-    color:rgba(0, 0, 0, 0.54);
+    color:#ffffff;
     transform: translateY(-50%);
 }
 
 .nav-item > button {
-    border-right: mat-color($mat-app-primary)  2px solid;
+    // border-right: mat-color($mat-app-primary)  2px solid;
     margin-right: 5px;
     height: 35px;
     padding:0px 20px;
+    font-size: 0.8rem;
+    color: #ffffff;
+    text-transform: uppercase !important;
 }
 
 .nav-item:last-child > button{
     border-right: none !important;
     padding:0px 0px 0px 20px;
+}
+
+.bg-image-container{
+    background-color: rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
+    background-image: url("../../assets/bg-image.jpg");
+    background-size: cover;
+    // background-position: center center;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    visibility: inherit;
+    z-index: 20
 }

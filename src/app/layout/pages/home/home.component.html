@@ -1,17 +1,5 @@
-<div *ngIf="this.contentCategory == 'landing-page'" class="container-fluid">
-    <div *ngIf="sharedServ.isUserLoggedIn" class="row">
-        <div class="post-login-container">
-            <div>
-                <h1 class="center-text">Golf your stress away ..... in the fresh air</h1>
-            </div>
-            <div style="margin-top:20px">
-                <button disableRipple="true" style="padding: 15px 30px;border-radius: 40px;font-size: 20px" mat-raised-button color="primary"
-                    (click)="this.rtr.navigateByUrl('/layout/teetime')">Book A Tee Time</button>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="!sharedServ.isUserLoggedIn" class="row">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div *ngIf="this.contentCategory == 'landing-page'">
+    <!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -54,6 +42,34 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
+        </div> -->
+    <div class="home-background-image-container">
+        <img src="../../assets/bg-image.jpg" class="home-background-image">
+        <div class="centered">
+            <div *ngIf="!sharedServ.isUserLoggedIn">
+                <div>
+                    <p class="center-text uppercase-text" style="color: #ffffff;font-size:4rem;letter-spacing: 0.75rem">Golf Experience</p>
+                    <p class="center-text" style="color:#ffffff;letter-spacing: 0.1rem">Our legendary golf course is a classic gem that caters exclusively to our members</p>
+                </div>
+                <div style="margin-top:20px;text-align: center">
+                    <button disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent"
+                        (click)="this.rtr.navigateByUrl('/layout/teetime')">
+                        <span style="color:#ffffff;letter-spacing: 0.15rem">Know More</span>
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="sharedServ.isUserLoggedIn">
+                <div>
+                    <p class="center-text uppercase-text" style="color: #ffffff;font-size:3.5rem;letter-spacing: 0.25rem">Online Reservation</p>
+                    <p class="center-text" style="color:#ffffff;letter-spacing: 0.1rem">Book your teetime today! Booking one of our golf club finest courses has never been so easy</p>
+                </div>
+                <div style="margin-top:20px;text-align: center">
+                    <button disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent"
+                        (click)="this.rtr.navigateByUrl('/layout/teetime')">
+                        <span style="color:#ffffff;letter-spacing: 0.15rem">Book Tee Times</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 

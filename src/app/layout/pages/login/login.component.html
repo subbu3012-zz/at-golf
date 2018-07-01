@@ -7,7 +7,7 @@
     <h6 class="warn-color center-text">{{loginExceptionDesc}}</h6>
     <div class="login-template-container container-fluid">
         <form [formGroup]="formGroup">
-            <div>
+            <div *ngIf="this.mode == 'login'">
                 <mat-form-field>
                     <input matInput placeholder="Login Id" formControlName="loginId">
                     <mat-error *ngIf="formGroup.controls['loginId'].errors?.required">
@@ -15,16 +15,32 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div>
+            <div *ngIf="this.mode == 'login'">
                 <mat-form-field>
                     <input matInput placeholder="Passcode" type="password" formControlName="loginPassword">
                     <mat-error *ngIf="formGroup.controls['loginPassword'].errors?.required">
                         *Mandatory Field
                     </mat-error>
+                    <mat-hint (click) = "this.mode ='forgotpassword'">
+                        <a style="cursor: pointer;">forgot password?</a>
+                    </mat-hint>
                 </mat-form-field>
             </div>
-            <div>
-                <button mat-raised-button color="primary" (click)="processUserLogin();">Login</button>
+            <div *ngIf="this.mode == 'forgotpassword'">
+                <mat-form-field>
+                    <input matInput placeholder="Email Id" formControlName="emailId">
+                    <mat-error *ngIf="formGroup.controls['emailId'].errors?.required">
+                        *Mandatory Field
+                    </mat-error>
+                    <mat-hint (click) = "this.mode = 'login'">
+                            <a style="cursor: pointer;">go back</a>
+                        </mat-hint>
+                </mat-form-field>
+            </div>
+            <div style="margin-top:10px;">
+                <button mat-raised-button color="primary" (click)="processUserLogin()">
+                    {{this.mode == 'login' ? 'Login' : 'Forgot Password'}}
+                </button>
             </div>
         </form>
     </div>

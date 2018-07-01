@@ -16,10 +16,12 @@ export class LoginComponent implements OnInit {
 
     private _mobileQueryListener: () => void;
     private loginExceptionDesc: string = "";
+    private mode: string = "login";
 
     public loginFormGroup: FormGroup = new FormGroup({
-        loginId: new FormControl('', [Validators.minLength(2), Validators.required]),
-        loginPassword: new FormControl('', [Validators.minLength(2), Validators.required])
+        loginId: new FormControl(''),
+        loginPassword: new FormControl(''),
+        emailId: new FormControl('')
     });
 
     constructor(
@@ -53,28 +55,40 @@ export class LoginComponent implements OnInit {
     public processUserLogin() {
         this.markFormGroupTouched(this.loginFormGroup);
         if (this.loginFormGroup.valid) {
-            let _loginPayload = {};
-            let _loginId = this.loginFormGroup.controls['loginId'].value;
-            _loginPayload['password'] = this.loginFormGroup.controls['loginPassword'].value;
-            _loginPayload[(_loginId.includes("@admin.com") ? 'email' : 'memberId')] = _loginId;
-            this.sharedServ.showProgressBar = true;
-            this.loginUser(_loginPayload).subscribe(data => {
-                if (data) {
-                    data['loginId'] = _loginId;
-                    this.sharedServ.setSessionData(data);
-                    this.dialogRef.close();
-                    this.dialogRef.afterClosed().subscribe(data => {
-                        this.logUserInToApp();
-                    })
-                    this.sharedServ.showProgressBar = false;
-                } else {
+            if (this.mode == "login") {
+                let _loginPayload = {};
+                let _loginId = this.loginFormGroup.controls['loginId'].value;
+                _loginPayload['password'] = this.loginFormGroup.controls['loginPassword'].value;
+                _loginPayload[(_loginId.includes("@admin.com") ? 'email' : 'memberId')] = _loginId;
+                // this.sharedServ.showProgressBar = true;
+                this.loginUser(_loginPayload).subscribe(data => {
+                    if (data) {
+                        data['loginId'] = _loginId;
+                        this.sharedServ.setSessionData(data);
+                        this.dialogRef.close();
+                        this.dialogRef.afterClosed().subscribe(data => {
+                            this.logUserInToApp();
+                        })
+                        this.sharedServ.showProgressBar = false;
+                    } else {
+                        this.loginExceptionDesc = "Invalid credentials. Try again or contact your admin."
+                        this.sharedServ.showProgressBar = false;
+                    }
+                }, err => {
                     this.loginExceptionDesc = "Invalid credentials. Try again or contact your admin."
                     this.sharedServ.showProgressBar = false;
-                }
-            }, err => {
-                this.loginExceptionDesc = "Invalid credentials. Try again or contact your admin."
-                this.sharedServ.showProgressBar = false;
-            })
+                })
+            }else{
+                this.sharedServ.showProgressBar = true;
+                this.forgotPassword().subscribe(data => {
+                    this.dialogRef.close();
+                    this.sharedServ.showProgressBar = false;
+                    this.sharedServ.openSnackBar("Verfication mail is sent to the eamail id","DISMISS",5000);
+                }, err => {
+                    this.sharedServ.showProgressBar = false;
+                    this.sharedServ.openSnackBar("Please check the email id you have entered","DISMISS",5000);
+                })
+            }
         }
     }
 
@@ -89,5 +103,10 @@ export class LoginComponent implements OnInit {
 
     public loginUser(loginPayload: any): Observable<any> {
         return this.httpClient.post<any>(environment.hostName + "oauth2/token?cid=df926dce-dff3-4b64-a30c-e480934b22d3", loginPayload);
+    }
+
+    public forgotPassword(): Observable<any> {
+        console.log(this.loginFormGroup.getRawValue())
+        return this.httpClient.get<any>(environment.hostName + "customers/sendForgetPasswordMail/"+this.loginFormGroup.getRawValue()['emailId']);
     }
 }

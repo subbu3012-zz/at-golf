@@ -52,11 +52,6 @@ tbody{
     font-size: 14px !important;
 }
 
-th{
-    background-color:mat-color($mat-app-primary) !important;
-    border:none !important;
-}
-
 .table-flex-container{
     align-items: flex-start;
 }
@@ -88,4 +83,22 @@ th{
     color:white;
     flex-direction: column;
     width: 100vw;
+}
+
+.home-background-image{
+    width: 100vw;
+    // height: 100vh;
+    margin-top: -90px;
+}
+
+.centered{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.home-background-image-container{
+    position: relative;
+    text-align: center;
 }
