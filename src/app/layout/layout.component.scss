@@ -109,11 +109,12 @@ mat-sidenav {
 
 .mat-menu-item{
     letter-spacing: 0.5px;
+    color: #ffffff;
 }
 
 .mat-menu-item:hover{
     background-color: transparent !important;
-    color: mat-color($mat-app-primary);
+    color: mat-color($mat-app-accent);
 }
 
 .mat-menu-list-button::after {
@@ -137,7 +138,7 @@ mat-sidenav {
     height: 35px;
     padding:0px 20px;
     font-size: 0.8rem;
-    color: #ffffff;
+    // color: #ffffff;
     text-transform: uppercase !important;
 }
 
@@ -157,4 +158,26 @@ mat-sidenav {
     opacity: 1;
     visibility: inherit;
     z-index: 20
+}
+
+.map-image-container{
+    background-color: rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
+    background-image: url("../../assets/map.png");
+    background-size: cover;
+    height: 350px;
+    opacity: 1;
+    visibility: inherit;
+    z-index: 20
+}
+
+.feedback-form-container{
+    background: #ffffff;
+    // display: flex;
+    // align-content: center;
+    // background-image: url("../../assets/background.gif");
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    height: 330px;
 }

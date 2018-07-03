@@ -1,4 +1,4 @@
-<div *ngIf="this.contentCategory == 'landing-page'">
+<div *ngIf="this.contentCategory == 'landing-page'" style="background: #020e18">
     <!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -52,8 +52,7 @@
                     <p class="center-text" style="color:#ffffff;letter-spacing: 0.1rem">Our legendary golf course is a classic gem that caters exclusively to our members</p>
                 </div>
                 <div style="margin-top:20px;text-align: center">
-                    <button disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent"
-                        (click)="this.rtr.navigateByUrl('/layout/teetime')">
+                    <button disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent" (click)="this.rtr.navigateByUrl('/layout/teetime')">
                         <span style="color:#ffffff;letter-spacing: 0.15rem">Know More</span>
                     </button>
                 </div>
@@ -64,8 +63,7 @@
                     <p class="center-text" style="color:#ffffff;letter-spacing: 0.1rem">Book your teetime today! Booking one of our golf club finest courses has never been so easy</p>
                 </div>
                 <div style="margin-top:20px;text-align: center">
-                    <button disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent"
-                        (click)="this.rtr.navigateByUrl('/layout/teetime')">
+                    <button disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent" (click)="this.rtr.navigateByUrl('/layout/teetime')">
                         <span style="color:#ffffff;letter-spacing: 0.15rem">Book Tee Times</span>
                     </button>
                 </div>
@@ -73,7 +71,7 @@
         </div>
     </div>
 
-    <div align="center" class="division-container">
+    <!-- <div align="center" class="division-container">
         <h2 class="bold-text camelcase-text">Hyderabad Golf Association - In harmony with heritage</h2>
         <hr class="divider ">
 
@@ -88,9 +86,9 @@
             facilities such as a Golf Academy, Driving Range, and a modern club house with F & B, pro-shop and club fitting
             facilities, golf simulator, HGA is now the top golfing destination in Hyderabad.
         </p>
-    </div>
+    </div> -->
 
-    <div align="center" class="division-container">
+    <!-- <div align="center" class="division-container">
         <h2 class="bold-text uppercase-text">Coaches and Instructors</h2>
         <hr class="divider ">
         <div class="row">
@@ -118,31 +116,78 @@
                 <img style="width:inherit;height:inherit" src="../../assets/index-10.jpg" alt="Card image cap">
             </div>
         </div>
+    </div> -->
+
+    <div class="division-container">
+        <div class="container">
+            <div class="row">
+                <div class="welcome-div-image-container">
+                    <img src="../../assets/index-04.jpg" style="width: 100%;height: inherit" alt="">
+                </div>
+                <div class="welcome-div-content-container" style="text-align: center">
+                    <h1 style="letter-spacing: 3px;margin: 0" class="light-color">Welcome</h1>
+                    <!-- <hr class="divider"> -->
+                    <p style="font-size: 10px" class="accent-color">TO OUR GOLF CLUB</p>
+                    <p style="font-size: 12px;margin-top:30px" class="light-color">
+                        The Hyderabad Golf club is located in a historic setting in and around Golconda fort. A project promoted by the Telangana
+                        State Tourism Development Corporation and the Hyderabad Golf Association.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div align="center" class="division-container">
-        <h2 class="bold-text camelcase-text">Upcoming Tournaments</h2>
-        <hr class="divider ">
-        <div class="row">
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2">
-                <img class="blurred-image" style="width:inherit;height:inherit" src="../../assets/events-01.jpg" alt="Card image cap">
-                <div class="image-body">
-                    <h2>Global Championship</h2>
-                    <p>September 2nd to 5th</p>
+    <div class="division-container">
+        <h2 class="bold-text camelcase-text center-text light-color">Upcoming Tournaments</h2>
+        <hr class="divider">
+        <div class="container-fluid">
+            <div class="row center-text">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2">
+                    <img class="blurred-image" style="width:inherit;height:inherit" src="../../assets/events-01.jpg" alt="Card image cap">
+                    <div class="image-body">
+                        <h2>Global Championship</h2>
+                        <p>September 2nd to 5th</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2">
+                    <img class="blurred-image" style="width:inherit;height:inherit" src="../../assets/events-02.jpg" alt="Card image cap">
+                    <div class="image-body">
+                        <h2>Amateur Championship</h2>
+                        <p>September 12th to 15th</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2">
+                    <img class="blurred-image" style="width:inherit;height:inherit" src="../../assets/events-03.jpg" alt="Card image cap">
+                    <div class="image-body">
+                        <h2>San Diego Championship</h2>
+                        <p>September 18th to 21st</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2">
-                <img class="blurred-image" style="width:inherit;height:inherit" src="../../assets/events-02.jpg" alt="Card image cap">
-                <div class="image-body">
-                    <h2>Amateur Championship</h2>
-                    <p>September 12th to 15th</p>
+        </div>
+    </div>
+
+    <div class="division-container">
+        <div class="container">
+            <div class="row">
+                <div class="welcome-div-content2-container" style="text-align: center">
+                    <h1 style="letter-spacing: 3px;margin: 0" class="light-color">Golf Field Review</h1>
+                    <!-- <hr class="divider"> -->
+                    <p style="font-size: 10px" class="accent-color">A UNIQUE CONSTRUCTION</p>
+                    <ul style="text-align: left">
+                        <p style="font-size: 12px;margin-top:30px" class="light-color">
+                            <span class="accent-color">*</span> No daily water usage
+                        </p>
+                        <p style="font-size: 10px" class="light-color">
+                            <span class="accent-color">*</span> Not affected by freezing weather</p>
+                        <p style="font-size: 10px" class="light-color">
+                            <span class="accent-color">*</span> 3 Distinct tennis court surface speed-of-play options</p>
+                        <p style="font-size: 10px" class="light-color">
+                            <span class="accent-color">*</span> Adjustable court speeds that are great for serves</p>
+                    </ul>
                 </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2">
-                <img class="blurred-image" style="width:inherit;height:inherit" src="../../assets/events-03.jpg" alt="Card image cap">
-                <div class="image-body">
-                    <h2>San Diego Championship</h2>
-                    <p>September 18th to 21st</p>
+                <div class="welcome-div-image-container">
+                    <img src="../../assets/image-21.jpg" style="width: 100%;height: inherit" alt="">
                 </div>
             </div>
         </div>

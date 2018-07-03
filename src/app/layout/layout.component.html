@@ -123,45 +123,79 @@
         <router-outlet></router-outlet>
     </div>
 </div>
-<div class="mt-5 division-container">
-    <div style="background-color:#333335">
+<div class="division-container">
+    <div style="background: #152229">
         <div class="card-body">
-            <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-2">
-                    <h4 class="primary-color uppercase-text bold-text">About</h4>
-                    <p class="light-color">
-                        The Hyderabad Golf club is an 18 hole golf course located in a historic setting in and around Golconda Fort. A project promoted
-                        by the Telangana State Tourism Development Corporation and the Hyderabad Golf Association. Hyderabad’s
-                        first and only public golf course
-                    </p>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-2">
-                    <h4 class="primary-color uppercase-text bold-text">Quick Links</h4>
-                    <div class="pl-5">
-                        <p class="light-color cursor-pointer" (click)="routeTo(['home', 'contact-us'])">
-                            <span class="bold-text">></span> About</p>
-                        <p class="light-color cursor-pointer" (click)="routeTo(['teetime'])">
-                            <span class="bold-text">></span> Tee Time</p>
-                        <p class="light-color cursor-pointer" (click)="routeTo(['home', 'coaches-and-facilities'])">
-                            <span class="bold-text">></span> Training</p>
-                        <p class="light-color cursor-pointer" (click)="routeTo(['events'])">
-                            <span class="bold-text">></span> Events</p>
-                        <p class="light-color cursor-pointer" (click)="routeTo(['home', 'landing-page'])">
-                            <span class="bold-text">></span> Blog</p>
-                        <p class="light-color cursor-pointer" (click)="routeTo(['home', 'contact-us'])">
-                            <span class="bold-text">></span> Contacts</p>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-6 col-xs-12 mt-2">
+                        <h4 class="accent-color bold-text">About</h4>
+                        <p class="light-color">
+                            The Hyderabad Golf club is an 18 hole golf course located in a historic setting in and around Golconda Fort. A project promoted
+                            by the Telangana State Tourism Development Corporation and the Hyderabad Golf Association. Hyderabad’s
+                            first and only public golf course
+                        </p>
                     </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-2">
-                    <h4 class="primary-color uppercase-text bold-text">Contact Us</h4>
-                    <p class="light-color">9-4-187/GOLF, 7 Tombs Road, Golconda Fort</p>
-                    <p class="light-color"> Hyderabad, Telangana 500008</p>
-                    <p class="light-color">090300 32700</p>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-12 mt-2">
+                        <h4 class="accent-color bold-text">Quick Links</h4>
+                        <ul class="pl-5">
+                            <p class="light-color cursor-pointer" (click)="routeTo(['home', 'contact-us'])">
+                                <span class="bold-text accent-color">></span> About</p>
+                            <p class="light-color cursor-pointer" (click)="routeTo(['teetime'])">
+                                <span class="bold-text accent-color">></span> Tee Time</p>
+                            <p class="light-color cursor-pointer" (click)="routeTo(['home', 'coaches-and-facilities'])">
+                                <span class="bold-text accent-color">></span> Training</p>
+                            <p class="light-color cursor-pointer" (click)="routeTo(['events'])">
+                                <span class="bold-text accent-color">></span> Events</p>
+                            <p class="light-color cursor-pointer" (click)="routeTo(['home', 'landing-page'])">
+                                <span class="bold-text accent-color">></span> Blog</p>
+                            <p class="light-color cursor-pointer" (click)="routeTo(['home', 'contact-us'])">
+                                <span class="bold-text accent-color">></span> Contacts</p>
+                        </ul>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-2">
+                        <h4 class="accent-color bold-text">Contact Us</h4>
+                        <p class="light-color">9-4-187/GOLF, 7 Tombs Road, Golconda Fort</p>
+                        <p class="light-color"> Hyderabad, Telangana 500008</p>
+                        <p class="light-color">090300 32700</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div *ngIf="!sharedServ.mobileQuery.matches" style="margin-top:20px" class="col-12">
-            <img style="height:350px;width:inherit" src="../../assets/map.png" alt="Card image cap">
+        <div class="map-image-container col-12" style="width: inherit;padding:10px">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-3 offset-8">
+                        <div class="feedback-form-container">
+                            <div>
+                                <h4 class="primary-color">Reach us out here</h4>
+                                <hr class="divider">
+                                <form>
+                                    <div>
+                                        <mat-form-field>
+                                            <input matInput placeholder="Name">
+                                            <mat-icon matSuffix>account_circle</mat-icon>
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <mat-form-field>
+                                            <input matInput placeholder="Email Id">
+                                            <mat-icon matSuffix>contact_mail</mat-icon>
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <mat-form-field>
+                                            <input matInput placeholder="Message">
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <button mat-raised-button color="primary">Send Message</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>

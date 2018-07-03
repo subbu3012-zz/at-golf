@@ -78,15 +78,15 @@ export class LoginComponent implements OnInit {
                     this.loginExceptionDesc = "Invalid credentials. Try again or contact your admin."
                     this.sharedServ.showProgressBar = false;
                 })
-            }else{
+            } else {
                 this.sharedServ.showProgressBar = true;
                 this.forgotPassword().subscribe(data => {
                     this.dialogRef.close();
                     this.sharedServ.showProgressBar = false;
-                    this.sharedServ.openSnackBar("Verfication mail is sent to the eamail id","DISMISS",5000);
+                    this.sharedServ.openSnackBar("Verfication mail is sent to the eamail id", "DISMISS", 5000);
                 }, err => {
                     this.sharedServ.showProgressBar = false;
-                    this.sharedServ.openSnackBar("Please check the email id you have entered","DISMISS",5000);
+                    this.sharedServ.openSnackBar("Please check the email id you have entered", "DISMISS", 5000);
                 })
             }
         }
@@ -107,6 +107,6 @@ export class LoginComponent implements OnInit {
 
     public forgotPassword(): Observable<any> {
         console.log(this.loginFormGroup.getRawValue())
-        return this.httpClient.get<any>(environment.hostName + "customers/sendForgetPasswordMail/"+this.loginFormGroup.getRawValue()['emailId']);
+        return this.httpClient.get<any>(environment.hostName + "customers/sendForgetPasswordMail/" + this.loginFormGroup.getRawValue()['emailId'], { headers: this.sharedServ.getRequestHeaders() });
     }
 }

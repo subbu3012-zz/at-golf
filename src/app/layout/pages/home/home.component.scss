@@ -37,7 +37,7 @@
 }
 
 .division-container {
-    margin-top: 30px;
+    padding: 35px 0px;
 }
 
 .mc-member-container{
@@ -101,4 +101,29 @@ tbody{
 .home-background-image-container{
     position: relative;
     text-align: center;
+}
+
+.welcome-div-image-container,.welcome-div-content-container,.welcome-div-content2-container{
+    color:white;
+    width: 50%;
+    height: 450px;
+    background: #333333;
+    display: inline-block
+}
+
+.welcome-div-content-container{
+    height: 350px;
+    margin-top: 50px;
+    margin-left: -50px;
+    padding:60px;
+    background: #152229;
+}
+
+.welcome-div-content2-container{
+    height: 350px;
+    margin-top: 50px;
+    margin-right: -50px;
+    padding:60px;
+    background: #152229;
+    z-index: 1;
 }
