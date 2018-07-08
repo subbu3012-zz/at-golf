@@ -9,3 +9,9 @@
     -webkit-transition: width 2s ease-in-out;
     transition: width 2s ease-in-out;
 }
+
+.blurred-image {
+    -webkit-filter: blur(10);
+    /* Safari 6.0 - 9.0 */
+    filter: blur(2px);
+}

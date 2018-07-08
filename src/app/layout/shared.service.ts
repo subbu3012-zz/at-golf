@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { environment } from './../../environments/environment'
 import { Member } from './layout.model'
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+
 
 @Injectable()
 export class SharedService {
@@ -16,6 +17,7 @@ export class SharedService {
     public showProgressBar: boolean = false;
     public environment: any = environment;
     public memberList: Member[] = [];
+    public uploadFileSubject: Subject<boolean> = new Subject<boolean>();
 
     constructor(
         media: MediaMatcher,
@@ -95,6 +97,38 @@ export class SharedService {
 
     public getTransformedDate(date: Date, dateFormat: string) {
         return this.datePipe.transform(date, dateFormat);
+    }
+
+    public uploadFile(uploadedFile: File, customerId: string) {
+        let self = this;
+        let formData = new FormData();
+        var xhr = new XMLHttpRequest();
+        /**Prepare form data */
+        formData.append("image", uploadedFile, uploadedFile.name);
+
+        /*********************/
+        xhr.open('POST', environment.hostName + "userprofileimage/" + customerId);
+        xhr.setRequestHeader("cid", "df926dce-dff3-4b64-a30c-e480934b22d3");
+        xhr.setRequestHeader("Authorization", 'bearer ' + this.userSessionData['token']);
+        
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200 || xhr.status == 201) {
+                    self.uploadFileSubject.next(true); // On Upload Success
+                    self.uploadFileSubject = new Subject<boolean>();
+                }
+                else {
+                    console.log('here')
+                    self.uploadFileSubject.next(false); // On Upload Failure
+                }
+            }
+        }
+        xhr.send(formData);
+    }
+
+    /**Send upload status back to the component*/
+    public onuploadFile(): Observable<boolean> {
+        return this.uploadFileSubject.asObservable();
     }
 }
 

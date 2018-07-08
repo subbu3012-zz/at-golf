@@ -4,44 +4,85 @@
     </h2>
     <hr class="divider">
     <div class="row">
-        <div *ngIf="!this.sharedServ.mobileQuery.matches" class="col-6">
+        <!-- <div *ngIf="!this.sharedServ.mobileQuery.matches" class="col-6">
             <img style="width:inherit" title="Add New Member" src="../../../../assets/golf1.png" alt="Card image cap">
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2">
-            <div style="width:inherit">
-                <mat-form-field>
+        </div> -->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+            <div class="flex-container">
+                <div>
+                    <mat-form-field>
+                        <mat-select placeholder="Choose No. Of Members*" (change)="addMemberFields($event.value)">
+                            <mat-option [value]="3">3</mat-option>
+                            <mat-option [value]="4">4</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-select placeholder="Choose Holes" [(ngModel)]="this.bookTeeSlotData.noOfHoles">
+                            <mat-option [value]="'9'">9 Holes</mat-option>
+                            <mat-option [value]="'18'">18 Holes</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <table *ngIf = "memberList.length" class="table table-hover table-striped table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Member Type</th>
+                        <th>Member Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <!-- <th>Member Type</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let selectedMember of memberList;let _index = index;">
+                        <td>
+                            <mat-form-field>
+                                <mat-select placeholder="Member Type" [(ngModel)]="selectedMember.memberType">
+                                    <mat-option [value]="'member'">Member</mat-option>
+                                    <mat-option [value]="'guest'">Guest</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field *ngIf="!selectedMember.memberType || selectedMember.memberType == 'member'">
+                                <mat-select [disabled]="!selectedMember.memberType" placeholder="Choose Members*" (change)="setMemberList(_index,$event.value);"
+                                    [(ngModel)]="selectedMember.memberId">
+                                    <ng-container *ngFor="let member of sharedServ.memberList">
+                                        <mat-option *ngIf="member.firstName && !this.getSelectedMemberList(selectedMember.memberId).includes(member.memberId)" [value]="member.memberId">{{member.firstName +' '+member.lastName }}</mat-option>
+                                    </ng-container>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field *ngIf="selectedMember.memberType && selectedMember.memberType == 'guest'">
+                                <input matInput placeholder="Guest Name" [(ngModel)]="selectedMember.firstName">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field>
+                                <input [disabled]="!selectedMember.memberType || selectedMember.memberType == 'member'" matInput placeholder="Email" [(ngModel)]="selectedMember.email">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field>
+                                <input [disabled]="!selectedMember.memberType || selectedMember.memberType == 'member'" matInput placeholder="Phone" [(ngModel)]="selectedMember.phone">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- <mat-form-field>
                     <mat-select placeholder="Choose Members*" [(ngModel)]="this.bookTeeSlotData.members" multiple>
                         <ng-container *ngFor="let member of sharedServ.memberList">
                             <mat-option *ngIf="member.firstName" [value]="member.memberId">{{member.firstName +' '+member.lastName }}</mat-option>
                         </ng-container>
                     </mat-select>
-                </mat-form-field>
-                <mat-form-field>
-                    <textarea matInput placeholder="Type in an invitation"></textarea>
-                </mat-form-field>
-            </div>
+                </mat-form-field> -->
             <div class="center-text" style="margin-top:30px">
-                <button (click)="bookTeetimeSlot()" style="padding: 10px 50px;border-radius: 40px;font-size: 20px" mat-raised-button color="primary">Book Now</button>
+                <button (click)="prepareDataForSlotBooking()" style="padding: 10px 50px;border-radius: 40px;font-size: 20px" mat-raised-button color="primary">Book Now</button>
             </div>
         </div>
     </div>
 </div>
-<!-- <div class="flex-container" style="justify-content: space-around">
-
-</div>
-<div class="flex-container" style="justify-content: space-between">
-    <div>
-        <mat-form-field>
-            <mat-select placeholder="Choose Members" multiple>
-                <mat-option>One</mat-option>
-                <mat-option>Two</mat-option>
-                <mat-option>Three</mat-option>
-                <mat-option>Four</mat-option>
-                <mat-option>Five</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <div>
-        <button mat-raised-button color="primary">Book Now</button>
-    </div>
-</div> -->

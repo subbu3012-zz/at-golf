@@ -26,7 +26,7 @@ export class EventsComponent implements OnInit {
         setTimeout(() => {
             this.sharedServ.showProgressBar = true;
         }, 100);
-        this.eventServ.getEventData("", "").subscribe(data => {
+        this.eventServ.getEventData(this.sharedServ.isUserTypeInsider() ? "" : this.sharedServ.userSessionData['memberId']).subscribe(data => {
             this.eventList = data;
             this.sharedServ.showProgressBar = false;
             console.log(this.eventList)

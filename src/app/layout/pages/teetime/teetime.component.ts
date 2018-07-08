@@ -1,11 +1,13 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
-import { TeeSlot, MEMBERLIST, BookTeeSlot, TBOXLIST, TBox } from './teetime.model'
+import { TeeSlot, MEMBERLIST, BookTeeSlot, TBOXLIST, TBox, Member } from './teetime.model'
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { SharedService } from './../../shared.service'
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Inject } from '@angular/core';
 import { TeetimeService } from './teetime.service'
+import { MembersRoutingModule } from '../members/members-routing.module';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
     selector: 'teetime',
@@ -18,6 +20,7 @@ export class TeeTimeComponent implements OnInit {
     public teeSlotList: TeeSlot[] = [];
     public teeTimeDate: Date = new Date();
     public currentDate: Date = new Date();
+    public teeTimeBlockDate: Date = new Date();
     public maxDate: Date = new Date();
     public teeBoxList: TBox[] = [];
     public selectedTBox: TBox;
@@ -61,11 +64,10 @@ export class TeeTimeComponent implements OnInit {
     }
 
     public openBookTeetimeModal(_index: number) {
-        //temp fix
         this.teeSlotList[_index].resourceId = this.selectedTBox.id;
         let dialogRef: MatDialogRef<BookTeeTimeComponent> = this.dialog.open(
             BookTeeTimeComponent, {
-                "width": "700px",
+                "width": "1000px",
                 "data": { "slotInfo": this.teeSlotList[_index] }
             })
         dialogRef.afterClosed().subscribe(data => {
@@ -88,6 +90,16 @@ export class TeeTimeComponent implements OnInit {
             this.sharedServ.showProgressBar = false;
         });
     }
+
+    public blockTeeTimeDate() {
+        setTimeout(() => {
+            this.sharedServ.showProgressBar = true;
+        }, 100);
+        this.teeServ.blockTeeTimeDate(this.sharedServ.getTransformedDate(this.teeTimeBlockDate, "yyyy-MM-dd")).subscribe(data => {
+            this.sharedServ.openSnackBar("Tee time booking is blocked for the selected date", "DISMISS", 5000);
+            this.sharedServ.showProgressBar = false;
+        })
+    }
 }
 
 @Component({
@@ -99,7 +111,7 @@ export class TeeTimeComponent implements OnInit {
 export class BookTeeTimeComponent implements OnInit {
 
     public slotInfo: TeeSlot;
-    public memberList: any[] = MEMBERLIST;
+    public memberList: Member[] = [];
     public bookTeeSlotData: BookTeeSlot = new BookTeeSlot();
 
     constructor(
@@ -112,7 +124,8 @@ export class BookTeeTimeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.bookTeeSlotData.bookedby = this.sharedServ.userSessionData['loginId'];
+        // console.log(this.slotInfo)
+        this.bookTeeSlotData.bookedBy = this.sharedServ.userSessionData['loginId'];
         this.bookTeeSlotData.eventDate = new Date(this.slotInfo.date);
         this.bookTeeSlotData.resourceId = this.slotInfo.resourceId;
         this.bookTeeSlotData.slotId = this.slotInfo.id;
@@ -121,6 +134,44 @@ export class BookTeeTimeComponent implements OnInit {
 
     ngOnDestroy(): void {
 
+    }
+
+    public addMemberFields(noOfMembers: number) {
+        this.memberList = [];
+        for (let counter: number = 0; counter < noOfMembers; counter++) {
+            this.memberList.push(new Member());
+        }
+        this.setMemberList(0,this.sharedServ.userSessionData['loginId']);
+    }
+
+    public setMemberList(index: number, memberId: string) {
+        this.memberList[index] = this.sharedServ.memberList.find(element => element.memberId == memberId);
+        this.memberList[index].memberType = "member";
+    }
+
+    public getSelectedMemberList(selectedMemberId:string){
+        return this.memberList.filter(member => member.memberId != selectedMemberId).map(data => data.memberId);
+    }
+
+    public prepareDataForSlotBooking() {
+        let _observableBatch: any[] = [];
+        this.memberList.filter(element => element.memberType == "guest").forEach(element => {
+            element.memberType = null;
+            element.lastName = "";
+            _observableBatch.push(this.teeServ.postGuestData(element));
+        })
+        this.bookTeeSlotData.eventDate = this.sharedServ.getTransformedDate(this.bookTeeSlotData.eventDate, "yyyy-MM-dd");
+        this.bookTeeSlotData.members = this.memberList
+            .filter(element => element.memberType == "member")
+            .map(data => data.memberId);
+        if (_observableBatch.length) {
+            Observable.forkJoin(_observableBatch).subscribe(data => {
+                this.bookTeeSlotData.guests = data.map(data => data.guestId);
+                this.bookTeetimeSlot();
+            })
+        } else {
+            this.bookTeetimeSlot();
+        }
     }
 
     public bookTeetimeSlot() {

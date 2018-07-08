@@ -10,12 +10,26 @@ export class TeeSlot {
     isFocused?: boolean = false;
 }
 
+export class Member {
+    id: string;
+    firstName: string;
+    lastName: string;
+    memberId: string;
+    email: string;
+    phone: string;
+    memberType: string;
+}
+
 export class BookTeeSlot {
     slotId: string;
-    bookedby: string;
+    bookedBy: string;
     resourceId: string;
-    eventDate: Date;
+    eventDate: any;
     members: string[];
+    guests: string[];
+    noOfHoles: string;
+    eventType:string = "Tournament";
+    status:string = "Scheduled";
 }
 
 export class TBox {

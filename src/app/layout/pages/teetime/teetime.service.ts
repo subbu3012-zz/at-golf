@@ -26,8 +26,18 @@ export class TeetimeService {
             { headers: this.sharedServ.getRequestHeaders() });
     }
 
+    public blockTeeTimeDate(blockedDate: string): Observable<any> {
+        return this.httpClient.post<any>(environment.hostName + "blocked-dates", { date: blockedDate },
+            { headers: this.sharedServ.getRequestHeaders() });
+    }
+
     public getResources(): Observable<TBox[]> {
         return this.httpClient.get<TBox[]>(environment.hostName + "resources",
+            { headers: this.sharedServ.getRequestHeaders() });
+    }
+
+    public postGuestData(guestData: any) {
+        return this.httpClient.post<any>(environment.hostName + "guests", guestData,
             { headers: this.sharedServ.getRequestHeaders() });
     }
 }

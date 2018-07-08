@@ -1,11 +1,11 @@
 <div class="container-fluid">
     <div *ngIf="!this.sharedServ.mobileQuery.matches" class="row">
-        <div class="col-xl-4 offset-1 col-lg-4 offset-1 col-md-12 col-sm-12 col-xs-12" style="cursor:pointer" (click)="selectedTBox = this.teeBoxList[0];getTeeSlotData()">
+        <div [class.blurred-image]="selectedTBox == this.teeBoxList[1]" class="col-xl-4 offset-1 col-lg-4 offset-1 col-md-12 col-sm-12 col-xs-12" style="cursor:pointer" (click)="selectedTBox = this.teeBoxList[0];getTeeSlotData()">
             <img title="Book Slots for TBox 1" width="395" height="538" src="../../assets/field_reservation1.jpg" alt="Card image cap">
             <!-- <h6 class="center-text primary-color">TBox 1</h6> -->
             <button style="position: absolute;bottom: 30%;left: 10%;" mat-mini-fab color="warn">T1</button>
         </div>
-        <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12" style="margin-top:50px;cursor:pointer" (click)="selectedTBox = this.teeBoxList[0];getTeeSlotData()">
+        <div [class.blurred-image]="selectedTBox == this.teeBoxList[0]" class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12" style="margin-top:50px;cursor:pointer" (click)="selectedTBox = this.teeBoxList[1];getTeeSlotData()">
             <img title="Book Slots for TBox 10" src="../../assets/field_reservation10.jpg" alt="Card image cap">
             <!-- <h6 class="center-text primary-color">TBox 10</h6> -->
             <button style="position: absolute;bottom: 30%;left: 40%;" mat-mini-fab color="warn">T10</button>
@@ -22,7 +22,7 @@
 <div class="flex-container ">
     <div>
         <mat-form-field>
-            <input matInput (dateChange)="getTeeSlotData()" [min]="currentDate" [max]="maxDate" [matDatepicker]="picker" [(ngModel)]="teeTimeDate"
+            <input matInput (dateChange)="getTeeSlotData()" [min]="currentDate" [matDatepicker]="picker" [(ngModel)]="teeTimeDate"
                 placeholder="Book a Tee Time On">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -31,13 +31,25 @@
     <div>
         <button mat-raised-button (click)="getTeeSlotData()" color="primary">Refresh</button>
     </div>
+    <ng-container *ngIf="sharedServ.isUserTypeInsider()">
+        <div>
+            <mat-form-field>
+                <input matInput [min]="currentDate" [matDatepicker]="picker1" [(ngModel)]="teeTimeBlockDate" placeholder="Block Teetime Booking on">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div>
+            <button mat-raised-button (click)="blockTeeTimeDate()" color="primary">Block Date</button>
+        </div>
+    </ng-container>
 </div>
 
 <h2 class="bold-text center-text camelcase-text">Tee Time Slots for {{selectedTBox?.resourceName}} on {{teeTimeDate | date:'mediumDate'}}</h2>
 <hr class="divider ">
 <div class="teeslot-container">
     <div class="flex-container">
-        <div *ngFor="let teeSlot of teeSlotList; let _index = index;">
+        <div [class.blurred-image] = "teeSlot.isBooked" *ngFor="let teeSlot of teeSlotList; let _index = index;">
             <mat-card style="padding:8px 24px;height:160px">
                 <mat-card-header>
                     <mat-card-title style="font-size:22px;text-align:center">{{teeSlot.slotStartTime}}</mat-card-title>
