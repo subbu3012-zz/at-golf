@@ -14,8 +14,8 @@ export class EventsService {
 
     }
 
-    public getEventData(loginId: string): Observable<Event[]> {
-        return this.httpClient.get<Event[]>(environment.hostName + "event-members/" + loginId,
+    public getEventData(endPoint:string): Observable<Event[]> {
+        return this.httpClient.get<Event[]>(environment.hostName + endPoint,
             { headers: this.sharedServ.getRequestHeaders() });
     }
 }

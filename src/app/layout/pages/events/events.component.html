@@ -9,6 +9,7 @@
                 <th>End Time</th>
                 <th>Booked By</th>
                 <th>Other Members</th>
+                <th>Guests(if any)</th>
             </tr>
         </thead>
         <tbody>
@@ -16,8 +17,35 @@
                 <td>{{event.eventDate | date:'mediumDate'}}</td>
                 <td>{{event.slotStartTime}}</td>
                 <td>{{event.slotEndTime}}</td>
-                <td>{{event.bookedBy}}</td>
-                <td>{{event.members.join(",")}}</td>
+                <td>
+                    <span class="at-tooltip">{{event.bookedBy}}
+                        <span *ngIf="getMemberInfo(event.bookedBy)" class="at-tooltip-text">
+                            <p class="accent-color" style="font-weight: bold">{{getMemberInfo(event.bookedBy).firstName + ' ' + getMemberInfo(event.bookedBy).lastName}}</p>
+                            <p>
+                                <font style="font-weight: bold">Email-</font>{{getMemberInfo(event.bookedBy).email}}</p>
+                            <p>
+                                <font style="font-weight: bold">Phone-</font>{{getMemberInfo(event.bookedBy).phone}}</p>
+                            <!-- <p>{{getMemberInfo(otherMember).name}}</p> -->
+                        </span>
+                    </span>
+                </td>
+                <td>
+                    <ng-container *ngFor="let otherMember of event.members">
+                        <ng-container *ngIf="otherMember != event.bookedBy">
+                            <span class="at-tooltip">{{otherMember}}
+                                <span *ngIf="getMemberInfo(otherMember)" class="at-tooltip-text">
+                                    <p class="accent-color" style="font-weight: bold">{{getMemberInfo(otherMember).firstName + ' ' + getMemberInfo(otherMember).lastName}}</p>
+                                    <p>
+                                        <font style="font-weight: bold">Email-</font>{{getMemberInfo(otherMember).email}}</p>
+                                    <p>
+                                        <font style="font-weight: bold">Phone-</font>{{getMemberInfo(otherMember).phone}}</p>
+                                    <!-- <p>{{getMemberInfo(otherMember).name}}</p> -->
+                                </span>
+                            </span>
+                        </ng-container>
+                    </ng-container>
+                </td>
+                <td>{{event.guests.join(",")}}</td>
             </tr>
         </tbody>
     </table>

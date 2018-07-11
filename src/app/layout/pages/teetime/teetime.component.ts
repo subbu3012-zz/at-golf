@@ -8,6 +8,7 @@ import { Inject } from '@angular/core';
 import { TeetimeService } from './teetime.service'
 import { MembersRoutingModule } from '../members/members-routing.module';
 import { Observable } from 'rxjs/Rx';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'teetime',
@@ -28,7 +29,7 @@ export class TeeTimeComponent implements OnInit {
     constructor(
         private dialog: MatDialog,
         public sharedServ: SharedService,
-        public teeServ: TeetimeService
+        public teeServ: TeetimeService,
     ) {
 
     }
@@ -118,7 +119,8 @@ export class BookTeeTimeComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public dialogData: any,
         public sharedServ: SharedService,
         private dialogRef: MatDialogRef<BookTeeTimeComponent>,
-        public teeServ: TeetimeService
+        public teeServ: TeetimeService,
+        public rtr: Router,
     ) {
         this.slotInfo = dialogData.slotInfo;
     }
@@ -136,12 +138,17 @@ export class BookTeeTimeComponent implements OnInit {
 
     }
 
+    public clearMember(memberType: string, index: number) {
+        this.memberList[index] = new Member();
+        this.memberList[index].memberType = memberType;
+    }
+
     public addMemberFields(noOfMembers: number) {
         this.memberList = [];
         for (let counter: number = 0; counter < noOfMembers; counter++) {
             this.memberList.push(new Member());
         }
-        this.setMemberList(0,this.sharedServ.userSessionData['loginId']);
+        !this.sharedServ.isUserTypeInsider() && this.setMemberList(0, this.sharedServ.userSessionData['loginId']);
     }
 
     public setMemberList(index: number, memberId: string) {
@@ -149,7 +156,7 @@ export class BookTeeTimeComponent implements OnInit {
         this.memberList[index].memberType = "member";
     }
 
-    public getSelectedMemberList(selectedMemberId:string){
+    public getSelectedMemberList(selectedMemberId: string) {
         return this.memberList.filter(member => member.memberId != selectedMemberId).map(data => data.memberId);
     }
 
@@ -180,6 +187,9 @@ export class BookTeeTimeComponent implements OnInit {
             this.sharedServ.openSnackBar("Slot booked succesfully. Have a nice day.", "DISMISS", 5000);
             this.dialogRef.close(true);
             this.sharedServ.showProgressBar = false;
+            setTimeout(() => {
+                this.rtr.navigateByUrl('/layout/events')
+            }, 5000);
         }, err => {
 
         })

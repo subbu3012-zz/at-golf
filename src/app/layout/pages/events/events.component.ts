@@ -26,11 +26,21 @@ export class EventsComponent implements OnInit {
         setTimeout(() => {
             this.sharedServ.showProgressBar = true;
         }, 100);
-        this.eventServ.getEventData(this.sharedServ.isUserTypeInsider() ? "" : this.sharedServ.userSessionData['memberId']).subscribe(data => {
+        this.sharedServ.getCustomerData().subscribe(data => {
+            this.sharedServ.memberList = data;
+        })
+        this.eventServ.getEventData(this.sharedServ.isUserTypeInsider() ? "events" : "event-members/" + this.sharedServ.userSessionData['memberId']).subscribe(data => {
             this.eventList = data;
+            this.eventList.sort((a:Event,b:Event) => {
+                return b.eventDate.localeCompare(a.eventDate);
+            })
             this.sharedServ.showProgressBar = false;
             console.log(this.eventList)
         })
+    }
+
+    public getMemberInfo(memberId: string) {
+        return this.sharedServ.memberList.find(element => element.memberId == memberId);
     }
 
     ngOnDestroy(): void {

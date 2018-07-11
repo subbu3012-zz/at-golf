@@ -30,6 +30,7 @@ export class BookTeeSlot {
     noOfHoles: string;
     eventType:string = "Tournament";
     status:string = "Scheduled";
+    eventName:string = "Golf Championship 2018";
 }
 
 export class TBox {
