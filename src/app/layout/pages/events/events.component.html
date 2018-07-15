@@ -1,22 +1,39 @@
 <div class="container-fluid">
-    <h2 class="menu-header bold-text camelcase-text center-text">UpComing Events</h2>
+    <h2 class="menu-header bold-text camelcase-text center-text">Events</h2>
     <hr class="divider">
-    <table class="table table-hover table-striped mt-2">
+    <mat-tab-group *ngIf="eventList.length">
+        <mat-tab label="UpComing Events">
+            <div class="mt-2">
+                <ng-container *ngTemplateOutlet="eventsTableTemplate;context:{eventList:this.upcomingEventList}"></ng-container>
+            </div>
+        </mat-tab>
+        <mat-tab label="History">
+            <div class="mt-2">
+                <ng-container *ngTemplateOutlet="eventsTableTemplate;context:{eventList:historyEventList}"></ng-container>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<ng-template #eventsTableTemplate let-showEventList="eventList">
+    <table class="table table-hover table-striped">
         <thead class="thead-dark">
             <tr>
                 <th>Event Date</th>
                 <th>Start Time</th>
                 <th>End Time</th>
+                <th>T-Box</th>
                 <th>Booked By</th>
                 <th>Other Members</th>
                 <th>Guests(if any)</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let event of eventList">
+            <tr *ngFor="let event of showEventList">
                 <td>{{event.eventDate | date:'mediumDate'}}</td>
                 <td>{{event.slotStartTime}}</td>
                 <td>{{event.slotEndTime}}</td>
+                <td>{{getTBoxInfo(event.resourceId).resourceName}}</td>
                 <td>
                     <span class="at-tooltip">{{event.bookedBy}}
                         <span *ngIf="getMemberInfo(event.bookedBy)" class="at-tooltip-text">
@@ -25,7 +42,6 @@
                                 <font style="font-weight: bold">Email-</font>{{getMemberInfo(event.bookedBy).email}}</p>
                             <p>
                                 <font style="font-weight: bold">Phone-</font>{{getMemberInfo(event.bookedBy).phone}}</p>
-                            <!-- <p>{{getMemberInfo(otherMember).name}}</p> -->
                         </span>
                     </span>
                 </td>
@@ -39,14 +55,25 @@
                                         <font style="font-weight: bold">Email-</font>{{getMemberInfo(otherMember).email}}</p>
                                     <p>
                                         <font style="font-weight: bold">Phone-</font>{{getMemberInfo(otherMember).phone}}</p>
-                                    <!-- <p>{{getMemberInfo(otherMember).name}}</p> -->
                                 </span>
                             </span>
                         </ng-container>
                     </ng-container>
                 </td>
-                <td>{{event.guests.join(",")}}</td>
+                <td>
+                    <ng-container *ngFor="let guest of event.guests">
+                            <span class="at-tooltip">{{guest}}
+                                    <span *ngIf="getGuestInfo(guest)" class="at-tooltip-text">
+                                        <p class="accent-color" style="font-weight: bold">{{getGuestInfo(guest).firstName + ' ' + getGuestInfo(guest).lastName}}</p>
+                                        <p>
+                                            <font style="font-weight: bold">Email-</font>{{getGuestInfo(guest).email}}</p>
+                                        <p>
+                                            <font style="font-weight: bold">Phone-</font>{{getGuestInfo(guest).phone}}</p>
+                                    </span>
+                                </span>
+                    </ng-container>
+                </td>
             </tr>
         </tbody>
     </table>
-</div>
+</ng-template>

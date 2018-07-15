@@ -82,6 +82,34 @@ export class SharedService {
         }
     }
 
+    public isTimeExpired(date: Date, time: string) {
+        let _newDate = new Date();
+        let _transformedDate = this.getTransformedDate(date);
+        let _newTransformedDate = this.getTransformedDate(_newDate);
+        if (_transformedDate.localeCompare(_newTransformedDate) == 1) {
+            return false;
+        } else if (_transformedDate.localeCompare(_newTransformedDate) == -1) {
+            return true;
+        } else {
+            let _current24Hours = _newDate.getHours();
+            time = this.get24HoursTime(time);
+            let currentTime = ('0' + _current24Hours).slice(-2) + '.' + ('0' + _newDate.getMinutes()).slice(-2);
+            if (currentTime.localeCompare(time) == 1) {
+                return true;
+            } else {
+                // console.log(_transformedDate, _newTransformedDate, time, currentTime, 'c', false);
+                return false;
+            }
+        }
+    }
+
+    public get24HoursTime(time: string) {
+        let _hours = +time.split(" ")[0].split(".")[0]
+        let _minutes = time.split(" ")[0].split(".")[1]
+        time.split(" ")[1] == 'PM' &&  _hours != 12 && (_hours = _hours + 12);
+        return ('0' + _hours).slice(-2) + "." + _minutes;
+    }
+
     public getRequestHeaders() {
         return new HttpHeaders({
             'Content-Type': 'application/json',
@@ -95,7 +123,7 @@ export class SharedService {
             { headers: this.getRequestHeaders() });
     }
 
-    public getTransformedDate(date: Date, dateFormat: string) {
+    public getTransformedDate(date: Date, dateFormat: string = "yyyy-MM-dd") {
         return this.datePipe.transform(date, dateFormat);
     }
 
@@ -110,7 +138,7 @@ export class SharedService {
         xhr.open('POST', environment.hostName + "userprofileimage/" + customerId);
         xhr.setRequestHeader("cid", "df926dce-dff3-4b64-a30c-e480934b22d3");
         xhr.setRequestHeader("Authorization", 'bearer ' + this.userSessionData['token']);
-        
+
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200 || xhr.status == 201) {

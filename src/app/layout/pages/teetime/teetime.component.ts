@@ -126,7 +126,6 @@ export class BookTeeTimeComponent implements OnInit {
     }
 
     ngOnInit() {
-        // console.log(this.slotInfo)
         this.bookTeeSlotData.bookedBy = this.sharedServ.userSessionData['loginId'];
         this.bookTeeSlotData.eventDate = new Date(this.slotInfo.date);
         this.bookTeeSlotData.resourceId = this.slotInfo.resourceId;
@@ -152,8 +151,14 @@ export class BookTeeTimeComponent implements OnInit {
     }
 
     public setMemberList(index: number, memberId: string) {
-        this.memberList[index] = this.sharedServ.memberList.find(element => element.memberId == memberId);
-        this.memberList[index].memberType = "member";
+        console.log(memberId,JSON.parse(JSON.stringify(this.sharedServ.memberList)));
+        let _selectedMember = this.sharedServ.memberList.filter(element => { return element.memberId == memberId})[0];
+        if (_selectedMember) {
+            this.memberList[index] = _selectedMember;
+            this.memberList[index].memberType = "member";
+        } else {
+            this.sharedServ.openSnackBar("Member Not Found. Please type in correct member id.", "DISMISS", 5000);
+        }
     }
 
     public getSelectedMemberList(selectedMemberId: string) {

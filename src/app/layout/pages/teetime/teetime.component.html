@@ -22,7 +22,7 @@
 <div class="flex-container ">
     <div>
         <mat-form-field>
-            <input matInput (dateChange)="getTeeSlotData()" [min]="currentDate" [max] = "maxDate" [matDatepicker]="picker" [(ngModel)]="teeTimeDate"
+            <input matInput (dateChange)="getTeeSlotData()" [min]="currentDate" [max] = "!this.sharedServ.isUserTypeInsider() ? maxDate : null" [matDatepicker]="picker" [(ngModel)]="teeTimeDate"
                 placeholder="Book a Tee Time On">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -49,7 +49,7 @@
 <hr class="divider ">
 <div class="teeslot-container">
     <div *ngIf = "teeSlotList.length" class="flex-container">
-        <div [class.blurred-image] = "teeSlot.isBooked" *ngFor="let teeSlot of teeSlotList; let _index = index;">
+        <div *ngFor="let teeSlot of teeSlotList; let _index = index;">
             <mat-card style="padding:8px 24px;height:160px">
                 <mat-card-header>
                     <mat-card-title style="font-size:22px;text-align:center">{{teeSlot.slotStartTime}}</mat-card-title>

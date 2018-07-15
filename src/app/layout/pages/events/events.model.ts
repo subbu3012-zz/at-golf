@@ -4,4 +4,6 @@ export class Event {
     eventDate: string;
     members: string;
     bookedBy: string;
+    slotStartTime:string;
+    slotEndTime:string;
 }

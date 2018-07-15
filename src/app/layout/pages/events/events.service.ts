@@ -18,4 +18,14 @@ export class EventsService {
         return this.httpClient.get<Event[]>(environment.hostName + endPoint,
             { headers: this.sharedServ.getRequestHeaders() });
     }
+
+    public getGuestData():Observable<any[]>{
+        return this.httpClient.get<Event[]>(environment.hostName + "guests",
+            { headers: this.sharedServ.getRequestHeaders() });
+    }
+
+    public getResources(): Observable<any[]> {
+        return this.httpClient.get<any[]>(environment.hostName + "resources",
+            { headers: this.sharedServ.getRequestHeaders() });
+    }
 }

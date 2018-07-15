@@ -26,10 +26,11 @@
                     </mat-form-field>
                 </div>
             </div>
-            <table *ngIf = "memberList.length" class="table table-hover table-striped table-sm">
+            <table *ngIf="memberList.length" class="table table-hover table-striped table-sm">
                 <thead class="thead-dark">
                     <tr>
                         <th>Member Type</th>
+                        <th>Member Id</th>
                         <th>Member Name</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -40,7 +41,7 @@
                     <tr *ngFor="let selectedMember of memberList;let _index = index;">
                         <td>
                             <mat-form-field>
-                                <mat-select placeholder="Member Type" (change) = "clearMember($event.value,_index);" [(ngModel)]="selectedMember.memberType">
+                                <mat-select placeholder="Member Type" (change)="clearMember($event.value,_index);" [(ngModel)]="selectedMember.memberType">
                                     <mat-option [value]="'member'">Member</mat-option>
                                     <mat-option [value]="'guest'">Guest</mat-option>
                                 </mat-select>
@@ -48,20 +49,16 @@
                         </td>
                         <td>
                             <mat-form-field *ngIf="!selectedMember.memberType || selectedMember.memberType == 'member'">
-                                <mat-select [disabled]="!selectedMember.memberType" placeholder="Choose Members*" (change)="setMemberList(_index,$event.value);"
+                                <input [disabled]="!selectedMember.memberType" matInput placeholder="Member Id" (change)="setMemberList(_index,$event.target.value)"
                                     [(ngModel)]="selectedMember.memberId">
-                                    <ng-container *ngFor="let member of sharedServ.memberList">
-                                        <mat-option *ngIf="member.firstName && !this.getSelectedMemberList(selectedMember.memberId).includes(member.memberId)" [value]="member.memberId">{{member.firstName +' '+member.lastName }}</mat-option>
-                                    </ng-container>
-                                </mat-select>
                             </mat-form-field>
                             <mat-form-field *ngIf="selectedMember.memberType && selectedMember.memberType == 'guest'">
-                                <input matInput placeholder="Guest Name" [(ngModel)]="selectedMember.firstName">
+                                <input [disabled]="true" matInput placeholder="Guest Id" [(ngModel)]="selectedMember.memberId">
                             </mat-form-field>
                         </td>
                         <td>
                             <mat-form-field>
-                                <input [disabled]="true" matInput placeholder="Member Id" [(ngModel)]="selectedMember.memberId">
+                                <input matInput placeholder="Name" [(ngModel)]="selectedMember.firstName">
                             </mat-form-field>
                         </td>
                         <td>
@@ -86,7 +83,8 @@
                     </mat-select>
                 </mat-form-field> -->
             <div class="center-text" style="margin-top:30px">
-                <button (click)="prepareDataForSlotBooking()" style="padding: 10px 50px;border-radius: 40px;font-size: 20px" mat-raised-button color="primary">Book Now</button>
+                <button (click)="prepareDataForSlotBooking()" style="padding: 10px 50px;border-radius: 40px;font-size: 20px" mat-raised-button
+                    color="primary">Book Now</button>
             </div>
         </div>
     </div>

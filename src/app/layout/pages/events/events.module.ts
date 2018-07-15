@@ -4,7 +4,7 @@ import { EventsRoutingModule } from './events-routing.module';
 import { EventsComponent } from './events.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule } from '@angular/material'
+import { MatInputModule, MatButtonModule,MatTabsModule } from '@angular/material'
 import { EventsService } from './events.service'
 
 @NgModule({
@@ -14,7 +14,7 @@ import { EventsService } from './events.service'
         CommonModule,
         EventsRoutingModule,
         HttpClientModule,
-        MatInputModule, MatButtonModule
+        MatInputModule, MatButtonModule,MatTabsModule
     ],
     declarations: [
         EventsComponent,
