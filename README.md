@@ -1,4 +1,4 @@
-# ai-subbu
+# at-golf
 
 ## Pre-requisities: 
 * node >= v7.0.0 //check the version with `node -v` command.
