@@ -1,8 +1,8 @@
 # at-golf
 
 ## Pre-requisities: 
-* node >= v7.0.0 //check the version with `node -v` command.
-* npm >= 3.2.0 // check the version with `npm -v` command.
+* node's version >= v7.0.0 //check the version with `node -v` command.
+* npm's version >= v3.2.0 // check the version with `npm -v` command.
 
 ### Setting up project:
 * Clone the repo. cd into at-golf(`cd at-golf`) and run these commands.
