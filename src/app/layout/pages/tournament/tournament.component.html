@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <h2 class="menu-header bold-text camelcase-text center-text">Tournaments</h2>
+    <hr class="divider">
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>S. No.</th>
+                <th>Tournament Name</th>
+                <th>Tournament Desc.</th>
+                <th>Book</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tournament  of tournamentList; let _index = index;">
+                <td>{{_index + 1}}</td>
+                <td>{{tournament.shortDescription}}</td>
+                <td>{{tournament.details}}</td>
+                <td>
+                    <button mat-raised-button (click)="bookTournamentForCustomer(tournament)" color="primary">Go For This Tournament</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

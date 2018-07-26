@@ -267,3 +267,8 @@ th{
 .mat-calendar-table-header th{
     background: white !important;
 }
+
+.link-text:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

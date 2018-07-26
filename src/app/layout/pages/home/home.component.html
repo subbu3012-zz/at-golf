@@ -125,13 +125,32 @@
                     <img src="../../assets/index-04.jpg" style="width: 100%;height: inherit" alt="">
                 </div>
                 <div class="welcome-div-content-container" style="text-align: center">
-                    <h1 style="letter-spacing: 3px;margin: 0" class="light-color">Welcome</h1>
-                    <!-- <hr class="divider"> -->
-                    <p style="font-size: 10px" class="accent-color">TO OUR GOLF CLUB</p>
-                    <p style="font-size: 12px;margin-top:30px" class="light-color">
-                        The Hyderabad Golf club is located in a historic setting in and around Golconda fort. A project promoted by the Telangana
-                        State Tourism Development Corporation and the Hyderabad Golf Association.
-                    </p>
+                    <div *ngIf="!this.sharedServ.isUserLoggedIn">
+                        <h1 style="letter-spacing: 3px;margin: 0" class="light-color">Welcome</h1>
+                        <!-- <hr class="divider"> -->
+                        <p style="font-size: 10px" class="accent-color">TO OUR GOLF CLUB</p>
+                        <p style="font-size: 12px;margin-top:30px" class="light-color">
+                            The Hyderabad Golf club is located in a historic setting in and around Golconda fort. A project promoted by the Telangana
+                            State Tourism Development Corporation and the Hyderabad Golf Association.
+                        </p>
+                    </div>
+                    <div *ngIf="this.sharedServ.isUserLoggedIn">
+                        <h1 style="letter-spacing: 3px;margin: 0" class="light-color">Upcoming Events</h1>
+                        <!-- <hr class="divider"> -->
+                        <p style="font-size: 12px" (click)="this.rtr.navigateByUrl('/layout/events')" class="accent-color link-text">View More >></p>
+                        <div class="time-container row" *ngFor="let event of sharedServ.upcomingEventList.slice(0,2)">
+                            <div style="padding-right: 0" class="col-3 offset-2">
+                                <time class="icon">
+                                    <em>{{sharedServ.getDayName(event.eventDate)}}</em>
+                                    <strong>{{sharedServ.getMonthName(event.eventDate)}}</strong>
+                                    <span>{{sharedServ.getDate(event.eventDate)}}</span>
+                                </time>
+                            </div>
+                            <div style="padding-left:0;margin-top:30px" class="col-5">
+                                {{event.slotStartTime}} - {{event.slotEndTime}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

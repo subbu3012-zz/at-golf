@@ -3,6 +3,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '
 import { EventsService } from './events.service'
 import { Event } from './events.model'
 import { SharedService } from '../../../layout/shared.service'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,16 +14,14 @@ import { SharedService } from '../../../layout/shared.service'
 })
 export class EventsComponent implements OnInit {
 
-    public eventList: Event[] = [];
     public guestList: any[] = [];
-    public upcomingEventList: Event[] = [];
-    public historyEventList: Event[] = [];
     public tBoxList: any[] = [];
 
 
     constructor(
         public eventServ: EventsService,
-        public sharedServ: SharedService
+        public sharedServ: SharedService,
+        public rtr: Router,
     ) {
 
     }
@@ -36,17 +35,8 @@ export class EventsComponent implements OnInit {
         this.sharedServ.getCustomerData().subscribe(data => {
             this.sharedServ.memberList = data;
         })
-        this.eventServ.getEventData(this.sharedServ.isUserTypeInsider() ? "events" : "event-members/" + this.sharedServ.userSessionData['memberId']).subscribe(data => {
-            this.eventList = data;
-            this.eventList.sort((a: Event, b: Event) => {
-                if (b.eventDate == a.eventDate) {
-                    return this.sharedServ.get24HoursTime(a.slotStartTime).localeCompare(this.sharedServ.get24HoursTime(b.slotStartTime));
-                }
-                return a.eventDate.localeCompare(b.eventDate);
-            })
-            this.getEvents();
-            this.sharedServ.showProgressBar = false;
-        })
+        this.sharedServ.getEventsData();
+        
     }
 
     public getMemberInfo(memberId: string) {
@@ -71,11 +61,6 @@ export class EventsComponent implements OnInit {
 
     public getGuestInfo(guestId:string){
         return this.guestList.find(element => element.guestId == guestId);
-    }
-
-    public getEvents() {
-        this.upcomingEventList = this.eventList.filter(data => !this.sharedServ.isTimeExpired(new Date(data.eventDate), data.slotEndTime))
-        this.historyEventList = this.eventList.filter(data => this.sharedServ.isTimeExpired(new Date(data.eventDate), data.slotEndTime))
     }
 
     ngOnDestroy(): void {

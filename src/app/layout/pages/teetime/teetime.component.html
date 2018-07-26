@@ -57,7 +57,7 @@
                     <mat-card-subtitle style="text-align:center">18 Holes</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
-                    <button [disabled]="teeSlot.isBooked" mat-raised-button (click)="openBookTeetimeModal(_index)" color="primary">Book Now</button>
+                    <button [disabled]="teeSlot.isBooked || this.sharedServ.isTimeExpired(teeTimeDate, teeSlot.slotStartTime)" mat-raised-button (click)="openBookTeetimeModal(_index)" color="primary">Book Now</button>
                 </mat-card-content>
             </mat-card>
         </div>

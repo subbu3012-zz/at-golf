@@ -14,11 +14,6 @@ export class EventsService {
 
     }
 
-    public getEventData(endPoint:string): Observable<Event[]> {
-        return this.httpClient.get<Event[]>(environment.hostName + endPoint,
-            { headers: this.sharedServ.getRequestHeaders() });
-    }
-
     public getGuestData():Observable<any[]>{
         return this.httpClient.get<Event[]>(environment.hostName + "guests",
             { headers: this.sharedServ.getRequestHeaders() });

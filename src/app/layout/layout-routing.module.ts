@@ -31,6 +31,12 @@ const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'tournament',
+                loadChildren: './pages/tournament/tournament.module#TournamentModule',
+                resolve: [UserSessionDataResolver],
+                canActivate: [AuthGuard]
+            },
+            {
                 path: 'home/:category',
                 loadChildren: './pages/home/home.module#HomeModule',
                 resolve: [UserSessionDataResolver]

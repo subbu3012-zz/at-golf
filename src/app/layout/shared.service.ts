@@ -17,6 +17,9 @@ export class SharedService {
     public showProgressBar: boolean = false;
     public environment: any = environment;
     public memberList: Member[] = [];
+    public eventList: any[] = [];
+    public upcomingEventList: any[] = [];
+    public historyEventList: any[] = [];
     public uploadFileSubject: Subject<boolean> = new Subject<boolean>();
 
     constructor(
@@ -106,8 +109,20 @@ export class SharedService {
     public get24HoursTime(time: string) {
         let _hours = +time.split(" ")[0].split(".")[0]
         let _minutes = time.split(" ")[0].split(".")[1]
-        time.split(" ")[1] == 'PM' &&  _hours != 12 && (_hours = _hours + 12);
+        time.split(" ")[1] == 'PM' && _hours != 12 && (_hours = _hours + 12);
         return ('0' + _hours).slice(-2) + "." + _minutes;
+    }
+
+    public getMonthName(date: string) {
+        return new Date(date).toLocaleString("en-us", { month: "short" });
+    }
+
+    public getDayName(date:string){
+        return new Date(date).toLocaleString("en-us", { weekday: "short" });
+    }
+
+    public getDate(date:string){
+        return new Date(date).getDate();
     }
 
     public getRequestHeaders() {
@@ -157,6 +172,30 @@ export class SharedService {
     /**Send upload status back to the component*/
     public onuploadFile(): Observable<boolean> {
         return this.uploadFileSubject.asObservable();
+    }
+
+    public getEventsData() {
+        this.getEventData(this.isUserTypeInsider() ? "events" : "event-members/" + this.userSessionData['memberId']).subscribe(data => {
+            this.eventList = data;
+            this.eventList.sort((a: any, b: any) => {
+                if (b.eventDate == a.eventDate) {
+                    return this.get24HoursTime(a.slotStartTime).localeCompare(this.get24HoursTime(b.slotStartTime));
+                }
+                return a.eventDate.localeCompare(b.eventDate);
+            })
+            this.filterEventData();
+            this.showProgressBar = false;
+        })
+    }
+
+    public filterEventData() {
+        this.upcomingEventList = this.eventList.filter(data => !this.isTimeExpired(new Date(data.eventDate), data.slotEndTime))
+        this.historyEventList = this.eventList.filter(data => this.isTimeExpired(new Date(data.eventDate), data.slotEndTime)).reverse();
+    }
+
+    public getEventData(endPoint: string): Observable<Event[]> {
+        return this.httpClient.get<Event[]>(environment.hostName + endPoint,
+            { headers: this.getRequestHeaders() });
     }
 }
 
