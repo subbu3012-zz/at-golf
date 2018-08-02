@@ -28,7 +28,7 @@ export class BookTeeSlot {
     members: string[];
     guests: string[];
     noOfHoles: string;
-    eventType:string = "Tournament";
+    eventType:string = "TeeTime";
     status:string = "Scheduled";
     eventName:string = "Golf Championship 2018";
 }
