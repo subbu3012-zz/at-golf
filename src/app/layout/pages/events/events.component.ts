@@ -32,6 +32,9 @@ export class EventsComponent implements OnInit {
         }, 100);
         this.getGuestData();
         this.getTBoxData();
+        !this.sharedServ.isUserTypeInsider() && this.eventServ.getTournamentData(this.sharedServ.userSessionData['memberId']).subscribe(data => {
+            console.log(data);
+        })
         this.sharedServ.getCustomerData().subscribe(data => {
             this.sharedServ.memberList = data;
         })

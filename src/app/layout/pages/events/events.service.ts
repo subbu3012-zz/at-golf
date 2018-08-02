@@ -23,4 +23,9 @@ export class EventsService {
         return this.httpClient.get<any[]>(environment.hostName + "resources",
             { headers: this.sharedServ.getRequestHeaders() });
     }
+
+    public getTournamentData(memberId:string):Observable<any[]>{
+        return this.httpClient.get<any[]>(environment.hostName + "all-tournaments/"+memberId+"/eventType/tournament",
+            { headers: this.sharedServ.getRequestHeaders() });
+    }
 }

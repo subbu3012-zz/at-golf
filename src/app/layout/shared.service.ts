@@ -117,11 +117,11 @@ export class SharedService {
         return new Date(date).toLocaleString("en-us", { month: "short" });
     }
 
-    public getDayName(date:string){
+    public getDayName(date: string) {
         return new Date(date).toLocaleString("en-us", { weekday: "short" });
     }
 
-    public getDate(date:string){
+    public getDate(date: string) {
         return new Date(date).getDate();
     }
 
@@ -228,6 +228,9 @@ export class UserSessionDataResolver implements Resolve<any> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         return new Promise((resolve, reject) => {
             this.sharedServ.authorizeUser();
+            if (!this.sharedServ.eventList.length) {
+                this.sharedServ.getEventsData();
+            }
             resolve(true);
         });
     }

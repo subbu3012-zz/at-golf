@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit {
                     if (data) {
                         data['loginId'] = _loginId;
                         this.sharedServ.setSessionData(data);
+                        this.sharedServ.getEventsData();
                         this.dialogRef.close();
                         this.dialogRef.afterClosed().subscribe(data => {
                             this.logUserInToApp();
