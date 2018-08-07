@@ -30,7 +30,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let event of showEventList">
-                <td>{{event.eventDate | date:'mediumDate'}}</td>
+                <td>{{event.eventDate}}</td>
                 <td>{{event.slotStartTime}}</td>
                 <td>{{event.slotEndTime}}</td>
                 <td>{{getTBoxInfo(event.resourceId)?.resourceName}}</td>

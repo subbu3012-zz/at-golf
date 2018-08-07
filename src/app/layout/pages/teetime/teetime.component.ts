@@ -147,11 +147,11 @@ export class BookTeeTimeComponent implements OnInit {
         for (let counter: number = 0; counter < noOfMembers; counter++) {
             this.memberList.push(new Member());
         }
-        !this.sharedServ.isUserTypeInsider() && this.setMemberList(0, this.sharedServ.userSessionData['loginId']);
+        !this.sharedServ.isUserTypeInsider() && this.setMemberList(0, this.sharedServ.userSessionData['memberId']);
     }
 
     public setMemberList(index: number, memberId: string) {
-        console.log(memberId,JSON.parse(JSON.stringify(this.sharedServ.memberList)));
+        // console.log(memberId,JSON.parse(JSON.stringify(this.sharedServ.memberList)));
         let _selectedMember = this.sharedServ.memberList.filter(element => { return element.memberId == memberId})[0];
         if (_selectedMember) {
             this.memberList[index] = _selectedMember;

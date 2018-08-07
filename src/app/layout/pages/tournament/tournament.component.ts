@@ -23,31 +23,49 @@ export class TournamentComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.sharedServ.showProgressBar = true;
-        this.getTournaments().subscribe(data => {
+        setTimeout(() => {
+            this.sharedServ.showProgressBar = true;
+        }, 100);
+        this.getTournaments(this.sharedServ.userSessionData['memberId']);
+    }
+
+    public getTournaments(memberId) {
+        setTimeout(() => {
+            this.sharedServ.showProgressBar = true;
+        }, 100);
+        this.getTournamentData().subscribe(data => {
             this.tournamentList = data;
+            this.tournamentList.forEach(data => {
+                data.isBookedForMember = data.members.includes(memberId);
+            })
             this.sharedServ.showProgressBar = false;
-        });
-    }
-
-    public getTournaments(): Observable<any[]> {
-        return this.httpClient.get<any[]>(environment.hostName + "tournaments",
-            { headers: this.sharedServ.getRequestHeaders() });
-    }
-
-    public bookTournamentForCustomer(tournamentData:any){
-        this.bookForTournament(tournamentData).subscribe(data => {
-            this.sharedServ.openSnackBar("Tournament booked succesfully. Have a nice day.", "DISMISS", 5000);
-            this.sharedServ.showProgressBar = false;
-            setTimeout(() => {
-                this.rtr.navigateByUrl('/layout/events')
-            }, 5000);
         })
     }
 
-    public bookForTournament(tournamentData: any) {
-        tournamentData.customerId = this.sharedServ.userSessionData['userId'];
-        return this.httpClient.post<any>(environment.hostName + "tournaments", tournamentData,
+    public bookTournamentForCustomer(tournamentData: any) {
+        setTimeout(() => {
+            this.sharedServ.showProgressBar = true;
+        }, 100);
+        // tournamentData.members = [];
+        tournamentData.members.push(this.sharedServ.userSessionData['memberId']);
+        this.updateTournamentData(tournamentData).subscribe(data => {
+            this.sharedServ.openSnackBar("Tournament booked succesfully. Have a nice day.", "DISMISS", 5000);
+            this.sharedServ.showProgressBar = false;
+            this.getTournaments(this.sharedServ.userSessionData['memberId']);
+        });
+    }
+
+    public isTournamentExpired(tournamentData) {
+        return this.sharedServ.isTimeExpired(this.sharedServ.getDateFromString(tournamentData.eventDate), tournamentData.slotStartTime);
+    }
+
+    public getTournamentData(): Observable<Event[]> {
+        return this.httpClient.get<Event[]>(environment.hostName + "event-type/Tournament/category/Tournament",
+            { headers: this.sharedServ.getRequestHeaders() });
+    }
+
+    public updateTournamentData(touranmentData: any): Observable<any> {
+        return this.httpClient.put<any>(environment.hostName + "events/" + touranmentData.id, touranmentData,
             { headers: this.sharedServ.getRequestHeaders() });
     }
 }

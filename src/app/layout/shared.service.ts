@@ -106,6 +106,11 @@ export class SharedService {
         }
     }
 
+    public getDateFromString(dateString:string){
+        let _parts = dateString.split('-');
+        return new Date(+_parts[2], +_parts[1] - 1,+_parts[0]);
+    }
+
     public get24HoursTime(time: string) {
         let _hours = +time.split(" ")[0].split(".")[0]
         let _minutes = time.split(" ")[0].split(".")[1]
@@ -114,15 +119,15 @@ export class SharedService {
     }
 
     public getMonthName(date: string) {
-        return new Date(date).toLocaleString("en-us", { month: "short" });
+        return this.getDateFromString(date).toLocaleString("en-us", { month: "short" });
     }
 
     public getDayName(date: string) {
-        return new Date(date).toLocaleString("en-us", { weekday: "short" });
+        return this.getDateFromString(date).toLocaleString("en-us", { weekday: "short" });
     }
 
     public getDate(date: string) {
-        return new Date(date).getDate();
+        return this.getDateFromString(date).getDate();
     }
 
     public getRequestHeaders() {
@@ -189,8 +194,8 @@ export class SharedService {
     }
 
     public filterEventData() {
-        this.upcomingEventList = this.eventList.filter(data => !this.isTimeExpired(new Date(data.eventDate), data.slotEndTime))
-        this.historyEventList = this.eventList.filter(data => this.isTimeExpired(new Date(data.eventDate), data.slotEndTime)).reverse();
+        this.upcomingEventList = this.eventList.filter(data => !this.isTimeExpired(this.getDateFromString(data.eventDate), data.slotEndTime))
+        this.historyEventList = this.eventList.filter(data => this.isTimeExpired(this.getDateFromString(data.eventDate), data.slotEndTime)).reverse();
     }
 
     public getEventData(endPoint: string): Observable<Event[]> {

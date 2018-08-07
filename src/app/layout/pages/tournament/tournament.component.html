@@ -6,17 +6,20 @@
             <tr>
                 <th>S. No.</th>
                 <th>Tournament Name</th>
-                <th>Tournament Desc.</th>
+                <th>Tournament Date</th>
                 <th>Book</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let tournament  of tournamentList; let _index = index;">
                 <td>{{_index + 1}}</td>
-                <td>{{tournament.shortDescription}}</td>
-                <td>{{tournament.details}}</td>
+                <td>{{tournament.eventName}}</td>
+                <td>{{(tournament.eventDate) + ' from ' + tournament.slotStartTime + ' to '+ tournament.slotEndTime }}</td>
                 <td>
-                    <button mat-raised-button (click)="bookTournamentForCustomer(tournament)" color="primary">Go For This Tournament</button>
+                    <button [disabled] = "tournament.isBookedForMember || this.isTournamentExpired(tournament)" mat-raised-button (click)="bookTournamentForCustomer(tournament)" color="primary">
+                        {{this.isTournamentExpired(tournament) ? 'Expired' : (tournament.isBookedForMember ? 'Booked!!!' : 'Go For This Tournament')}}
+                    </button>
+                    <!-- <button mat-raised-button (click)="bookTournamentForCustomer(tournament)" color="primary">Go For This Tournament</button> -->
                 </td>
             </tr>
         </tbody>
