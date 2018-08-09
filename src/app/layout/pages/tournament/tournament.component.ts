@@ -26,42 +26,26 @@ export class TournamentComponent implements OnInit {
         setTimeout(() => {
             this.sharedServ.showProgressBar = true;
         }, 100);
-        this.getTournaments(this.sharedServ.userSessionData['memberId']);
+        this.sharedServ.getTournaments(this.sharedServ.userSessionData['memberId']);
     }
 
-    public getTournaments(memberId) {
+    public bookOrWithdrawTournamentForCustomer(tournamentData: any,action:string) {
         setTimeout(() => {
             this.sharedServ.showProgressBar = true;
         }, 100);
-        this.getTournamentData().subscribe(data => {
-            this.tournamentList = data;
-            this.tournamentList.forEach(data => {
-                data.isBookedForMember = data.members.includes(memberId);
-            })
-            this.sharedServ.showProgressBar = false;
-        })
-    }
-
-    public bookTournamentForCustomer(tournamentData: any) {
-        setTimeout(() => {
-            this.sharedServ.showProgressBar = true;
-        }, 100);
-        // tournamentData.members = [];
-        tournamentData.members.push(this.sharedServ.userSessionData['memberId']);
+        let _memberId = this.sharedServ.userSessionData['memberId'];
+        action == 'book' ? 
+        tournamentData.members.push(_memberId) : 
+        tournamentData.members = tournamentData.members.filter(member => member != _memberId);
         this.updateTournamentData(tournamentData).subscribe(data => {
-            this.sharedServ.openSnackBar("Tournament booked succesfully. Have a nice day.", "DISMISS", 5000);
+            this.sharedServ.openSnackBar("Tournament updated succesfully. Have a nice day.", "DISMISS", 5000);
             this.sharedServ.showProgressBar = false;
-            this.getTournaments(this.sharedServ.userSessionData['memberId']);
+            this.sharedServ.getTournaments(this.sharedServ.userSessionData['memberId']);
         });
     }
 
     public isTournamentExpired(tournamentData) {
         return this.sharedServ.isTimeExpired(this.sharedServ.getDateFromString(tournamentData.eventDate), tournamentData.slotStartTime);
-    }
-
-    public getTournamentData(): Observable<Event[]> {
-        return this.httpClient.get<Event[]>(environment.hostName + "event-type/Tournament/category/Tournament",
-            { headers: this.sharedServ.getRequestHeaders() });
     }
 
     public updateTournamentData(touranmentData: any): Observable<any> {

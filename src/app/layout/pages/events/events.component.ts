@@ -32,11 +32,12 @@ export class EventsComponent implements OnInit {
         }, 100);
         this.getGuestData();
         this.getTBoxData();
+        this.sharedServ.getTournaments(this.sharedServ.userSessionData['memberId']);
         this.sharedServ.getCustomerData().subscribe(data => {
             this.sharedServ.memberList = data;
         })
         this.sharedServ.getEventsData();
-        
+
     }
 
     public getMemberInfo(memberId: string) {
@@ -49,17 +50,21 @@ export class EventsComponent implements OnInit {
         })
     }
 
-    public getTBoxData(){
+    public getValidTournamentsLength(){
+        return this.sharedServ.tournamentList.filter(tournament => tournament.isBookedForMember).length;
+    }
+
+    public getTBoxData() {
         return this.eventServ.getResources().subscribe(data => {
             this.tBoxList = data;
         })
     }
 
-    public getTBoxInfo(tBoxId:string){
+    public getTBoxInfo(tBoxId: string) {
         return this.tBoxList.find(data => data.id == tBoxId);
     }
 
-    public getGuestInfo(guestId:string){
+    public getGuestInfo(guestId: string) {
         return this.guestList.find(element => element.guestId == guestId);
     }
 

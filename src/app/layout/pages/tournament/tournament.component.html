@@ -7,19 +7,28 @@
                 <th>S. No.</th>
                 <th>Tournament Name</th>
                 <th>Tournament Date</th>
-                <th>Book</th>
+                <th>From Time</th>
+                <th>To Time</th>
+                <th>Participate</th>
+                <th>Withdraw</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let tournament  of tournamentList; let _index = index;">
+            <tr *ngFor="let tournament  of sharedServ.tournamentList; let _index = index;">
                 <td>{{_index + 1}}</td>
                 <td>{{tournament.eventName}}</td>
-                <td>{{(tournament.eventDate) + ' from ' + tournament.slotStartTime + ' to '+ tournament.slotEndTime }}</td>
+                <td>{{tournament.eventDate}}</td>
+                <td>{{tournament.slotStartTime}}</td>
+                <td>{{tournament.slotEndTime}}</td>
                 <td>
-                    <button [disabled] = "tournament.isBookedForMember || this.isTournamentExpired(tournament)" mat-raised-button (click)="bookTournamentForCustomer(tournament)" color="primary">
-                        {{this.isTournamentExpired(tournament) ? 'Expired' : (tournament.isBookedForMember ? 'Booked!!!' : 'Go For This Tournament')}}
+                    <button [disabled] = "tournament.isBookedForMember || this.isTournamentExpired(tournament)" mat-raised-button (click)="bookOrWithdrawTournamentForCustomer(tournament,'book')" color="primary">
+                        {{this.isTournamentExpired(tournament) ? 'Expired' : (tournament.isBookedForMember ? 'Booked!!!' : 'Participate')}}
                     </button>
-                    <!-- <button mat-raised-button (click)="bookTournamentForCustomer(tournament)" color="primary">Go For This Tournament</button> -->
+                </td>
+                <td>
+                    <button [disabled] = "!tournament.isBookedForMember" mat-raised-button (click)="bookOrWithdrawTournamentForCustomer(tournament,'withdraw')" color="primary">
+                        Withdraw
+                    </button>
                 </td>
             </tr>
         </tbody>

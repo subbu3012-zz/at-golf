@@ -1,10 +1,15 @@
 <div class="container-fluid">
-    <h2 class="menu-header bold-text camelcase-text center-text">Events</h2>
+    <h2 class="menu-header bold-text camelcase-text center-text">My Bookings</h2>
     <hr class="divider">
-    <mat-tab-group *ngIf="this.sharedServ.eventList.length">
-        <mat-tab label="UpComing Events">
+    <mat-tab-group>
+        <mat-tab label="Upcoming Teetimes">
             <div class="mt-2">
                 <ng-container *ngTemplateOutlet="eventsTableTemplate;context:{eventList:this.sharedServ.upcomingEventList}"></ng-container>
+            </div>
+        </mat-tab>
+        <mat-tab label="Upcoming Tournaments">
+            <div class="mt-2">
+                <ng-container *ngTemplateOutlet="tournamentsTableTemplate;context:{tournamentList:this.sharedServ.tournamentList}"></ng-container>
             </div>
         </mat-tab>
         <mat-tab label="History">
@@ -14,6 +19,38 @@
         </mat-tab>
     </mat-tab-group>
 </div>
+
+
+<ng-template #tournamentsTableTemplate let-showTournamentList="tournamentList">
+        <table *ngIf="getValidTournamentsLength()" class="table table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Tournament Name</th>
+                    <th>Tournament Date</th>
+                    <th>From Time</th>
+                    <th>To Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let tournament  of showTournamentList;">
+                    <tr *ngIf="tournament.isBookedForMember">
+                        <td>{{tournament.eventName}}</td>
+                        <td>{{tournament.eventDate}}</td>
+                        <td>{{tournament.slotStartTime}}</td>
+                        <td>{{tournament.slotEndTime}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <div class="mt-4 center-text" *ngIf="!getValidTournamentsLength()">
+            <h2 class="accent-color">No Tournaments here</h2>
+            <div style="margin:20px;text-align: center">
+                <button disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent" (click)="this.rtr.navigateByUrl('/layout/tournament')">
+                    <span style="color:#ffffff;letter-spacing: 0.15rem">Participate in a Tournament</span>
+                </button>
+            </div>
+        </div>
+    </ng-template>
 
 <ng-template #eventsTableTemplate let-showEventList="eventList">
     <table *ngIf="showEventList.length" class="table table-hover table-striped">

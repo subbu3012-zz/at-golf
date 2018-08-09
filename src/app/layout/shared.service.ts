@@ -20,6 +20,7 @@ export class SharedService {
     public eventList: any[] = [];
     public upcomingEventList: any[] = [];
     public historyEventList: any[] = [];
+    public tournamentList:any[] = [];
     public uploadFileSubject: Subject<boolean> = new Subject<boolean>();
 
     constructor(
@@ -181,7 +182,7 @@ export class SharedService {
 
     public getEventsData() {
         this.getEventData(this.isUserTypeInsider() ? "events" : "event-members/" + this.userSessionData['memberId']).subscribe(data => {
-            this.eventList = data;
+            this.eventList = data.filter(event => event.eventType == "Teetime");
             this.eventList.sort((a: any, b: any) => {
                 if (b.eventDate == a.eventDate) {
                     return this.get24HoursTime(a.slotStartTime).localeCompare(this.get24HoursTime(b.slotStartTime));
@@ -198,8 +199,26 @@ export class SharedService {
         this.historyEventList = this.eventList.filter(data => this.isTimeExpired(this.getDateFromString(data.eventDate), data.slotEndTime)).reverse();
     }
 
-    public getEventData(endPoint: string): Observable<Event[]> {
-        return this.httpClient.get<Event[]>(environment.hostName + endPoint,
+    public getEventData(endPoint: string): Observable<any[]> {
+        return this.httpClient.get<any[]>(environment.hostName + endPoint,
+            { headers: this.getRequestHeaders() });
+    }
+
+    public getTournaments(memberId) {
+        setTimeout(() => {
+            this.showProgressBar = true;
+        }, 100);
+        this.getTournamentData().subscribe(data => {
+            this.tournamentList = data;
+            this.tournamentList.forEach(data => {
+                data.isBookedForMember = data.members.includes(memberId);
+            })
+            this.showProgressBar = false;
+        })
+    }
+
+    public getTournamentData(): Observable<Event[]> {
+        return this.httpClient.get<Event[]>(environment.hostName + "event-type/Tournament/category/Tournament",
             { headers: this.getRequestHeaders() });
     }
 }

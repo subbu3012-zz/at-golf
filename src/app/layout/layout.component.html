@@ -93,7 +93,7 @@
                         <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="userMenus">
                             {{sharedServ.isUserTypeInsider() ? "Admin's Area" : "Member's Area"}} </button>
                         <mat-menu [overlapTrigger]="false" #userMenus="matMenu">
-                            <button mat-menu-item (click)="routeTo(['events'])">Events</button>
+                            <button mat-menu-item (click)="routeTo(['events'])">Bookings</button>
                             <button *ngIf = "!sharedServ.isUserTypeInsider()" mat-menu-item (click)="routeTo(['tournament'])">Tournaments</button>
                             <button mat-menu-item (click)="routeTo(['members'])">Members</button>
                             <button mat-menu-item (click)="routeTo(['change-password'])">Personalize</button>
