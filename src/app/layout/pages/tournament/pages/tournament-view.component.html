@@ -1,11 +1,11 @@
 <div class="container-fluid">
     <h2 class="menu-header bold-text camelcase-text center-text">Tournament Details</h2>
     <hr class="divider">
-    <div *ngIf = "tournamentInfo" class="tournament-details-container center-text m-3">
-        <p class="short-desc" [innerHtml] = "getDecodedHtml(tournamentInfo.shortDescription)"></p>
-        <p class="short-desc" [innerHtml] = "getDecodedHtml(tournamentInfo.longDescription1)"></p>
-        <p class="short-desc" [innerHtml] = "getDecodedHtml(tournamentInfo.longDescription2)"></p>
-        <p class="short-desc" [innerHtml] = "getDecodedHtml(tournamentInfo.longDescription3)"></p>
+    <div *ngIf="tournamentInfo" class="tournament-details-container center-text m-3">
+        <p class="short-desc" [innerHtml]="getDecodedHtml(tournamentInfo.shortDescription)"></p>
+        <p class="short-desc" [innerHtml]="getDecodedHtml(tournamentInfo.longDescription1)"></p>
+        <p class="short-desc" [innerHtml]="getDecodedHtml(tournamentInfo.longDescription2)"></p>
+        <p class="short-desc" [innerHtml]="getDecodedHtml(tournamentInfo.longDescription3)"></p>
         <button mat-raised-button (click)="this.sharedServ.goBack()" color="primary">
             Go Back
         </button>
