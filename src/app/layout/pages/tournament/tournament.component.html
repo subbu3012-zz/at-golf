@@ -11,6 +11,7 @@
                 <th>To Time</th>
                 <th>Participate</th>
                 <th>Withdraw</th>
+                <th>View</th>
             </tr>
         </thead>
         <tbody>
@@ -21,13 +22,20 @@
                 <td>{{tournament.slotStartTime}}</td>
                 <td>{{tournament.slotEndTime}}</td>
                 <td>
-                    <button [disabled] = "tournament.isBookedForMember || this.isTournamentExpired(tournament)" mat-raised-button (click)="bookOrWithdrawTournamentForCustomer(tournament,'book')" color="primary">
+                    <button [disabled]="tournament.isBookedForMember || this.isTournamentExpired(tournament)" mat-raised-button (click)="bookOrWithdrawTournamentForCustomer(tournament,'book')"
+                        color="primary">
                         {{this.isTournamentExpired(tournament) ? 'Expired' : (tournament.isBookedForMember ? 'Booked!!!' : 'Participate')}}
                     </button>
                 </td>
                 <td>
-                    <button [disabled] = "!tournament.isBookedForMember" mat-raised-button (click)="bookOrWithdrawTournamentForCustomer(tournament,'withdraw')" color="primary">
+                    <button [disabled]="!tournament.isBookedForMember" mat-raised-button (click)="bookOrWithdrawTournamentForCustomer(tournament,'withdraw')"
+                        color="primary">
                         Withdraw
+                    </button>
+                </td>
+                <td>
+                    <button mat-raised-button (click)="this.sharedServ.routeTo([tournament.id],this.activatedRoute)" color="primary">
+                        View
                     </button>
                 </td>
             </tr>

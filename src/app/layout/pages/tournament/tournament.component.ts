@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http'
 import { environment } from './../../../../environments/environment'
 import { Observable } from 'rxjs'
@@ -52,4 +51,44 @@ export class TournamentComponent implements OnInit {
         return this.httpClient.put<any>(environment.hostName + "events/" + touranmentData.id, touranmentData,
             { headers: this.sharedServ.getRequestHeaders() });
     }
+}
+
+@Component({
+    selector: 'tournament-view',
+    templateUrl: './pages/tournament-view.component.html',
+    styles: []
+})
+export class TournamentViewComponent implements OnInit {
+    public tournamentInfo : any;
+
+    constructor(
+        private httpClient: HttpClient,
+        public sharedServ: SharedService,
+        public activatedRoute: ActivatedRoute,
+        public rtr: Router,
+    ) {
+        this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+            setTimeout(() => {
+                this.sharedServ.showProgressBar = true;
+            }, 100);
+            this.getTournamentInfo(params.get('id')).subscribe(data => {
+                this.tournamentInfo = data;
+                this.sharedServ.showProgressBar = false;
+            })
+        })
+    }
+
+    ngOnInit(){
+        
+    }
+
+    public getDecodedHtml(htmlString:string){
+        return htmlString.split('&lt;').join('<').split('&gt;').join('>').split("&amp;").join("&");
+    }
+
+    public getTournamentInfo(tournamentId: string): Observable<any> {
+        return this.httpClient.get<any>(environment.hostName + "tournaments/" + tournamentId,
+            { headers: this.sharedServ.getRequestHeaders() });
+    }
+
 }

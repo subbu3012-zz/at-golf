@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TournamentComponent } from './tournament.component';
+import { TournamentComponent,TournamentViewComponent } from './tournament.component';
 import { TournamentRoutingModule } from './tournament-routing.module';
 import {
     MatInputModule, MatButtonModule, MatTabsModule, MatCardModule,
@@ -16,6 +16,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MatInputModule, MatButtonModule, MatTabsModule, MatCardModule,
         MatExpansionModule, MatIconModule
     ],
-    declarations: [TournamentComponent]
+    declarations: [TournamentComponent,TournamentViewComponent]
 })
 export class TournamentModule { }

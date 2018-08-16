@@ -101,10 +101,17 @@ export class SharedService {
             if (currentTime.localeCompare(time) == 1) {
                 return true;
             } else {
-                // console.log(_transformedDate, _newTransformedDate, time, currentTime, 'c', false);
                 return false;
             }
         }
+    }
+
+    public routeTo(routerLinkArray: any[],activatedRoute:any) {
+        this.rtr.navigate(routerLinkArray, { relativeTo: activatedRoute });
+    }
+
+    public goBack(){
+        window.history.back();
     }
 
     public getDateFromString(dateString:string){

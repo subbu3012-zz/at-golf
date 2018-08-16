@@ -56,7 +56,13 @@ const routes: Routes = [
             {
                 path: '',
                 redirectTo: 'home/landing-page'
-            }
+            },
+            {
+                path: 'news-feed',
+                loadChildren: './pages/news-feed/news-feed.module#NewsFeedModule',
+                resolve: [UserSessionDataResolver],
+                canActivate: [AuthGuard]
+            },
         ]
     }
 ];

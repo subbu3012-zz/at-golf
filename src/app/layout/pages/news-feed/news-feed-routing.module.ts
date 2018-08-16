@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TournamentComponent,TournamentViewComponent } from './tournament.component';
+import { NewsFeedComponent } from './news-feed.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: TournamentComponent
-    },
-    {
-        path: ':id',
-        component: TournamentViewComponent
+        component: NewsFeedComponent
     }
 ];
 
@@ -17,4 +13,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class TournamentRoutingModule { }
+export class NewsFeedRoutingModule { }
