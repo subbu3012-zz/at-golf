@@ -60,16 +60,18 @@ mat-sidenav {
     bottom: 0;
 }
 
-.navbar-class {
-    // background-color: rgba(0, 0, 0, 0.7) !important;
-    background-color: white;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
-    // height: 70px;
-    padding:0px;
+.navbar {
+    height: 70px;
 }
 
 .transparent-navbar-class{
     background-color: transparent;
+    transition: background-color 0.3s ease-out, opacity 0.3s ease 0.5s;
+}
+
+.colored-navbar-class{
+    background-color: #114052 !important;
+    transition: background-color 0.3s ease-out, opacity 0.3s ease 0.5s;
 }
 
 .nav-button{
@@ -123,7 +125,7 @@ mat-sidenav {
     display: inline-block;
     position: absolute;
     top: 20px;
-    right: 10px;
+    right: 5px;
     color:#ffffff;
     transform: translateY(-50%);
 }
@@ -132,7 +134,7 @@ mat-sidenav {
     // border-right: mat-color($mat-app-primary)  2px solid;
     margin-right: 5px;
     height: 35px;
-    padding:0px 20px;
+    padding:0px 15px;
     font-size: 0.8rem;
     // color: #ffffff;
     text-transform: uppercase !important;
@@ -169,11 +171,13 @@ mat-sidenav {
 
 .feedback-form-container{
     background: #ffffff;
-    // display: flex;
-    // align-content: center;
-    // background-image: url("../../assets/background.gif");
     width: 100%;
     padding: 30px;
     text-align: center;
     height: 330px;
+}
+
+.carousel-caption{
+    top:30%;
+    transition : all 3s ease-out 1s
 }

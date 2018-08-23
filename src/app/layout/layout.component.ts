@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild, HostListener } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { Menu, MENULIST } from './layout.model'
 import { Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
@@ -20,6 +20,11 @@ export class LayoutComponent implements OnInit {
     public activeMenu: string = "Tee Time";
     public isRouteLoading: boolean = false;
     public isMenuToggled: boolean = !this.sharedServ.mobileQuery.matches;
+    public navBarClass:string = "transparent-navbar-class";
+    @HostListener("window:scroll", [])
+    onWindowScroll() {
+        this.setNavBarClass();
+    }
 
     constructor(public rtr: Router, public domSanitizer: DomSanitizer,
         private activatedRoute: ActivatedRoute, private dialog: MatDialog, public sharedServ: SharedService) {
@@ -62,5 +67,12 @@ export class LayoutComponent implements OnInit {
         //     this.sharedServ.isUserLoggedIn = true;
         //     this.routeTo(['teetime'])
         // });
+    }
+
+    public setNavBarClass() {
+        console.log('fdassd')
+        let _node: any = (document.documentElement || document.body.parentNode || document.body);
+        let _scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : _node.scrollTop;
+        this.navBarClass = _scrollTop > 100 ? 'colored-navbar-class' : 'transparent-navbar-class';
     }
 }

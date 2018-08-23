@@ -1,127 +1,157 @@
-<!-- <div *ngIf="this.rtr.url.includes('landing-page')">
-    <div style="height:100vh" class="bg-image-container">
-        <ng-container *ngTemplateOutlet="navBarTemplate"></ng-container>
+<div *ngIf="this.rtr.url.includes('landing-page')" class="carousel slide" data-ride="carousel" data-interval="3000">
+    <ul class="carousel-indicators">
+        <li data-slide-to="0" class="active"></li>
+        <li data-slide-to="1"></li>
+        <li data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="../../assets/bg-image.jpg" alt="Los Angeles" style="width:100vw;height: 100vh">
+            <div class="carousel-caption">
+                <div>
+                    <p class="center-text uppercase-text" style="color: #ffffff;font-size:4rem;letter-spacing: 0.75rem">Golf Experience</p>
+                    <p class="center-text" style="color:#ffffff;letter-spacing: 0.1rem">Our legendary golf course is a classic gem that caters exclusively to our members</p>
+                </div>
+                <div style="margin-top:20px;text-align: center">
+                    <button disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent" (click)="this.rtr.navigateByUrl('/layout/teetime')">
+                        <span style="color:#ffffff;letter-spacing: 0.15rem">Know More</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="../../assets/slider2_bg2.jpg" alt="Chicago" style="width:100vw;height: 100vh">
+            <div class="carousel-caption">
+                <div>
+                    <p class="center-text uppercase-text" style="color: #ffffff;font-size:3.5rem;letter-spacing: 0.25rem">Online Reservation</p>
+                    <p class="center-text" style="color:#ffffff;letter-spacing: 0.1rem">Book your teetime today! Booking one of our golf club finest courses has never been so easy</p>
+                </div>
+                <div style="margin-top:20px;text-align: center">
+                    <button disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent" (click)="this.rtr.navigateByUrl('/layout/teetime')">
+                        <span style="color:#ffffff;letter-spacing: 0.15rem">Book Tee Times</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div *ngIf="!this.rtr.url.includes('landing-page')" style="height:90px" class="sticky-top bg-image-container">
-    <ng-container *ngTemplateOutlet="navBarTemplate"></ng-container>
-</div> -->
-<div style="height:90px" class="sticky-top bg-image-container">
+<div style="position:fixed;top:0;z-index: 1020;">
     <ng-container *ngTemplateOutlet="navBarTemplate"></ng-container>
 </div>
-<!-- <ng-container *ngTemplateOutlet="navBarTemplate"></ng-container> -->
 
 <ng-template #navBarTemplate>
-    <div class="sticky-top">
-        <nav class="navbar navbar-expand-lg transparent-navbar-class">
-            <a class="navbar-brand" href="#">
-                <img src="../../assets/hgc-logo.png" width="60" height="65" alt="">
-                <span style="font-size:1.2rem;color:#ffffff;letter-spacing: 0.15rem;margin-left: 8px;">Hyderabad Golf Club</span>
-            </a>
-            <button (click)="isMenuToggled = !isMenuToggled" class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <mat-icon class="primary-color">apps</mat-icon>
-            </button>
+    <nav class="navbar navbar-expand-lg justify-content-between" [ngClass] = "this.rtr.url.includes('landing-page') ? navBarClass : 'colored-navbar-class'" style="width: 100vw">
+        <a class="navbar-brand" href="#">
+            <img src="../../assets/hgc-logo.png" width="45" height="50" alt="">
+            <span style="font-size:1.2rem;color:#ffffff;letter-spacing: 0.15rem;margin-left: 8px;">Hyderabad Golf Club</span>
+        </a>
+        <button (click)="isMenuToggled = !isMenuToggled" class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <mat-icon class="primary-color">apps</mat-icon>
+        </button>
 
-            <div class="collapse navbar-collapse" [class.show]="isMenuToggled" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-menu ml-auto">
-                    <li class="nav-item">
-                        <button disableRipple="true" mat-menu-item (click)="routeTo(['home', 'landing-page'])">Home</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="aboutUsMenus">About us
-                            <!-- <mat-icon >arrow_drop_down</mat-icon> -->
+        <div class="collapse navbar-collapse" [class.show]="isMenuToggled" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-menu ml-auto">
+                <li class="nav-item">
+                    <button disableRipple="true" mat-menu-item (click)="routeTo(['home', 'landing-page'])">Home</button>
+                </li>
+                <li class="nav-item">
+                    <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="aboutUsMenus">About us
+                        <!-- <mat-icon >arrow_drop_down</mat-icon> -->
+                    </button>
+                    <mat-menu [overlapTrigger]="false" backdropClass="temp-class" #aboutUsMenus="matMenu">
+                        <button mat-menu-item (click)="routeTo(['home', 'management-committee'])">Management Committee</button>
+                        <button mat-menu-item (click)="routeTo(['home', 'sub-committees'])">Sub-Committees</button>
+                        <button mat-menu-item (click)="routeTo(['home', 'affiliations'])">HGA Affiliations & Clubs</button>
+                        <button mat-menu-item (click)="routeTo(['home', 'contact-us'])">Contact us</button>
+                    </mat-menu>
+                </li>
+                <li class="nav-item">
+                    <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="golfMenus">Golf
+                        <!-- <mat-icon >arrow_drop_down</mat-icon> -->
+                    </button>
+                    <mat-menu [overlapTrigger]="false" #golfMenus="matMenu">
+                        <button mat-menu-item [matMenuTriggerFor]="courseMenus">Course Layout</button>
+                        <button mat-menu-item [matMenuTriggerFor]="golfCoachingMenus">Golf Coaching</button>
+                        <button mat-menu-item [matMenuTriggerFor]="juniorProgramMenus">Junior Program</button>
+                        <button mat-menu-item (click)="routeTo(['home', 'driving-range'])">Driving Range</button>
+                        <button mat-menu-item (click)="routeTo(['home', 'fees-and-costs'])">Fees & Costs</button>
+                        <button mat-menu-item (click)="routeTo(['home', 'rules-and-etiquette'])">Rules & Etiquette</button>
+                    </mat-menu>
+                    <mat-menu [overlapTrigger]="false" #courseMenus="matMenu">
+                        <button mat-menu-item (click)="routeTo(['home', 'score-card'])">Score Card</button>
+                        <button mat-menu-item>Pictures</button>
+                    </mat-menu>
+                    <mat-menu [overlapTrigger]="false" #golfCoachingMenus="matMenu">
+                        <button mat-menu-item>Programs</button>
+                        <button mat-menu-item (click)="routeTo(['home', 'coaches-and-facilities'])">Coaches & Facilities</button>
+                    </mat-menu>
+                    <mat-menu [overlapTrigger]="false" #juniorProgramMenus="matMenu">
+                        <button mat-menu-item (click)="routeTo(['home', 'hga-kga'])">HGA-K&A Jr Programme</button>
+                        <button mat-menu-item>Student Player</button>
+                        <button mat-menu-item>Coaching Camps</button>
+                        <button mat-menu-item>Gallery</button>
+                    </mat-menu>
+                </li>
+                <li class="nav-item">
+                    <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="clubHouseMenus">Club house
+                        <!-- <mat-icon >arrow_drop_down</mat-icon> -->
+                    </button>
+                    <mat-menu [overlapTrigger]="false" #clubHouseMenus="matMenu">
+                        <button mat-menu-item>Food & Beverages</button>
+                        <button mat-menu-item (click)="routeTo(['home', 'food-menu'])">Food Menu</button>
+                    </mat-menu>
+                </li>
+                <li class="nav-item">
+                    <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="galleryMenus">Gallery
+                        <!-- <mat-icon >arrow_drop_down</mat-icon> -->
+                    </button>
+                    <mat-menu [overlapTrigger]="false" #galleryMenus="matMenu">
+                        <button mat-menu-item>The Course</button>
+                        <button mat-menu-item>Events</button>
+                        <button mat-menu-item>Jamalikunta</button>
+                        <button mat-menu-item>Nayaqila</button>
+                    </mat-menu>
+                </li>
+                <li *ngIf="this.sharedServ.isUserLoggedIn" class="nav-item">
+                    <button disableRipple="true" mat-menu-item (click)="routeTo(['teetime'])">Tee Time</button>
+                </li>
+                <li *ngIf="this.sharedServ.isUserLoggedIn" class="nav-item">
+                    <button disableRipple="true" mat-menu-item (click)="routeTo(['tournament'])">Tournaments</button>
+                </li>
+                <li *ngIf="this.sharedServ.isUserLoggedIn" class="nav-item">
+                    <button disableRipple="true" mat-menu-item (click)="routeTo(['news-feed'])">News Feed</button>
+                </li>
+                <li *ngIf="this.sharedServ.isUserLoggedIn" class="nav-item">
+                    <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="userMenus">
+                        {{sharedServ.isUserTypeInsider() ? "Admin's Area" : "Member's Area"}} </button>
+                    <mat-menu [overlapTrigger]="false" #userMenus="matMenu">
+                        <button mat-menu-item (click)="routeTo(['events'])">Bookings</button>
+                        <button mat-menu-item (click)="routeTo(['members'])">Members</button>
+                        <button mat-menu-item (click)="routeTo(['change-password'])">Personalize</button>
+                        <button class="warn-color" (click)="processUserLogout();" mat-menu-item>
+                            Logout
+                            <mat-icon class="warn-color" style="font-size:22px">exit_to_app</mat-icon>
                         </button>
-                        <mat-menu [overlapTrigger]="false" backdropClass="temp-class" #aboutUsMenus="matMenu">
-                            <button mat-menu-item (click)="routeTo(['home', 'management-committee'])">Management Committee</button>
-                            <button mat-menu-item (click)="routeTo(['home', 'sub-committees'])">Sub-Committees</button>
-                            <button mat-menu-item (click)="routeTo(['home', 'affiliations'])">HGA Affiliations & Clubs</button>
-                            <button mat-menu-item (click)="routeTo(['home', 'contact-us'])">Contact us</button>
-                        </mat-menu>
-                    </li>
-                    <li class="nav-item">
-                        <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="golfMenus">Golf
-                            <!-- <mat-icon >arrow_drop_down</mat-icon> -->
-                        </button>
-                        <mat-menu [overlapTrigger]="false" #golfMenus="matMenu">
-                            <button mat-menu-item [matMenuTriggerFor]="courseMenus">Course Layout</button>
-                            <button mat-menu-item [matMenuTriggerFor]="golfCoachingMenus">Golf Coaching</button>
-                            <button mat-menu-item [matMenuTriggerFor]="juniorProgramMenus">Junior Program</button>
-                            <button mat-menu-item (click)="routeTo(['home', 'driving-range'])">Driving Range</button>
-                            <button mat-menu-item (click)="routeTo(['home', 'fees-and-costs'])">Fees & Costs</button>
-                            <button mat-menu-item (click)="routeTo(['home', 'rules-and-etiquette'])">Rules & Etiquette</button>
-                        </mat-menu>
-                        <mat-menu [overlapTrigger]="false" #courseMenus="matMenu">
-                            <button mat-menu-item (click)="routeTo(['home', 'score-card'])">Score Card</button>
-                            <button mat-menu-item>Pictures</button>
-                        </mat-menu>
-                        <mat-menu [overlapTrigger]="false" #golfCoachingMenus="matMenu">
-                            <button mat-menu-item>Programs</button>
-                            <button mat-menu-item (click)="routeTo(['home', 'coaches-and-facilities'])">Coaches & Facilities</button>
-                        </mat-menu>
-                        <mat-menu [overlapTrigger]="false" #juniorProgramMenus="matMenu">
-                            <button mat-menu-item (click)="routeTo(['home', 'hga-kga'])">HGA-K&A Jr Programme</button>
-                            <button mat-menu-item>Student Player</button>
-                            <button mat-menu-item>Coaching Camps</button>
-                            <button mat-menu-item>Gallery</button>
-                        </mat-menu>
-                    </li>
-                    <li class="nav-item">
-                        <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="clubHouseMenus">Club house
-                            <!-- <mat-icon >arrow_drop_down</mat-icon> -->
-                        </button>
-                        <mat-menu [overlapTrigger]="false" #clubHouseMenus="matMenu">
-                            <button mat-menu-item>Food & Beverages</button>
-                            <button mat-menu-item (click)="routeTo(['home', 'food-menu'])">Food Menu</button>
-                        </mat-menu>
-                    </li>
-                    <li class="nav-item">
-                        <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="galleryMenus">Gallery
-                            <!-- <mat-icon >arrow_drop_down</mat-icon> -->
-                        </button>
-                        <mat-menu [overlapTrigger]="false" #galleryMenus="matMenu">
-                            <button mat-menu-item>The Course</button>
-                            <button mat-menu-item>Events</button>
-                            <button mat-menu-item>Jamalikunta</button>
-                            <button mat-menu-item>Nayaqila</button>
-                        </mat-menu>
-                    </li>
-                    <li *ngIf="this.sharedServ.isUserLoggedIn" class="nav-item">
-                        <button disableRipple="true" mat-menu-item (click)="routeTo(['teetime'])">Tee Time</button>
-                    </li>
-                    <li *ngIf="this.sharedServ.isUserLoggedIn" class="nav-item">
-                        <button class="mat-menu-list-button" disableRipple="true" mat-menu-item [matMenuTriggerFor]="userMenus">
-                            {{sharedServ.isUserTypeInsider() ? "Admin's Area" : "Member's Area"}} </button>
-                        <mat-menu [overlapTrigger]="false" #userMenus="matMenu">
-                            <button mat-menu-item (click)="routeTo(['news-feed'])">News Feed</button>
-                            <button mat-menu-item (click)="routeTo(['events'])">Bookings</button>
-                            <button *ngIf="!sharedServ.isUserTypeInsider()" mat-menu-item (click)="routeTo(['tournament'])">Tournaments</button>
-                            <button mat-menu-item (click)="routeTo(['members'])">Members</button>
-                            <button mat-menu-item (click)="routeTo(['change-password'])">Personalize</button>
-                            <button class="warn-color" (click)="processUserLogout();" mat-menu-item>
-                                Logout
-                                <mat-icon class="warn-color" style="font-size:22px">exit_to_app</mat-icon>
-                            </button>
-                        </mat-menu>
-                    </li>
-                    <li class="nav-item">
-                        <button *ngIf="!this.sharedServ.isUserLoggedIn" disableRipple="true" (click)="openLoginDialog()" mat-menu-item>
-                            Login
-                            <mat-icon style="color:#ffffff;font-size:22px">account_circle</mat-icon>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <mat-progress-bar *ngIf="sharedServ.showProgressBar" mode="indeterminate"></mat-progress-bar>
-    </div>
+                    </mat-menu>
+                </li>
+                <li class="nav-item">
+                    <button *ngIf="!this.sharedServ.isUserLoggedIn" disableRipple="true" (click)="openLoginDialog()" mat-menu-item>
+                        Login
+                        <mat-icon style="color:#ffffff;font-size:22px">account_circle</mat-icon>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <mat-progress-bar *ngIf="sharedServ.showProgressBar" mode="indeterminate"></mat-progress-bar>
 </ng-template>
 
 <div class="router-outlet-container" [class.mt-3]="!this.rtr.url.includes('landing-page')">
     <div *ngIf="isRouteLoading" style="display:flex;justify-content: center;align-items: center;height:100vh">
         <img src="../../assets/loading.png" style="height:250px;width:250px" alt="">
     </div>
-    <div [style.visibility]="isRouteLoading ? 'hidden' : 'visible'">
+    <div [style.margin-top] = "this.rtr.url.includes('landing-page') ? 0  : '80px'" [style.visibility]="isRouteLoading ? 'hidden' : 'visible'">
         <router-outlet></router-outlet>
     </div>
 </div>
