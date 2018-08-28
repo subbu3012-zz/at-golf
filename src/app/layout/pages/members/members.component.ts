@@ -56,7 +56,6 @@ export class MembersComponent implements OnInit {
         this.filteredMemberList = this.sharedServ.memberList.filter(data =>
             (this.filterMemberType == "All" ? true : data.memberType == this.filterMemberType)
         );
-        console.log(this.filterMemberType, this.filteredMemberList);
     }
 
     ngOnDestroy(): void {

@@ -48,10 +48,6 @@ export class LoginComponent implements OnInit {
         this.rtr.navigateByUrl('/layout/home/landing-page');
     }
 
-    public registerUser() {
-        // console.log(this.registrationFormGroup.getRawValue())
-    }
-
     public processUserLogin() {
         this.markFormGroupTouched(this.loginFormGroup);
         if (this.loginFormGroup.valid) {
@@ -107,7 +103,6 @@ export class LoginComponent implements OnInit {
     }
 
     public forgotPassword(): Observable<any> {
-        console.log(this.loginFormGroup.getRawValue())
         return this.httpClient.get<any>(environment.hostName + "customers/sendForgetPasswordMail/" + this.loginFormGroup.getRawValue()['emailId'], { headers: this.sharedServ.getRequestHeaders() });
     }
 }

@@ -151,7 +151,6 @@ export class BookTeeTimeComponent implements OnInit {
     }
 
     public setMemberList(index: number, memberId: string) {
-        // console.log(memberId,JSON.parse(JSON.stringify(this.sharedServ.memberList)));
         let _selectedMember = this.sharedServ.memberList.filter(element => { return element.memberId == memberId})[0];
         if (_selectedMember) {
             this.memberList[index] = _selectedMember;

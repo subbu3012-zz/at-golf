@@ -100,7 +100,7 @@
                 </td>
                 <td>
                     <ng-container *ngFor="let guest of event.guests">
-                        <span *ngIf="getGuestInfo(guest)" class="at-tooltip">{{getGuestInfo(guest).firstName + ' ' + getGuestInfo(guest).lastName}}
+                        <span *ngIf="getGuestInfo(guest)" class="at-tooltip">{{getGuestInfo(guest).firstName}}
                             <span class="at-tooltip-text">
                                 <p class="accent-color" style="font-weight: bold">{{guest}}</p>
                                 <p>

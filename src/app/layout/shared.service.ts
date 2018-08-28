@@ -116,7 +116,7 @@ export class SharedService {
 
     public getDateFromString(dateString:string){
         let _parts = dateString.split('-');
-        return new Date(+_parts[2], +_parts[1] - 1,+_parts[0]);
+        return new Date(+_parts[0], +_parts[1] - 1,+_parts[2]);
     }
 
     public get24HoursTime(time: string) {
@@ -174,7 +174,6 @@ export class SharedService {
                     self.uploadFileSubject = new Subject<boolean>();
                 }
                 else {
-                    console.log('here')
                     self.uploadFileSubject.next(false); // On Upload Failure
                 }
             }
@@ -189,7 +188,7 @@ export class SharedService {
 
     public getEventsData() {
         this.getEventData(this.isUserTypeInsider() ? "events" : "event-members/" + this.userSessionData['memberId']).subscribe(data => {
-            this.eventList = data.filter(event => event.eventType == "Teetime");
+            this.eventList = data.filter(event => event.eventType.toLowerCase() == "teetime");
             this.eventList.sort((a: any, b: any) => {
                 if (b.eventDate == a.eventDate) {
                     return this.get24HoursTime(a.slotStartTime).localeCompare(this.get24HoursTime(b.slotStartTime));

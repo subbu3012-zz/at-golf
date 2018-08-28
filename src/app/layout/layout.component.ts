@@ -70,7 +70,6 @@ export class LayoutComponent implements OnInit {
     }
 
     public setNavBarClass() {
-        console.log('fdassd')
         let _node: any = (document.documentElement || document.body.parentNode || document.body);
         let _scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : _node.scrollTop;
         this.navBarClass = _scrollTop > 100 ? 'colored-navbar-class' : 'transparent-navbar-class';
