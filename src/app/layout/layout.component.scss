@@ -106,8 +106,9 @@ mat-sidenav {
 
 .mat-menu-item{
     letter-spacing: 0.5px;
-    font-size: 14px;
+    font-size: 0.8rem;
     color: #ffffff;
+    height: 35px;
 }
 
 .mat-menu-item:hover{
@@ -135,7 +136,7 @@ mat-sidenav {
     margin-right: 5px;
     height: 35px;
     padding:0px 15px;
-    font-size: 0.8rem;
+    font-size: 0.725rem;
     // color: #ffffff;
     text-transform: uppercase !important;
 }
@@ -179,5 +180,43 @@ mat-sidenav {
 
 .carousel-caption{
     top:30%;
-    transition : all 3s ease-out 1s
+    transition : all 3s ease-out 1s;
+}
+
+.carousel-item-title {
+    opacity: 0.85;
+    -webkit-animation: line-spacing-anim 1s; /* Safari 4.0 - 8.0 */
+    animation: line-spacing-anim 1s;
+}
+
+
+.carousel-item-desc {
+    -webkit-animation: opacity-anim 1s; /* Safari 4.0 - 8.0 */
+    animation: opacity-anim 1s;
+}
+
+
+.carousel-item-button {
+    -webkit-animation: scale-anim 1s; /* Safari 4.0 - 8.0 */
+    animation: scale-anim 1s;
+}
+
+@keyframes scale-anim {
+    from {transform: scale(0); } to {transform: scale(1);}
+}
+
+@keyframes line-spacing-anim {
+    0%   {letter-spacing: 1.75rem; opacity: 0}
+    50%  {letter-spacing: 0.25rem; opacity: 0.5}
+    100% {letter-spacing: 0.75rem; opacity: 0.85}
+}
+
+@keyframes opacity-anim {
+    0%   {opacity: 0}
+    100% {opacity: 1}
+}
+
+@keyframes blur-anim {
+    0%   {filter: blur(1px)}
+    100% {filter: blur(0)}
 }
