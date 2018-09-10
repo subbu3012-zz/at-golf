@@ -16,7 +16,7 @@ export class EventsComponent implements OnInit {
 
     public guestList: any[] = [];
     public tBoxList: any[] = [];
-
+    public selectedFilterOption:number = 1;
 
     constructor(
         public eventServ: EventsService,

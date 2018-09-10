@@ -1,7 +1,25 @@
 <div class="container-fluid">
     <h2 class="menu-header bold-text camelcase-text center-text">My Bookings</h2>
     <hr class="divider">
-    <mat-tab-group>
+
+    <mat-radio-group [(ngModel)]="selectedFilterOption">
+        <mat-radio-button value="1">Upcoming Teetimes</mat-radio-button>
+        <mat-radio-button value="2">Upcoming Tournaments</mat-radio-button>
+        <mat-radio-button value="3">History</mat-radio-button>
+    </mat-radio-group>
+    <div *ngIf="selectedFilterOption == 1">
+        <ng-container *ngTemplateOutlet="eventsTableTemplate;context:{eventList:this.sharedServ.upcomingEventList}"></ng-container>
+    </div>
+    
+    <div *ngIf="selectedFilterOption == 2">
+        <ng-container *ngTemplateOutlet="tournamentsTableTemplate;context:{tournamentList:this.sharedServ.tournamentList}"></ng-container>
+    </div>
+    
+    <div *ngIf="selectedFilterOption == 3">
+        <ng-container *ngTemplateOutlet="eventsTableTemplate;context:{eventList:this.sharedServ.historyEventList}"></ng-container>
+    </div>
+
+    <!-- <mat-tab-group>
         <mat-tab label="Upcoming Teetimes">
             <div class="mt-2">
                 <ng-container *ngTemplateOutlet="eventsTableTemplate;context:{eventList:this.sharedServ.upcomingEventList}"></ng-container>
@@ -17,40 +35,40 @@
                 <ng-container *ngTemplateOutlet="eventsTableTemplate;context:{eventList:this.sharedServ.historyEventList}"></ng-container>
             </div>
         </mat-tab>
-    </mat-tab-group>
+    </mat-tab-group> -->
 </div>
 
 
 <ng-template #tournamentsTableTemplate let-showTournamentList="tournamentList">
-        <table *ngIf="getValidTournamentsLength()" class="table table-hover table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Tournament Name</th>
-                    <th>Tournament Date</th>
-                    <th>From Time</th>
-                    <th>To Time</th>
+    <table *ngIf="getValidTournamentsLength()" class="table table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Tournament Name</th>
+                <th>Tournament Date</th>
+                <th>From Time</th>
+                <th>To Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let tournament  of showTournamentList;">
+                <tr *ngIf="tournament.isBookedForMember">
+                    <td>{{tournament.eventName}}</td>
+                    <td>{{tournament.eventDate}}</td>
+                    <td>{{tournament.slotStartTime}}</td>
+                    <td>{{tournament.slotEndTime}}</td>
                 </tr>
-            </thead>
-            <tbody>
-                <ng-container *ngFor="let tournament  of showTournamentList;">
-                    <tr *ngIf="tournament.isBookedForMember">
-                        <td>{{tournament.eventName}}</td>
-                        <td>{{tournament.eventDate}}</td>
-                        <td>{{tournament.slotStartTime}}</td>
-                        <td>{{tournament.slotEndTime}}</td>
-                    </tr>
-                </ng-container>
-            </tbody>
-        </table>
-        <div class="mt-4 center-text" *ngIf="!getValidTournamentsLength()">
-            <h2 class="accent-color">No Tournaments here</h2>
-            <div style="margin:20px;text-align: center">
-                <button disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent" (click)="this.rtr.navigateByUrl('/layout/tournament')">
-                    <span style="color:#ffffff;letter-spacing: 0.15rem">Participate in a Tournament</span>
-                </button>
-            </div>
+            </ng-container>
+        </tbody>
+    </table>
+    <div class="mt-4 center-text" *ngIf="!getValidTournamentsLength()">
+        <h2 class="accent-color">No Tournaments here</h2>
+        <div style="margin:20px;text-align: center">
+            <button disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent" (click)="this.rtr.navigateByUrl('/layout/tournament')">
+                <span style="color:#ffffff;letter-spacing: 0.15rem">Participate in a Tournament</span>
+            </button>
         </div>
-    </ng-template>
+    </div>
+</ng-template>
 
 <ng-template #eventsTableTemplate let-showEventList="eventList">
     <table *ngIf="showEventList.length" class="table table-hover table-striped">
@@ -75,11 +93,11 @@
                     <span class="at-tooltip">{{getMemberInfo(event.bookedBy) ? getMemberInfo(event.bookedBy).firstName+ ' ' + getMemberInfo(event.bookedBy).lastName
                         : event.bookedBy}}
                         <span *ngIf="getMemberInfo(event.bookedBy)" class="at-tooltip-text">
-                            <p class="accent-color" style="font-weight: bold">{{event.bookedBy}}</p>
+                            <p class="accent-color" style="font-weight: 500">{{event.bookedBy}}</p>
                             <p>
-                                <font style="font-weight: bold">Email-</font>{{getMemberInfo(event.bookedBy).email}}</p>
+                                <font style="font-weight: 500">Email-</font>{{getMemberInfo(event.bookedBy).email}}</p>
                             <p>
-                                <font style="font-weight: bold">Phone-</font>{{getMemberInfo(event.bookedBy).phone}}</p>
+                                <font style="font-weight: 500">Phone-</font>{{getMemberInfo(event.bookedBy).phone}}</p>
                         </span>
                     </span>
                 </td>
@@ -88,11 +106,11 @@
                         <ng-container *ngIf="otherMember != event.bookedBy">
                             <span *ngIf="getMemberInfo(otherMember)" class="at-tooltip">{{getMemberInfo(otherMember).firstName+ ' ' + getMemberInfo(otherMember).lastName}}
                                 <span class="at-tooltip-text">
-                                    <p class="accent-color" style="font-weight: bold">{{otherMember}}</p>
+                                    <p class="accent-color" style="font-weight: 500">{{otherMember}}</p>
                                     <p>
-                                        <font style="font-weight: bold">Email-</font>{{getMemberInfo(otherMember).email}}</p>
+                                        <font style="font-weight: 500">Email-</font>{{getMemberInfo(otherMember).email}}</p>
                                     <p>
-                                        <font style="font-weight: bold">Phone-</font>{{getMemberInfo(otherMember).phone}}</p>
+                                        <font style="font-weight: 500">Phone-</font>{{getMemberInfo(otherMember).phone}}</p>
                                 </span>
                             </span>
                         </ng-container>
@@ -102,11 +120,11 @@
                     <ng-container *ngFor="let guest of event.guests">
                         <span *ngIf="getGuestInfo(guest)" class="at-tooltip">{{getGuestInfo(guest).firstName}}
                             <span class="at-tooltip-text">
-                                <p class="accent-color" style="font-weight: bold">{{guest}}</p>
+                                <p class="accent-color" style="font-weight: 500">{{guest}}</p>
                                 <p>
-                                    <font style="font-weight: bold">Email-</font>{{getGuestInfo(guest).email}}</p>
+                                    <font style="font-weight: 500">Email-</font>{{getGuestInfo(guest).email}}</p>
                                 <p>
-                                    <font style="font-weight: bold">Phone-</font>{{getGuestInfo(guest).phone}}</p>
+                                    <font style="font-weight: 500">Phone-</font>{{getGuestInfo(guest).phone}}</p>
                             </span>
                         </span>
                     </ng-container>

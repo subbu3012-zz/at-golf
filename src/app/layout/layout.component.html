@@ -1,9 +1,11 @@
-<div *ngIf="this.rtr.url.includes('landing-page')" data-pause="false" class="carousel slide" data-ride="carousel" data-interval="3000">
-    <ul class="carousel-indicators">
-        <li data-slide-to="0" class="active"></li>
-        <li data-slide-to="1"></li>
-    </ul>
+<div id="carouselExampleIndicators" *ngIf="this.rtr.url.includes('landing-page')" data-pause="false" class="carousel slide carousel-fade"
+    data-ride="carousel" data-interval="10000">
     <div class="carousel-inner">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
         <div class="carousel-item active">
             <img src="../../assets/bg-image.jpg" alt="Los Angeles" style="width:100vw;height: 100vh">
             <div class="carousel-caption">
@@ -12,8 +14,24 @@
                     <p class="center-text carousel-item-desc" style="color:#ffffff;letter-spacing: 0.1rem">Our legendary golf course is a classic gem that caters exclusively to our members</p>
                 </div>
                 <div style="margin-top:20px;text-align: center;">
-                    <button class="carousel-item-button" disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent" (click)="this.rtr.navigateByUrl('/layout/teetime')">
+                    <button class="carousel-item-button" disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent"
+                        (click)="this.rtr.navigateByUrl('/layout/teetime')">
                         <span style="color:#ffffff;letter-spacing: 0.15rem">Know More</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="../../assets/golf-slide2.jpg" alt="Chicago" style="width:100vw;height: 100vh">
+            <div class="carousel-caption">
+                <div>
+                    <p class="center-text uppercase-text carousel-item-title" style="color: #ffffff;font-size:3.5rem;letter-spacing: 0.75rem">Online Reservation</p>
+                    <p class="center-text carousel-item-desc" style="color:#ffffff;letter-spacing: 0.1rem">Book your teetime today! Booking one of our golf club finest courses has never been so easy</p>
+                </div>
+                <div style="margin-top:20px;text-align: center">
+                    <button class="carousel-item-button" disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent"
+                        (click)="this.rtr.navigateByUrl('/layout/teetime')">
+                        <span style="color:#ffffff;letter-spacing: 0.15rem">Book Tee Times</span>
                     </button>
                 </div>
             </div>
@@ -22,16 +40,25 @@
             <img src="../../assets/slider2_bg2.jpg" alt="Chicago" style="width:100vw;height: 100vh">
             <div class="carousel-caption">
                 <div>
-                    <p class="center-text uppercase-text carousel-item-title" style="color: #ffffff;font-size:3.5rem;letter-spacing: 0.75rem">Online Reservation</p>
-                    <p class="center-text carousel-item-desc" style="color:#ffffff;letter-spacing: 0.1rem">Book your teetime today! Booking one of our golf club finest courses has never been so easy</p>
+                    <p class="center-text uppercase-text carousel-item-title" style="color: #ffffff;font-size:4rem;letter-spacing: 0.75rem">Tee up green!</p>
+                    <p class="center-text carousel-item-desc" style="color:#ffffff;letter-spacing: 0.1rem">Our legendary golf course is a classic gem that caters exclusively to our members</p>
                 </div>
-                <div style="margin-top:20px;text-align: center">
-                    <button class="carousel-item-button" disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent" (click)="this.rtr.navigateByUrl('/layout/teetime')">
-                        <span style="color:#ffffff;letter-spacing: 0.15rem">Book Tee Times</span>
+                <div style="margin-top:20px;text-align: center;">
+                    <button class="carousel-item-button" disableRipple="true" style="padding: 15px 30px;font-size: 16px" mat-raised-button color="accent"
+                        (click)="this.rtr.navigateByUrl('/layout/teetime')">
+                        <span style="color:#ffffff;letter-spacing: 0.15rem">Know More</span>
                     </button>
                 </div>
             </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 </div>
 <div style="position:fixed;top:0;z-index: 1020;">
@@ -39,7 +66,8 @@
 </div>
 
 <ng-template #navBarTemplate>
-    <nav class="navbar navbar-expand-lg justify-content-between" [ngClass] = "this.rtr.url.includes('landing-page') ? navBarClass : 'colored-navbar-class'" style="width: 100vw">
+    <nav class="navbar navbar-expand-lg justify-content-between" [ngClass]="this.rtr.url.includes('landing-page') ? navBarClass : 'colored-navbar-class'"
+        style="width: 100vw">
         <a class="navbar-brand" href="#">
             <img src="../../assets/hgc-logo.png" width="45" height="50" alt="">
             <span style="font-size:1.2rem;color:#ffffff;letter-spacing: 0.15rem;margin-left: 8px;">Hyderabad Golf Club</span>
@@ -150,7 +178,7 @@
     <div *ngIf="isRouteLoading" style="display:flex;justify-content: center;align-items: center;height:100vh">
         <img src="../../assets/loading.png" style="height:250px;width:250px" alt="">
     </div>
-    <div [style.margin-top] = "this.rtr.url.includes('landing-page') ? 0  : '80px'" [style.visibility]="isRouteLoading ? 'hidden' : 'visible'">
+    <div [style.margin-top]="this.rtr.url.includes('landing-page') ? 0  : '80px'" [style.visibility]="isRouteLoading ? 'hidden' : 'visible'">
         <router-outlet></router-outlet>
     </div>
 </div>
